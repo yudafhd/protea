@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "id": "botanical",
+  "name": "Botanical Reverie",
+  "description": "An intimate garden, a timeless love.",
+  "interactions": [
+    {
+      "id": "open",
+      "trigger": "tap",
+      "action": "next"
+    },
+    {
+      "id": "map",
+      "trigger": "click",
+      "action": "url",
+      "bind": "venue.mapLink"
+    },
+    {
+      "id": "rsvp",
+      "trigger": "tap",
+      "action": "rsvp"
+    }
+  ]
+}

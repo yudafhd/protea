@@ -1,0 +1,53 @@
+{
+  "background": "#f6f3eb",
+  "foreground": "#3c4739",
+  "accent": "#697553",
+  "muted": "#959782",
+  "typography": {
+    "body": {
+      "fontFamily": "DM Sans",
+      "fontSize": 0.17,
+      "fontWeight": 400,
+      "fontStyle": "normal",
+      "color": "#69715f",
+      "align": "center",
+      "verticalAlign": "middle",
+      "lineHeight": 1.65,
+      "letterSpacing": 0.015,
+      "maxWidth": 4.4
+    },
+    "eyebrow": {
+      "fontFamily": "DM Sans",
+      "fontSize": 0.12,
+      "color": "#748063",
+      "letterSpacing": 0.22,
+      "textTransform": "uppercase"
+    },
+    "heroName": {
+      "fontFamily": "Cormorant",
+      "fontSize": 0.95,
+      "color": "#414d3c",
+      "lineHeight": 1.1,
+      "maxWidth": 6.2
+    },
+    "sectionTitle": {
+      "fontFamily": "Cormorant",
+      "fontSize": 0.62,
+      "color": "#414d3c",
+      "maxWidth": 5.6
+    },
+    "script": {
+      "fontFamily": "Cormorant",
+      "fontStyle": "italic",
+      "fontSize": 0.32,
+      "color": "#6c775b"
+    },
+    "button": {
+      "fontFamily": "DM Sans",
+      "fontSize": 0.13,
+      "letterSpacing": 0.18,
+      "color": "#566344",
+      "textTransform": "uppercase"
+    }
+  }
+}

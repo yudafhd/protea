@@ -1,0 +1,1461 @@
+[
+  {
+    "id": "opening",
+    "name": "The invitation",
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "crest",
+        "type": "svg",
+        "src": "/assets/botanical/botanical-mark.svg",
+        "position": [
+          0,
+          2.3,
+          0.1
+        ],
+        "scale": [
+          0.65,
+          0.65,
+          1
+        ]
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          1.6,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "A CELEBRATION OF LOVE"
+      },
+      {
+        "id": "names",
+        "type": "text",
+        "position": [
+          0,
+          0.72,
+          0.2
+        ],
+        "stylePreset": "heroName",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "responsive": {
+          "mobile": {
+            "textStyle": {
+              "fontSize": 0.65,
+              "maxWidth": 5.8
+            }
+          }
+        },
+        "customizable": {
+          "fontFamily": true,
+          "color": true
+        },
+        "bind": "couple.names",
+        "textStyle": {
+          "fontSize": 0.68,
+          "maxWidth": 6.3
+        }
+      },
+      {
+        "id": "date",
+        "type": "text",
+        "position": [
+          0,
+          -0.15,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "wedding.dateLabel"
+      },
+      {
+        "id": "envelope",
+        "name": "Open envelope",
+        "type": "svg",
+        "src": "/assets/botanical/envelope.svg",
+        "position": [
+          0,
+          -1.35,
+          0.8
+        ],
+        "scale": [
+          2.1,
+          1.28,
+          1
+        ],
+        "interaction": "open"
+      },
+      {
+        "id": "invited",
+        "type": "text",
+        "position": [
+          0,
+          -2.35,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "A little world. A love without end."
+      }
+    ]
+  },
+  {
+    "id": "cover",
+    "name": "Our forever",
+    "position": [
+      1.5,
+      0,
+      -12
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          1.7,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "THE WEDDING OF"
+      },
+      {
+        "id": "groom",
+        "type": "text",
+        "position": [
+          0,
+          0.83,
+          0.2
+        ],
+        "stylePreset": "heroName",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "couple.groom"
+      },
+      {
+        "id": "and",
+        "type": "text",
+        "position": [
+          0,
+          0.05,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "textStyle": {
+          "fontSize": 0.46
+        },
+        "content": "&"
+      },
+      {
+        "id": "bride",
+        "type": "text",
+        "position": [
+          0,
+          -0.65,
+          0.2
+        ],
+        "stylePreset": "heroName",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "couple.bride"
+      },
+      {
+        "id": "greeting",
+        "type": "text",
+        "position": [
+          0,
+          -1.65,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "couple.greeting"
+      },
+      {
+        "id": "date",
+        "type": "text",
+        "position": [
+          0,
+          -2.42,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "wedding.dateLabel"
+      }
+    ]
+  },
+  {
+    "id": "couple",
+    "name": "The happy couple",
+    "position": [
+      0,
+      0,
+      -24
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          2.25,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "TWO SOULS, ONE STORY"
+      },
+      {
+        "id": "photo",
+        "type": "image",
+        "bind": "couple.photo",
+        "position": [
+          0,
+          0.25,
+          0.1
+        ],
+        "scale": [
+          2.5,
+          3.1,
+          1
+        ]
+      },
+      {
+        "id": "names",
+        "type": "text",
+        "position": [
+          0,
+          -1.62,
+          0.2
+        ],
+        "stylePreset": "sectionTitle",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "couple.names"
+      },
+      {
+        "id": "caption",
+        "type": "text",
+        "position": [
+          0,
+          -2.25,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "customizable": {
+          "content": true,
+          "fontFamily": true,
+          "color": true
+        },
+        "content": "Always, in all ways."
+      }
+    ]
+  },
+  {
+    "id": "story",
+    "name": "Our story",
+    "position": [
+      1.5,
+      0,
+      -36
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          1.75,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "HOW IT ALL BEGAN"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "position": [
+          0,
+          0.9,
+          0.2
+        ],
+        "stylePreset": "sectionTitle",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "Written in the stars"
+      },
+      {
+        "id": "mark",
+        "type": "svg",
+        "src": "/assets/botanical/botanical-mark.svg",
+        "position": [
+          0,
+          0.05,
+          0.1
+        ],
+        "scale": [
+          0.7,
+          0.7,
+          1
+        ]
+      },
+      {
+        "id": "story",
+        "type": "text",
+        "position": [
+          0,
+          -1,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "textStyle": {
+          "fontSize": 0.22,
+          "maxWidth": 3.65,
+          "lineHeight": 1.8
+        },
+        "bind": "couple.story"
+      },
+      {
+        "id": "caption",
+        "type": "text",
+        "position": [
+          0,
+          -2.2,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "And the best is yet to come."
+      }
+    ]
+  },
+  {
+    "id": "schedule",
+    "name": "The celebration",
+    "position": [
+      0,
+      0,
+      -48
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          2,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "SAVE THE DATE"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "position": [
+          0,
+          1.25,
+          0.2
+        ],
+        "stylePreset": "sectionTitle",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "A day to remember"
+      },
+      {
+        "id": "date",
+        "type": "text",
+        "position": [
+          0,
+          0.6,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "wedding.dateLabel"
+      },
+      {
+        "id": "akad-title",
+        "type": "text",
+        "position": [
+          0,
+          -0.05,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "Wedding ceremony"
+      },
+      {
+        "id": "akad",
+        "type": "text",
+        "position": [
+          0,
+          -0.5,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "wedding.akad"
+      },
+      {
+        "id": "reception-title",
+        "type": "text",
+        "position": [
+          0,
+          -1.15,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "The reception"
+      },
+      {
+        "id": "reception",
+        "type": "text",
+        "position": [
+          0,
+          -1.6,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "wedding.reception"
+      },
+      {
+        "id": "venue",
+        "type": "text",
+        "position": [
+          0,
+          -2.3,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "venue.name"
+      }
+    ]
+  },
+  {
+    "id": "venue",
+    "name": "A special place",
+    "position": [
+      1.5,
+      0,
+      -60
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          1.95,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "MEET US HERE"
+      },
+      {
+        "id": "mark",
+        "type": "svg",
+        "src": "/assets/botanical/botanical-mark.svg",
+        "position": [
+          0,
+          0.95,
+          0.1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "id": "venue",
+        "type": "text",
+        "position": [
+          0,
+          -0.1,
+          0.2
+        ],
+        "stylePreset": "sectionTitle",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "venue.name"
+      },
+      {
+        "id": "address",
+        "type": "text",
+        "position": [
+          0,
+          -0.95,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "venue.address"
+      },
+      {
+        "id": "map",
+        "type": "button",
+        "position": [
+          0,
+          -1.9,
+          0.2
+        ],
+        "stylePreset": "button",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "VIEW LOCATION \u2197",
+        "interaction": "map"
+      }
+    ]
+  },
+  {
+    "id": "gallery",
+    "name": "Little moments",
+    "position": [
+      0,
+      0,
+      -72
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          2.2,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "A GLIMPSE OF US"
+      },
+      {
+        "id": "gallery-photo",
+        "type": "image",
+        "bind": "gallery.0.src",
+        "position": [
+          0,
+          0.15,
+          0.1
+        ],
+        "scale": [
+          2.7,
+          3.35,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.045
+        ]
+      },
+      {
+        "id": "caption",
+        "type": "text",
+        "position": [
+          0,
+          -2,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "gallery.0.caption"
+      }
+    ]
+  },
+  {
+    "id": "rsvp",
+    "name": "Be part of our story",
+    "position": [
+      1.5,
+      0,
+      -84
+    ],
+    "layers": [
+      {
+        "id": "arch",
+        "type": "svg",
+        "src": "/assets/botanical/arch.svg",
+        "position": [
+          0,
+          0.0,
+          -0.7
+        ],
+        "scale": [
+          5.6,
+          6.4,
+          1
+        ]
+      },
+      {
+        "id": "branch-left",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          -3,
+          -0.1,
+          1.2
+        ],
+        "scale": [
+          2.8,
+          5.6,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          -0.23
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              -2.7,
+              -0.8,
+              0.8
+            ],
+            "scale": [
+              2.2,
+              4.4,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "branch-right",
+        "type": "svg",
+        "src": "/assets/botanical/branch.svg",
+        "position": [
+          3.2,
+          0.0,
+          0.5
+        ],
+        "scale": [
+          -2.4,
+          4.8,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0.18
+        ],
+        "responsive": {
+          "mobile": {
+            "position": [
+              2.7,
+              0.1,
+              0.6
+            ],
+            "scale": [
+              -2.1,
+              4.2,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "id": "eyebrow",
+        "type": "text",
+        "position": [
+          0,
+          1.9,
+          0.2
+        ],
+        "stylePreset": "eyebrow",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "YOUR PRESENCE IS OUR PRESENT"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "position": [
+          0,
+          0.85,
+          0.2
+        ],
+        "stylePreset": "sectionTitle",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "Better with you"
+      },
+      {
+        "id": "message",
+        "type": "text",
+        "position": [
+          0,
+          -0.15,
+          0.2
+        ],
+        "stylePreset": "body",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "textStyle": {
+          "maxWidth": 3.6
+        },
+        "content": "We would love to share this beautiful day with you. Let us know if you can join the celebration."
+      },
+      {
+        "id": "rsvp-button",
+        "type": "button",
+        "position": [
+          0,
+          -1.3,
+          0.2
+        ],
+        "stylePreset": "button",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "content": "KINDLY RSVP",
+        "interaction": "rsvp"
+      },
+      {
+        "id": "signoff",
+        "type": "text",
+        "position": [
+          0,
+          -2.18,
+          0.2
+        ],
+        "stylePreset": "script",
+        "animation": {
+          "type": "fade",
+          "duration": 1.1,
+          "delay": 0.25
+        },
+        "bind": "couple.names"
+      }
+    ]
+  }
+]

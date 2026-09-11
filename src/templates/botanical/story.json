@@ -1,0 +1,1684 @@
+{
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "The invitation",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "lifecycle": {
+        "start": 0,
+        "enterEnd": 0.03,
+        "anchor": 0.04,
+        "exitStart": 0.16,
+        "end": 0.43
+      },
+      "layers": [
+        {
+          "id": "opening-crest",
+          "type": "svg",
+          "renderer": "dom",
+          "src": "/assets/botanical/botanical-mark.svg",
+          "position": [
+            0,
+            2.25,
+            0
+          ],
+          "scale": [
+            0.5,
+            0.5,
+            1
+          ],
+          "depthRole": "text",
+          "depth": 0.4,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.32
+            },
+            {
+              "at": 0.55,
+              "y": 0.65,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": 1.8,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "opening-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.65,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "eyebrow",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.32
+            },
+            {
+              "at": 0.55,
+              "y": 0.65,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": 1.8,
+              "opacity": 0
+            }
+          ],
+          "content": "A LETTER TO OUR FAVORITE PEOPLE"
+        },
+        {
+          "id": "opening-names",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            0.97,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "heroName",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.32
+            },
+            {
+              "at": 0.55,
+              "y": 0.65,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": 1.8,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.66,
+            "maxWidth": 6.2
+          },
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.57,
+                "maxWidth": 5.8
+              }
+            }
+          },
+          "bind": "couple.names"
+        },
+        {
+          "id": "opening-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            0.23,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "script",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.32
+            },
+            {
+              "at": 0.55,
+              "y": 0.65,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": 1.8,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.26
+          },
+          "content": "Every forever begins with a little moment."
+        },
+        {
+          "id": "envelope-back",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-back.svg",
+          "position": [
+            0,
+            -1.0,
+            0
+          ],
+          "scale": [
+            2.8,
+            1.75,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.5,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.3,
+              "y": -0.08
+            },
+            {
+              "at": 0.57,
+              "y": -1.9,
+              "scale": 1.1,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": -3,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "letter-portal",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/letter.svg",
+          "position": [
+            0,
+            -0.95,
+            0.035
+          ],
+          "scale": [
+            2.6,
+            1.7,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.5,
+          "keyframes": [
+            {
+              "at": 0,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.18,
+              "opacity": 1,
+              "scale": 0.9
+            },
+            {
+              "at": 0.39,
+              "y": 0.8,
+              "scale": 1
+            },
+            {
+              "at": 0.6,
+              "y": 1.05,
+              "scale": 3.2
+            },
+            {
+              "at": 0.75,
+              "y": 1.05,
+              "scale": 7.2
+            },
+            {
+              "at": 0.91,
+              "y": 1.05,
+              "scale": 9,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": 1.05,
+              "scale": 9,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "envelope-front",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-front.svg",
+          "position": [
+            0,
+            -1,
+            0.08
+          ],
+          "scale": [
+            2.8,
+            1.75,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.55,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.3,
+              "y": -0.08
+            },
+            {
+              "at": 0.57,
+              "y": -1.9,
+              "scale": 1.1,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "y": -3,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "envelope-flap",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-flap.svg",
+          "position": [
+            0,
+            -0.64,
+            0.105
+          ],
+          "scale": [
+            2.8,
+            1.06,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.55,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.12
+            },
+            {
+              "at": 0.37,
+              "y": 0.93,
+              "rotationX": -2.8,
+              "z": -0.18
+            },
+            {
+              "at": 0.57,
+              "y": -1.1,
+              "rotationX": -2.8,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "wax-seal",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/seal.svg",
+          "position": [
+            0,
+            -1.08,
+            0.14
+          ],
+          "scale": [
+            0.6,
+            0.45,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.6,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.12
+            },
+            {
+              "at": 0.32,
+              "y": -0.7,
+              "x": 0.5,
+              "rotation": 0.7,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ]
+        },
+        {
+          "id": "opening-date",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.42,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "eyebrow",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.22
+            },
+            {
+              "at": 0.46,
+              "y": -0.4,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ],
+          "bind": "wedding.dateLabel"
+        }
+      ]
+    },
+    {
+      "id": "couple",
+      "name": "The happy couple",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "lifecycle": {
+        "start": 0.22,
+        "enterEnd": 0.4,
+        "anchor": 0.49,
+        "exitStart": 0.59,
+        "end": 0.82
+      },
+      "layers": [
+        {
+          "id": "couple-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            -1.8,
+            1.85,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "eyebrow",
+          "keyframes": [
+            {
+              "at": 0,
+              "x": -0.8,
+              "y": -0.25,
+              "opacity": 0,
+              "blur": 8
+            },
+            {
+              "at": 0.3,
+              "x": 0,
+              "y": 0,
+              "opacity": 1,
+              "blur": 0
+            },
+            {
+              "at": 0.62,
+              "x": 0,
+              "y": 0.07
+            },
+            {
+              "at": 0.85,
+              "x": -1,
+              "y": 0.5,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "maxWidth": 3.1,
+            "fontSize": 0.1
+          },
+          "responsive": {
+            "mobile": {
+              "position": [
+                0,
+                2.45,
+                0
+              ],
+              "textStyle": {
+                "fontSize": 0.1,
+                "maxWidth": 5
+              }
+            }
+          },
+          "content": "TWO SOULS. ONE BEAUTIFUL STORY."
+        },
+        {
+          "id": "couple-portrait",
+          "type": "image",
+          "renderer": "dom",
+          "bind": "couple.photo",
+          "position": [
+            1.65,
+            0.15,
+            0
+          ],
+          "scale": [
+            2.55,
+            3.4,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "keyframes": [
+            {
+              "at": 0,
+              "x": 1.5,
+              "y": -0.6,
+              "scale": 0.62,
+              "opacity": 0,
+              "rotation": 0.16
+            },
+            {
+              "at": 0.26,
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "opacity": 1,
+              "rotation": -0.035
+            },
+            {
+              "at": 0.63,
+              "x": -0.12,
+              "y": 0.1,
+              "rotation": -0.02
+            },
+            {
+              "at": 0.84,
+              "x": -1.9,
+              "y": 0.8,
+              "scale": 1.55,
+              "rotation": -0.15,
+              "opacity": 0.8
+            },
+            {
+              "at": 1,
+              "x": -4,
+              "y": 2,
+              "scale": 2,
+              "opacity": 0
+            }
+          ],
+          "responsive": {
+            "mobile": {
+              "position": [
+                0,
+                0.55,
+                0
+              ],
+              "scale": [
+                2.3,
+                2.9,
+                1
+              ]
+            }
+          }
+        },
+        {
+          "id": "couple-photo-frame",
+          "type": "svg",
+          "renderer": "dom",
+          "src": "/assets/botanical/story/frame.svg",
+          "position": [
+            1.65,
+            0.15,
+            0
+          ],
+          "scale": [
+            2.85,
+            3.7,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.5,
+          "keyframes": [
+            {
+              "at": 0,
+              "x": 1.5,
+              "y": -0.6,
+              "scale": 0.62,
+              "opacity": 0,
+              "rotation": 0.16
+            },
+            {
+              "at": 0.26,
+              "x": 0,
+              "y": 0,
+              "scale": 1,
+              "opacity": 1,
+              "rotation": -0.035
+            },
+            {
+              "at": 0.63,
+              "x": -0.12,
+              "y": 0.1,
+              "rotation": -0.02
+            },
+            {
+              "at": 0.84,
+              "x": -1.9,
+              "y": 0.8,
+              "scale": 1.55,
+              "rotation": -0.15,
+              "opacity": 0.8
+            },
+            {
+              "at": 1,
+              "x": -4,
+              "y": 2,
+              "scale": 2,
+              "opacity": 0
+            }
+          ],
+          "responsive": {
+            "mobile": {
+              "position": [
+                0,
+                0.55,
+                0
+              ],
+              "scale": [
+                2.58,
+                3.18,
+                1
+              ]
+            }
+          }
+        },
+        {
+          "id": "couple-names",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            -1.8,
+            0.8,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "heroName",
+          "keyframes": [
+            {
+              "at": 0,
+              "x": -0.8,
+              "y": -0.25,
+              "opacity": 0,
+              "blur": 8
+            },
+            {
+              "at": 0.3,
+              "x": 0,
+              "y": 0,
+              "opacity": 1,
+              "blur": 0
+            },
+            {
+              "at": 0.62,
+              "x": 0,
+              "y": 0.07
+            },
+            {
+              "at": 0.85,
+              "x": -1,
+              "y": 0.5,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.66,
+            "maxWidth": 3.4,
+            "lineHeight": 1.05
+          },
+          "textMotion": {
+            "split": "words",
+            "start": 0.08,
+            "end": 0.34
+          },
+          "responsive": {
+            "mobile": {
+              "position": [
+                0,
+                -1.27,
+                0
+              ],
+              "textStyle": {
+                "fontSize": 0.5,
+                "maxWidth": 5.8
+              }
+            }
+          },
+          "bind": "couple.names"
+        },
+        {
+          "id": "couple-greeting",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            -1.8,
+            -0.87,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "body",
+          "keyframes": [
+            {
+              "at": 0,
+              "x": -0.8,
+              "y": -0.25,
+              "opacity": 0,
+              "blur": 8
+            },
+            {
+              "at": 0.3,
+              "x": 0,
+              "y": 0,
+              "opacity": 1,
+              "blur": 0
+            },
+            {
+              "at": 0.62,
+              "x": 0,
+              "y": 0.07
+            },
+            {
+              "at": 0.85,
+              "x": -1,
+              "y": 0.5,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "maxWidth": 2.8,
+            "fontSize": 0.17,
+            "lineHeight": 1.8
+          },
+          "responsive": {
+            "mobile": {
+              "position": [
+                0,
+                -2.08,
+                0
+              ],
+              "textStyle": {
+                "maxWidth": 4.8,
+                "fontSize": 0.15
+              }
+            }
+          },
+          "bind": "couple.greeting"
+        },
+        {
+          "id": "couple-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            -1.8,
+            -1.95,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "script",
+          "keyframes": [
+            {
+              "at": 0,
+              "x": -0.8,
+              "y": -0.25,
+              "opacity": 0,
+              "blur": 8
+            },
+            {
+              "at": 0.3,
+              "x": 0,
+              "y": 0,
+              "opacity": 1,
+              "blur": 0
+            },
+            {
+              "at": 0.62,
+              "x": 0,
+              "y": 0.07
+            },
+            {
+              "at": 0.85,
+              "x": -1,
+              "y": 0.5,
+              "opacity": 0
+            },
+            {
+              "at": 1,
+              "opacity": 0
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.25
+          },
+          "responsive": {
+            "mobile": {
+              "opacity": 0
+            }
+          },
+          "content": "Always, in all ways."
+        }
+      ]
+    },
+    {
+      "id": "schedule",
+      "name": "A day to remember",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "lifecycle": {
+        "start": 0.63,
+        "enterEnd": 0.82,
+        "anchor": 0.91,
+        "exitStart": 1,
+        "end": 1
+      },
+      "layers": [
+        {
+          "id": "wedding-rings",
+          "type": "svg",
+          "renderer": "dom",
+          "src": "/assets/botanical/story/rings.svg",
+          "position": [
+            0,
+            1.8,
+            0
+          ],
+          "scale": [
+            1.55,
+            1.1,
+            1
+          ],
+          "depthRole": "midground",
+          "depth": 0.35,
+          "keyframes": [
+            {
+              "at": 0,
+              "scale": 0.6,
+              "rotation": -0.4,
+              "opacity": 0
+            },
+            {
+              "at": 0.48,
+              "scale": 1,
+              "rotation": 0,
+              "opacity": 1
+            },
+            {
+              "at": 1,
+              "scale": 1.07,
+              "rotation": 0.035
+            }
+          ]
+        },
+        {
+          "id": "date-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            0.85,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "eyebrow",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "content": "A NEW CHAPTER, TOGETHER"
+        },
+        {
+          "id": "date-title",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            0.16,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "sectionTitle",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.56,
+            "maxWidth": 6
+          },
+          "textMotion": {
+            "split": "words",
+            "start": 0.3,
+            "end": 0.6
+          },
+          "content": "Our forever starts here."
+        },
+        {
+          "id": "wedding-date",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.58,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "eyebrow",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.14,
+            "letterSpacing": 0.13
+          },
+          "bind": "wedding.dateLabel"
+        },
+        {
+          "id": "wedding-venue",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -1.22,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "script",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "bind": "venue.name"
+        },
+        {
+          "id": "wedding-ceremony",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -1.8,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "body",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.17
+          },
+          "bind": "wedding.akad"
+        },
+        {
+          "id": "wedding-address",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.3,
+            0
+          ],
+          "depthRole": "text",
+          "depth": 0.5,
+          "stylePreset": "body",
+          "keyframes": [
+            {
+              "at": 0,
+              "y": -0.8,
+              "opacity": 0,
+              "scale": 0.9
+            },
+            {
+              "at": 0.28,
+              "y": -0.3,
+              "opacity": 0
+            },
+            {
+              "at": 0.53,
+              "y": 0,
+              "opacity": 1,
+              "scale": 1
+            },
+            {
+              "at": 1,
+              "y": 0.04,
+              "scale": 1.015
+            }
+          ],
+          "textStyle": {
+            "fontSize": 0.13,
+            "maxWidth": 4.8
+          },
+          "bind": "venue.address"
+        }
+      ]
+    }
+  ],
+  "cameraPath": [
+    {
+      "scene": "opening",
+      "at": 0,
+      "position": [
+        0,
+        0,
+        10
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 42,
+      "duration": 1.8,
+      "ease": "none"
+    },
+    {
+      "scene": "couple",
+      "at": 0.5,
+      "position": [
+        0.04,
+        0,
+        10
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 42,
+      "duration": 1.8,
+      "ease": "none"
+    },
+    {
+      "scene": "schedule",
+      "at": 1,
+      "position": [
+        -0.025,
+        0,
+        10
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "fov": 42,
+      "duration": 1.8,
+      "ease": "none"
+    }
+  ],
+  "story": {
+    "scrollScreens": 7,
+    "preloadAhead": 0.09,
+    "virtualCamera": [
+      {
+        "at": 0,
+        "x": 0,
+        "y": 0,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 0.16,
+        "x": 0.12,
+        "y": 0.08,
+        "zoom": 1.04,
+        "rotation": -0.012
+      },
+      {
+        "at": 0.32,
+        "x": 0.6,
+        "y": -0.18,
+        "zoom": 1.13,
+        "rotation": 0.015
+      },
+      {
+        "at": 0.5,
+        "x": 0.35,
+        "y": -0.1,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 0.7,
+        "x": -0.35,
+        "y": 0.3,
+        "zoom": 1.2,
+        "rotation": -0.035
+      },
+      {
+        "at": 0.88,
+        "x": -0.12,
+        "y": 0.08,
+        "zoom": 1.02,
+        "rotation": 0
+      },
+      {
+        "at": 1,
+        "x": 0,
+        "y": 0,
+        "zoom": 1.04,
+        "rotation": 0
+      }
+    ]
+  },
+  "persistentLayers": [
+    {
+      "id": "garden-arch",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/arch.svg",
+      "position": [
+        0,
+        0.05,
+        0
+      ],
+      "scale": [
+        6.3,
+        7.1,
+        1
+      ],
+      "depthRole": "background",
+      "depth": 0.1,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.68
+        },
+        {
+          "at": 0.45,
+          "scale": 0.98,
+          "x": -0.1
+        },
+        {
+          "at": 0.72,
+          "scale": 1.07,
+          "x": 0.05
+        },
+        {
+          "at": 1,
+          "scale": 1,
+          "opacity": 0.72
+        }
+      ]
+    },
+    {
+      "id": "garden-midground-left",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/branch.svg",
+      "position": [
+        -3.3,
+        -0.2,
+        0
+      ],
+      "scale": [
+        1.9,
+        4.9,
+        1
+      ],
+      "depthRole": "midground",
+      "depth": 0.35,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.32,
+          "rotation": -0.22
+        },
+        {
+          "at": 0.5,
+          "x": 0.1,
+          "y": 0.1,
+          "rotation": -0.18
+        },
+        {
+          "at": 1,
+          "x": -0.2,
+          "y": 0.18,
+          "rotation": -0.24
+        }
+      ]
+    },
+    {
+      "id": "garden-midground-right",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/branch.svg",
+      "position": [
+        3.15,
+        0.15,
+        0
+      ],
+      "scale": [
+        -1.9,
+        4.9,
+        1
+      ],
+      "depthRole": "midground",
+      "depth": 0.35,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.3,
+          "rotation": 0.19
+        },
+        {
+          "at": 0.5,
+          "x": -0.1,
+          "y": 0.1,
+          "rotation": 0.13
+        },
+        {
+          "at": 1,
+          "x": 0.2,
+          "y": 0.18,
+          "rotation": 0.21
+        }
+      ]
+    },
+    {
+      "id": "foreground-flower-left",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/branch.svg",
+      "position": [
+        -3.1,
+        -0.45,
+        0
+      ],
+      "scale": [
+        2.5,
+        5.4,
+        1
+      ],
+      "depthRole": "foreground",
+      "depth": 0.9,
+      "keyframes": [
+        {
+          "at": 0,
+          "rotation": -0.27
+        },
+        {
+          "at": 0.18,
+          "x": -0.2,
+          "y": 0.08,
+          "rotation": -0.23
+        },
+        {
+          "at": 0.34,
+          "x": -0.6,
+          "y": -0.1,
+          "scale": 1.05,
+          "rotation": -0.32
+        },
+        {
+          "at": 0.56,
+          "x": -0.5,
+          "y": 0.06,
+          "scale": 1
+        },
+        {
+          "at": 0.69,
+          "x": 2.7,
+          "y": 0.4,
+          "scale": 3.2,
+          "rotation": -0.5
+        },
+        {
+          "at": 0.77,
+          "x": 6.2,
+          "y": 0.8,
+          "scale": 3.5,
+          "rotation": -0.8
+        },
+        {
+          "at": 0.84,
+          "x": 9,
+          "y": 1,
+          "scale": 4,
+          "opacity": 0
+        },
+        {
+          "at": 1,
+          "x": 9,
+          "opacity": 0
+        }
+      ]
+    },
+    {
+      "id": "foreground-flower-right",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/branch.svg",
+      "position": [
+        3.2,
+        -0.25,
+        0
+      ],
+      "scale": [
+        -2.4,
+        5.1,
+        1
+      ],
+      "depthRole": "foreground",
+      "depth": 0.8,
+      "keyframes": [
+        {
+          "at": 0,
+          "rotation": 0.27
+        },
+        {
+          "at": 0.2,
+          "x": 0.2,
+          "y": 0.1,
+          "rotation": 0.21
+        },
+        {
+          "at": 0.38,
+          "x": 0.7,
+          "y": 0.1,
+          "scale": 1.12
+        },
+        {
+          "at": 0.56,
+          "x": 0.4
+        },
+        {
+          "at": 0.7,
+          "x": -1.9,
+          "y": 0.5,
+          "scale": 2.3,
+          "rotation": 0.6
+        },
+        {
+          "at": 0.82,
+          "x": -0.2,
+          "y": 0.3,
+          "scale": 1.2,
+          "rotation": 0.3
+        },
+        {
+          "at": 1,
+          "x": 0.15,
+          "y": 0.2,
+          "scale": 1.08,
+          "rotation": 0.19
+        }
+      ]
+    },
+    {
+      "id": "golden-dust",
+      "type": "particle",
+      "renderer": "dom",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        9,
+        6,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 1,
+      "count": 16,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.35
+        },
+        {
+          "at": 0.5,
+          "x": 0.25,
+          "y": 0.5,
+          "rotation": 0.12,
+          "opacity": 0.55
+        },
+        {
+          "at": 1,
+          "x": -0.2,
+          "y": 1,
+          "rotation": -0.1,
+          "opacity": 0.35
+        }
+      ]
+    },
+    {
+      "id": "travelling-leaf-0",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/story/leaf.svg",
+      "position": [
+        -2.6,
+        1.7,
+        0
+      ],
+      "scale": [
+        0.22,
+        0.33,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 0.85,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.55,
+          "rotation": 0
+        },
+        {
+          "at": 0.35,
+          "x": 0.8,
+          "y": -0.7,
+          "rotation": 0.8
+        },
+        {
+          "at": 0.7,
+          "x": -0.5,
+          "y": 0.4,
+          "rotation": 1.9
+        },
+        {
+          "at": 1,
+          "x": 0.3,
+          "y": -0.8,
+          "rotation": 3
+        }
+      ]
+    },
+    {
+      "id": "travelling-leaf-1",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/story/leaf.svg",
+      "position": [
+        2.5,
+        2,
+        0
+      ],
+      "scale": [
+        0.18,
+        0.27,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 0.85,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.55,
+          "rotation": 1
+        },
+        {
+          "at": 0.35,
+          "x": 0.6000000000000001,
+          "y": -0.7,
+          "rotation": 1.8
+        },
+        {
+          "at": 0.7,
+          "x": -0.5,
+          "y": 0.4,
+          "rotation": 2.9
+        },
+        {
+          "at": 1,
+          "x": 0.3,
+          "y": -0.8,
+          "rotation": 4
+        }
+      ]
+    },
+    {
+      "id": "travelling-leaf-2",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/story/leaf.svg",
+      "position": [
+        -1.7,
+        -2.6,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.30000000000000004,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 0.85,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.55,
+          "rotation": 2
+        },
+        {
+          "at": 0.35,
+          "x": 0.4,
+          "y": -0.7,
+          "rotation": 2.8
+        },
+        {
+          "at": 0.7,
+          "x": -0.5,
+          "y": 0.4,
+          "rotation": 3.9
+        },
+        {
+          "at": 1,
+          "x": 0.3,
+          "y": -0.8,
+          "rotation": 5
+        }
+      ]
+    },
+    {
+      "id": "travelling-leaf-3",
+      "type": "svg",
+      "renderer": "dom",
+      "src": "/assets/botanical/story/leaf.svg",
+      "position": [
+        3,
+        -1.8,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.375,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 0.85,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.55,
+          "rotation": 3
+        },
+        {
+          "at": 0.35,
+          "x": 0.19999999999999996,
+          "y": -0.7,
+          "rotation": 3.8
+        },
+        {
+          "at": 0.7,
+          "x": -0.5,
+          "y": 0.4,
+          "rotation": 4.9
+        },
+        {
+          "at": 1,
+          "x": 0.3,
+          "y": -0.8,
+          "rotation": 6
+        }
+      ]
+    }
+  ]
+}

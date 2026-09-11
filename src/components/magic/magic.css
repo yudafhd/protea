@@ -1,0 +1,54 @@
+/* A single portrait artboard on phones, tablets, and wide browser windows. */
+body:has(.magic-page) { background: radial-gradient(ellipse at top, #eceee3, #dce0d1); }
+.magic-page {
+  --sans: var(--ui);
+  container: magic / size;
+  width: min(100%, 480px, 56.25dvh);
+  height: 100dvh;
+  min-height: 0;
+  margin-inline: auto;
+  padding: 0;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #f5f2e9;
+  color: #353e37;
+  font-family: var(--sans);
+  box-shadow: 0 0 0 1px #69755324, 0 0 70px #3c47391a;
+}
+.magic-game { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; background: #c4d8bc; isolation: isolate; }
+.magic-world { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; }
+.magic-world-3d { position: absolute; inset: 0; cursor: grab; }
+.magic-world-3d:active { cursor: grabbing; }
+.magic-world-3d canvas { display: block; touch-action: none; }
+.magic-vignette { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(#19392722, transparent 15%, transparent 83%, #19392744); }
+.magic-journal-button { position: absolute; top: max(16px, env(safe-area-inset-top)); right: 3cqw; }
+.magic-quest { position: absolute; top: max(16px, env(safe-area-inset-top)); left: 3cqw; display: flex; gap: 2cqw; }
+.magic-quest button, .magic-journal-button, .magic-camera-toggle { display: grid; place-items: center; width: clamp(32px, 10cqw, 46px); height: clamp(32px, 10cqw, 46px); padding: 0; border: 1px solid #d2d3a951; border-radius: 8px; background: #193b30a6; color: #f5ebc7; backdrop-filter: blur(6px); }
+.magic-quest button svg, .magic-journal-button svg, .magic-camera-toggle svg { width: clamp(16px, 4.5cqw, 21px); height: clamp(16px, 4.5cqw, 21px); }
+.magic-dpad { position: absolute; right: 3cqw; bottom: max(20px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(3, clamp(30px, 9cqw, 44px)); grid-template-rows: repeat(2, clamp(30px, 9cqw, 44px)); gap: 1cqw; }
+.magic-dpad button { display: grid; place-items: center; border: 1px solid #d2d3a951; background: #1c3731bf; color: #f1e9bf; border-radius: 1.2cqw; touch-action: none; user-select: none; }
+.magic-dpad button svg { width: 4.5cqw; height: 4.5cqw; }
+.magic-dpad button:first-child { grid-column: 2; }
+.magic-dpad button:nth-child(2) { grid-column: 1; grid-row: 2; }
+.magic-dpad button:nth-child(3) { grid-column: 2; grid-row: 2; }
+.magic-dpad button:nth-child(4) { grid-column: 3; grid-row: 2; }
+.magic-dpad button:active { background: #a9ae7f; color: #203d38; }
+.magic-camera-toggle { position: absolute; top: max(16px, env(safe-area-inset-top)); right: calc(5cqw + clamp(32px, 10cqw, 46px)); }
+.magic-travel { position: absolute; bottom: max(20px, env(safe-area-inset-bottom)); left: 3cqw; display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 3 * clamp(30px, 9cqw, 44px) - 11cqw); }
+.magic-travel button { display: flex; align-items: center; justify-content: center; gap: 5px; background: #dccc9b; color: #2e4235; padding: 10px 8px; min-height: 34px; border-radius: 5px; font-size: clamp(8px, 2.4cqw, 11px); }
+.magic-travel button svg { width: 3.2cqw; height: 3.2cqw; }
+.magic-letter-kicker { display: flex; align-items: center; gap: 9px; font-size: 8px; letter-spacing: 2px; color: #89936d; }
+.magic-letter-continue { display: flex; align-items: center; justify-content: center; gap: 12px; border-top: 1px solid #d9ddca; padding-top: 18px; font-size: 11px; color: #596945; }
+.magic-book-row { display: flex; gap: 13px; text-align: left; align-items: center; padding: 10px 0; border-bottom: 1px solid #dce0cf; font-size: 12px; }
+.magic-book-row:disabled { opacity: .4; }
+.magic-book-row svg { margin-left: auto; }
+.magic-page button:focus-visible, .magic-page a:focus-visible { outline: 2px solid #b6a16c; outline-offset: 2px; }
+.magic-3d-loading, .magic-3d-fallback { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; padding: 20px; background: #adc4a7; color: #334d3c; font: 5cqw var(--serif); pointer-events: none; }
+.magic-page .modal-backdrop { padding: 12px; }
+.magic-page .modal { width: min(440px, 94vw, 56.25dvh); max-height: 94svh; padding: clamp(14px, 3svh, 28px); }
+@media (max-height: 550px) {
+  .magic-page .modal h2 { font-size: 24px; }
+  .magic-page .modal { gap: 12px; }
+  .magic-page .modal .form-row { grid-template-columns: 1fr; }
+}

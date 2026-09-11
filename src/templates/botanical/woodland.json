@@ -1,0 +1,1581 @@
+{
+  "scenes": [
+    {
+      "id": "opening",
+      "name": "The forest invitation",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "lifecycle": {
+        "start": 0,
+        "enterEnd": 0,
+        "anchor": 0,
+        "exitStart": 0.08,
+        "end": 0.25
+      },
+      "layers": [
+        {
+          "id": "forest-threshold-left",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/forest.webp",
+          "position": [
+            -6.0,
+            0,
+            0
+          ],
+          "scale": [
+            12.0,
+            16,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/forest-preview.webp",
+          "crop": [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                -2.6,
+                0,
+                0
+              ]
+            },
+            "tablet": {
+              "position": [
+                -4.5,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "id": "forest-threshold-right",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/forest.webp",
+          "position": [
+            6.0,
+            0,
+            0
+          ],
+          "scale": [
+            12.0,
+            16,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/forest-preview.webp",
+          "crop": [
+            0.5,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                2.6,
+                0,
+                0
+              ]
+            },
+            "tablet": {
+              "position": [
+                4.5,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "id": "opening-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.45,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.13,
+            "color": "#5c644d",
+            "maxWidth": 6.2
+          },
+          "content": "SOME STORIES ARE MEANT TO BE",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "opening-names",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.3,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "heroName",
+          "textStyle": {
+            "fontSize": 0.83,
+            "color": "#334830",
+            "maxWidth": 6.3,
+            "lineHeight": 1.03
+          },
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.51,
+                "maxWidth": 4.1
+              }
+            }
+          },
+          "bind": "couple.names"
+        },
+        {
+          "id": "opening-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.1,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.29,
+            "color": "#526345"
+          },
+          "content": "A journey into our forever.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "opening-date",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.6,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.12,
+            "color": "#526345"
+          },
+          "bind": "wedding.dateLabel",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "envelope-back",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-back.svg",
+          "position": [
+            0,
+            -1.4,
+            3
+          ],
+          "scale": [
+            1.8479999999999999,
+            1.155,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.5,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.15
+            },
+            {
+              "at": 0.6,
+              "y": -4,
+              "rotationX": 0
+            },
+            {
+              "at": 1,
+              "y": -8,
+              "rotationX": 0
+            }
+          ]
+        },
+        {
+          "id": "envelope-front",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-front.svg",
+          "position": [
+            0,
+            -1.4,
+            3.08
+          ],
+          "scale": [
+            1.8479999999999999,
+            1.155,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.55,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.15
+            },
+            {
+              "at": 0.6,
+              "y": -4,
+              "rotationX": 0
+            },
+            {
+              "at": 1,
+              "y": -8,
+              "rotationX": 0
+            }
+          ]
+        },
+        {
+          "id": "envelope-flap",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/envelope-flap.svg",
+          "position": [
+            0,
+            -1.04,
+            3.105
+          ],
+          "scale": [
+            1.8479999999999999,
+            0.6996000000000001,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.55,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.15
+            },
+            {
+              "at": 0.6,
+              "y": -4,
+              "rotationX": -2.6
+            },
+            {
+              "at": 1,
+              "y": -8,
+              "rotationX": -2.6
+            }
+          ]
+        },
+        {
+          "id": "wax-seal",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/botanical/story/seal.svg",
+          "position": [
+            0,
+            -1.48,
+            3.14
+          ],
+          "scale": [
+            0.396,
+            0.29700000000000004,
+            1
+          ],
+          "depthRole": "subject",
+          "depth": 0.6,
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 0.15
+            },
+            {
+              "at": 0.6,
+              "y": -4,
+              "rotationX": 0
+            },
+            {
+              "at": 1,
+              "y": -8,
+              "rotationX": 0
+            }
+          ]
+        },
+        {
+          "id": "mountain-horizon",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/mountains.webp",
+          "position": [
+            0,
+            0,
+            -135
+          ],
+          "scale": [
+            216,
+            144,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "space": "screen"
+        },
+        {
+          "id": "continuous-river",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/river.svg",
+          "position": [
+            0,
+            -5,
+            -47
+          ],
+          "scale": [
+            32,
+            184,
+            1
+          ],
+          "depth": 0.1,
+          "depthRole": "subject",
+          "rotation": [
+            -1.5707963267948966,
+            0,
+            0
+          ],
+          "opacity": 0.2
+        },
+        {
+          "id": "distant-cloud-left",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/cloud.svg",
+          "position": [
+            -28,
+            17,
+            -112
+          ],
+          "scale": [
+            74,
+            29.6,
+            1
+          ],
+          "depth": 0.1,
+          "depthRole": "subject"
+        },
+        {
+          "id": "distant-cloud-right",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/cloud.svg",
+          "position": [
+            24,
+            15,
+            -118
+          ],
+          "scale": [
+            72,
+            28.8,
+            1
+          ],
+          "depth": 0.1,
+          "depthRole": "subject"
+        }
+      ]
+    },
+    {
+      "id": "couple",
+      "name": "Among the trees",
+      "position": [
+        0,
+        0,
+        -18
+      ],
+      "lifecycle": {
+        "start": 0.03,
+        "enterEnd": 0.16,
+        "anchor": 0.18,
+        "exitStart": 0.26,
+        "end": 0.43
+      },
+      "layers": [
+        {
+          "id": "woodland-canopy-left",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/forest.webp",
+          "position": [
+            -6.25,
+            0,
+            -1
+          ],
+          "scale": [
+            12.5,
+            16.7,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/forest-preview.webp",
+          "crop": [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                -2.6,
+                0,
+                -1
+              ]
+            },
+            "tablet": {
+              "position": [
+                -4.5,
+                0,
+                -1
+              ]
+            }
+          }
+        },
+        {
+          "id": "woodland-canopy-right",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/forest.webp",
+          "position": [
+            6.25,
+            0,
+            -1
+          ],
+          "scale": [
+            12.5,
+            16.7,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/forest-preview.webp",
+          "crop": [
+            0.5,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                2.6,
+                0,
+                -1
+              ]
+            },
+            "tablet": {
+              "position": [
+                4.5,
+                0,
+                -1
+              ]
+            }
+          }
+        },
+        {
+          "id": "couple-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.7,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.12
+          },
+          "content": "TWO SOULS, ONE BEAUTIFUL PATH",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "couple-names",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.75,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "heroName",
+          "textStyle": {
+            "fontSize": 0.73,
+            "maxWidth": 6.4
+          },
+          "bind": "couple.names",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.51,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "couple-portrait",
+          "type": "image",
+          "renderer": "dom",
+          "bind": "couple.photo",
+          "position": [
+            0,
+            -0.45,
+            2
+          ],
+          "scale": [
+            2.45,
+            3.05,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "rotation": [
+            0,
+            0,
+            -0.025
+          ]
+        },
+        {
+          "id": "couple-caption",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.5,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.29
+          },
+          "content": "Always, in all ways.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "schedule",
+      "name": "Through the garden",
+      "position": [
+        0,
+        0,
+        -36
+      ],
+      "lifecycle": {
+        "start": 0.21,
+        "enterEnd": 0.33999999999999997,
+        "anchor": 0.36,
+        "exitStart": 0.44,
+        "end": 0.61
+      },
+      "layers": [
+        {
+          "id": "garden-gateway-left",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/garden.webp",
+          "position": [
+            -6.0,
+            -0.25,
+            0
+          ],
+          "scale": [
+            12.0,
+            16,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/garden-preview.webp",
+          "crop": [
+            0,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                -2.6,
+                -0.25,
+                0
+              ]
+            },
+            "tablet": {
+              "position": [
+                -4.5,
+                -0.25,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "id": "garden-gateway-right",
+          "type": "image",
+          "renderer": "webgl",
+          "src": "/assets/woodland/garden.webp",
+          "position": [
+            6.0,
+            -0.25,
+            0
+          ],
+          "scale": [
+            12.0,
+            16,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject",
+          "previewSrc": "/assets/woodland/garden-preview.webp",
+          "crop": [
+            0.5,
+            0,
+            0.5,
+            1
+          ],
+          "edgeFade": 0.055,
+          "responsive": {
+            "mobile": {
+              "position": [
+                2.6,
+                -0.25,
+                0
+              ]
+            },
+            "tablet": {
+              "position": [
+                4.5,
+                -0.25,
+                0
+              ]
+            }
+          }
+        },
+        {
+          "id": "garden-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.5,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.12
+          },
+          "content": "IN FULL BLOOM, WITH YOU",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "date-title",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.5,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "sectionTitle",
+          "textStyle": {
+            "fontSize": 0.73
+          },
+          "content": "A day to remember",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.49,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "wedding-date",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            0.5,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.15,
+            "letterSpacing": 0.14
+          },
+          "bind": "wedding.dateLabel",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "ceremony-label",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.25,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.27
+          },
+          "content": "Wedding ceremony",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "wedding-ceremony",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.8,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "body",
+          "textStyle": {
+            "fontSize": 0.2
+          },
+          "bind": "wedding.akad",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.18,
+                "maxWidth": 3.8
+              }
+            }
+          }
+        },
+        {
+          "id": "reception-label",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -1.5,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.27
+          },
+          "content": "The reception",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "wedding-reception",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.0,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "body",
+          "textStyle": {
+            "fontSize": 0.2
+          },
+          "bind": "wedding.reception",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.18,
+                "maxWidth": 3.8
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "name": "Along the river",
+      "position": [
+        0,
+        0,
+        -54
+      ],
+      "lifecycle": {
+        "start": 0.39,
+        "enterEnd": 0.52,
+        "anchor": 0.54,
+        "exitStart": 0.62,
+        "end": 0.79
+      },
+      "layers": [
+        {
+          "id": "river-reeds-left",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/reeds.svg",
+          "position": [
+            -5,
+            -3,
+            0
+          ],
+          "scale": [
+            8,
+            5.4,
+            1
+          ],
+          "depth": 0.9,
+          "depthRole": "subject",
+          "rotation": [
+            0,
+            0,
+            -0.1
+          ]
+        },
+        {
+          "id": "river-reeds-right",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/reeds.svg",
+          "position": [
+            5,
+            -3,
+            -4
+          ],
+          "scale": [
+            -8,
+            5.4,
+            1
+          ],
+          "depth": 0.8,
+          "depthRole": "subject"
+        },
+        {
+          "id": "river-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.3,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.12
+          },
+          "content": "EVERY RIVER FINDS ITS WAY",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "story-title",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.3,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "sectionTitle",
+          "textStyle": {
+            "fontSize": 0.77
+          },
+          "content": "And I found you.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.49,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "our-story",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.35,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "body",
+          "textStyle": {
+            "fontSize": 0.23,
+            "maxWidth": 4.7,
+            "lineHeight": 1.85
+          },
+          "bind": "couple.story",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.18,
+                "maxWidth": 3.8
+              }
+            }
+          }
+        },
+        {
+          "id": "story-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -2.2,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.27
+          },
+          "content": "To all the adventures still to come.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "venue",
+      "name": "Above the clouds",
+      "position": [
+        0,
+        0,
+        -72
+      ],
+      "lifecycle": {
+        "start": 0.57,
+        "enterEnd": 0.7,
+        "anchor": 0.72,
+        "exitStart": 0.7999999999999999,
+        "end": 0.97
+      },
+      "layers": [
+        {
+          "id": "mountain-cloud-left",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/cloud.svg",
+          "position": [
+            -7,
+            3,
+            1
+          ],
+          "scale": [
+            23,
+            9,
+            1
+          ],
+          "depth": 0.9,
+          "depthRole": "subject",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 1,
+              "x": 0.65,
+              "y": 0.15
+            }
+          ]
+        },
+        {
+          "id": "mountain-cloud-right",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/cloud.svg",
+          "position": [
+            7,
+            -2,
+            -6
+          ],
+          "scale": [
+            24,
+            9.6,
+            1
+          ],
+          "depth": 0.8,
+          "depthRole": "subject",
+          "keyframes": [
+            {
+              "at": 0
+            },
+            {
+              "at": 1,
+              "x": -0.65,
+              "y": 0.15
+            }
+          ]
+        },
+        {
+          "id": "mountain-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.2,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.12
+          },
+          "content": "SOMEWHERE BEAUTIFUL, TOGETHER",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "venue-title",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1.1,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "sectionTitle",
+          "textStyle": {
+            "fontSize": 0.76
+          },
+          "bind": "venue.name",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.49,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "venue-address",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.15,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "body",
+          "textStyle": {
+            "fontSize": 0.22,
+            "maxWidth": 4.8
+          },
+          "bind": "venue.address",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.18,
+                "maxWidth": 3.8
+              }
+            }
+          }
+        },
+        {
+          "id": "venue-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -1.4,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.3
+          },
+          "content": "Meet us where forever begins.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rsvp",
+      "name": "Our forever",
+      "position": [
+        0,
+        0,
+        -90
+      ],
+      "lifecycle": {
+        "start": 0.7899999999999999,
+        "enterEnd": 0.9199999999999999,
+        "anchor": 0.94,
+        "exitStart": 1,
+        "end": 1
+      },
+      "layers": [
+        {
+          "id": "forever-cloud",
+          "type": "svg",
+          "renderer": "webgl",
+          "src": "/assets/woodland/cloud.svg",
+          "position": [
+            -8,
+            3,
+            -5
+          ],
+          "scale": [
+            28,
+            11.2,
+            1
+          ],
+          "depth": 0.5,
+          "depthRole": "subject"
+        },
+        {
+          "id": "forever-eyebrow",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            2.1,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "eyebrow",
+          "textStyle": {
+            "fontSize": 0.11,
+            "maxWidth": 6
+          },
+          "content": "OUR FAVORITE PEOPLE, OUR FAVORITE DAY",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.092,
+                "maxWidth": 4.1,
+                "letterSpacing": 0.12
+              }
+            }
+          }
+        },
+        {
+          "id": "forever-title",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            1,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "sectionTitle",
+          "textStyle": {
+            "fontSize": 0.81
+          },
+          "content": "Better with you.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.49,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        },
+        {
+          "id": "forever-note",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -0.2,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "body",
+          "textStyle": {
+            "fontSize": 0.23,
+            "maxWidth": 4.5
+          },
+          "content": "Your presence will make this day even more beautiful. We would love to celebrate with you.",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.18,
+                "maxWidth": 3.8
+              }
+            }
+          }
+        },
+        {
+          "id": "forever-names",
+          "type": "text",
+          "renderer": "dom",
+          "position": [
+            0,
+            -1.8,
+            2
+          ],
+          "depth": 0.5,
+          "depthRole": "text",
+          "stylePreset": "script",
+          "textStyle": {
+            "fontSize": 0.38
+          },
+          "bind": "couple.names",
+          "responsive": {
+            "mobile": {
+              "textStyle": {
+                "fontSize": 0.24,
+                "maxWidth": 4.1
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "cameraPath": [
+    {
+      "scene": "opening",
+      "at": 0,
+      "position": [
+        0,
+        0,
+        14
+      ],
+      "target": [
+        0,
+        0,
+        -30
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "couple",
+      "at": 0.18,
+      "position": [
+        0,
+        0,
+        -4
+      ],
+      "target": [
+        0,
+        0,
+        -48
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "schedule",
+      "at": 0.36,
+      "position": [
+        0,
+        0,
+        -22
+      ],
+      "target": [
+        0,
+        0,
+        -66
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "story",
+      "at": 0.54,
+      "position": [
+        0,
+        0,
+        -40
+      ],
+      "target": [
+        0,
+        0,
+        -84
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "venue",
+      "at": 0.72,
+      "position": [
+        0,
+        0,
+        -58
+      ],
+      "target": [
+        0,
+        0,
+        -102
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "rsvp",
+      "at": 0.94,
+      "position": [
+        0,
+        0,
+        -76
+      ],
+      "target": [
+        0,
+        0,
+        -120
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    },
+    {
+      "scene": "rsvp",
+      "at": 1,
+      "position": [
+        0,
+        0,
+        -78
+      ],
+      "target": [
+        0,
+        0,
+        -122
+      ],
+      "fov": 48,
+      "duration": 2,
+      "ease": "none"
+    }
+  ],
+  "persistentLayers": [
+    {
+      "id": "golden-dust",
+      "type": "particle",
+      "renderer": "dom",
+      "space": "screen",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        20,
+        10,
+        1
+      ],
+      "depthRole": "fx",
+      "depth": 1,
+      "count": 18,
+      "keyframes": [
+        {
+          "at": 0,
+          "opacity": 0.3
+        },
+        {
+          "at": 0.5,
+          "x": 0.3,
+          "y": 0.5,
+          "opacity": 0.5
+        },
+        {
+          "at": 1,
+          "x": -0.2,
+          "y": 0.8,
+          "opacity": 0.3
+        }
+      ]
+    }
+  ],
+  "story": {
+    "world": {
+      "far": 300,
+      "focusDistance": 14
+    },
+    "scrollScreens": 12,
+    "preloadAhead": 0.1,
+    "virtualCamera": [
+      {
+        "at": 0,
+        "x": 0,
+        "y": 0,
+        "zoom": 1,
+        "rotation": 0
+      },
+      {
+        "at": 1,
+        "x": 0,
+        "y": 0,
+        "zoom": 1,
+        "rotation": 0
+      }
+    ]
+  }
+}

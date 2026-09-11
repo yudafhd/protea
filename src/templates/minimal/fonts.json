@@ -1,0 +1,22 @@
+{
+  "Cormorant": {
+    "name": "Cormorant Garamond",
+    "src": "/fonts/cormorant-latin-400-normal.woff2",
+    "spatialSrc": "/fonts/cormorant-latin-400-normal.woff",
+    "fallback": "serif",
+    "category": "Serif",
+    "variants": {
+      "400-italic": {
+        "src": "/fonts/cormorant-latin-400-italic.woff2",
+        "spatialSrc": "/fonts/cormorant-latin-400-italic.woff"
+      }
+    }
+  },
+  "DM Sans": {
+    "name": "DM Sans",
+    "src": "/fonts/dm-sans-latin-400-normal.woff2",
+    "spatialSrc": "/fonts/dm-sans-latin-400-normal.woff",
+    "fallback": "sans-serif",
+    "category": "Sans Serif"
+  }
+}

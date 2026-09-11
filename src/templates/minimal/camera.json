@@ -1,0 +1,234 @@
+[
+  {
+    "scene": "opening",
+    "position": [
+      0,
+      0,
+      10
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          0,
+          0,
+          10
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "cover",
+    "position": [
+      1.5,
+      0,
+      -2
+    ],
+    "target": [
+      1.5,
+      0,
+      -12
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          1.5,
+          0,
+          -2
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "couple",
+    "position": [
+      0,
+      0,
+      -14
+    ],
+    "target": [
+      0,
+      0,
+      -24
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          0,
+          0,
+          -14
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "story",
+    "position": [
+      1.5,
+      0,
+      -26
+    ],
+    "target": [
+      1.5,
+      0,
+      -36
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          1.5,
+          0,
+          -26
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "schedule",
+    "position": [
+      0,
+      0,
+      -38
+    ],
+    "target": [
+      0,
+      0,
+      -48
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          0,
+          0,
+          -38
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "venue",
+    "position": [
+      1.5,
+      0,
+      -50
+    ],
+    "target": [
+      1.5,
+      0,
+      -60
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          1.5,
+          0,
+          -50
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "gallery",
+    "position": [
+      0,
+      0,
+      -62
+    ],
+    "target": [
+      0,
+      0,
+      -72
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          0,
+          0,
+          -62
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  },
+  {
+    "scene": "rsvp",
+    "position": [
+      1.5,
+      0,
+      -74
+    ],
+    "target": [
+      1.5,
+      0,
+      -84
+    ],
+    "fov": 42,
+    "duration": 1.8,
+    "ease": "power2.inOut",
+    "responsive": {
+      "mobile": {
+        "position": [
+          1.5,
+          0,
+          -74
+        ],
+        "fov": 48
+      },
+      "tablet": {
+        "fov": 48
+      }
+    }
+  }
+]

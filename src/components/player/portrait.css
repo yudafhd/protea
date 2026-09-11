@@ -1,0 +1,50 @@
+/* Every player uses the same portrait artboard, including wide browser windows. */
+.portrait-experience {
+  background: radial-gradient(ellipse at top, #eceee3, #dce0d1);
+}
+.portrait-invitation {
+  container: invitation / size;
+  width: min(100%, 480px, 56.25svh);
+  height: 100svh;
+  min-height: 0;
+  margin-inline: auto;
+  box-shadow: 0 0 0 1px #69755324, 0 0 70px #3c47391a;
+}
+
+/* Keep the controls inside the artboard on short landscape screens. */
+@container invitation (max-height: 600px) {
+  .player-header, .woodland-invitation .player-header { height: 12cqh; padding-inline: 12px; }
+  .world-heading, .cinematic-invitation .world-heading, .woodland-invitation .world-heading { top: 12cqh; }
+  .world-heading .heading-rule { margin-block: 5px; }
+  .world-heading p, .woodland-invitation .world-heading p { font-size: 12px; }
+  .world-heading .tiny-label { font-size: 6px; letter-spacing: 1.2px; }
+  .invitation-action, .woodland-invitation .invitation-action { bottom: 12cqh; gap: 5px; }
+  .invitation-action p { font-size: 6px; }
+  .guest-label { font-size: 6px; letter-spacing: .6px; }
+  .player-footer, .woodland-invitation .player-footer { height: 9cqh; margin-inline: 5px; padding-inline: 8px; }
+  .chapter-toggle, .audio-button { min-height: 24px; }
+  .chapter-menu { bottom: 11cqh; max-height: 75cqh; overflow-y: auto; width: min(250px, 92cqw); right: 4cqw; padding: 12px; }
+  .chapter-menu button { padding-block: 8px; }
+  .spatial-world, .cinematic-invitation .spatial-world { inset: 22cqh 0 24cqh; }
+  .woodland-invitation .spatial-world { inset: 0; }
+  .modal { max-height: 94cqh; padding: 18px; }
+}
+@container invitation (max-width: 300px) {
+  .wordmark { font-size: 22px; gap: 5px; }
+  .wordmark>svg { width: 21px; height: 21px; }
+  .player-header nav { gap: 3px; }
+  .comparison-link { font-size: 8px; padding: 6px; gap: 4px; }
+  .studio-link { font-size: 7px; padding: 6px; gap: 4px; }
+  .quiet-link svg { width: 13px; height: 13px; }
+  .primary-button { min-height: 30px; font-size: 8px; padding: 8px 10px; gap: 8px; }
+  .scene-actions { gap: 5px; }
+  .round-button { width: 28px; height: 28px; }
+  .round-button svg, .primary-button svg { width: 12px; height: 12px; }
+  .template-credit { font-size: 6px; gap: 4px; }
+  .footer-controls { gap: 4px; }
+  .chapter-toggle { font-size: 8px; gap: 4px; }
+  .control-divider { display: none; }
+  .chapter-dots, .woodland-invitation .chapter-dots { right: 3px; padding: 3px 0; }
+  .chapter-dots button, .woodland-invitation .chapter-dots button { width: 14px; height: 18px; }
+  .form-row { grid-template-columns: 1fr; }
+}

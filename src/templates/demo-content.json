@@ -1,0 +1,29 @@
+{
+  "couple": {
+    "groom": "Adrian",
+    "bride": "Isabella",
+    "photo": "/assets/botanical/couple.webp",
+    "greeting": "Together with our families, we joyfully invite you to celebrate the beginning of our forever.",
+    "story": "Two paths crossed, and a beautiful story began. From our first conversation to a thousand little adventures, every moment has led us here."
+  },
+  "wedding": {
+    "date": "2026-11-02",
+    "dateLabel": "MONDAY, 02 NOVEMBER 2026",
+    "akad": "09:00 \u2013 10:00 WIB",
+    "reception": "13:00 \u2013 16:00 WIB"
+  },
+  "venue": {
+    "name": "The Glasshouse",
+    "address": "Jl. Ciumbuleuit No. 88, Bandung, West Java",
+    "mapLink": "https://maps.google.com/?q=Bandung"
+  },
+  "gallery": [
+    {
+      "src": "/assets/botanical/couple.webp",
+      "caption": "A little moment, a lifetime of love."
+    }
+  ],
+  "guest": {
+    "name": "Our dearest family & friends"
+  }
+}
