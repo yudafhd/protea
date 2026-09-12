@@ -31,6 +31,28 @@ export const CATALOG_CATEGORIES = [
 
 export const THEME_CATALOG: CatalogTheme[] = [
   {
+    id: "grand-hall",
+    name: "Grand Hall",
+    category: "3d-interactive",
+    categoryLabel: "3D & Interaktif",
+    badge: "MVP · Portrait 3D",
+    subtitle: "Perayaan di Bawah Cahaya Lentera",
+    description: "Undangan portrait dengan satu karakter yang menyusuri hall gothic, lentera gantung, dan tiga kepingan informasi acara.",
+    couple: "Laras",
+    weddingDate: "Sabtu, 12 Desember 2026",
+    location: "The Sage House, Bandung",
+    route: "/templates/grand-hall",
+    previewImage: "/assets/models/grand-hall/preview.png",
+    palette: ["#101c29", "#527d99", "#e5d1a7", "#bc7439"],
+    features: ["Portrait-First", "1 Scene Blender GLB", "1 Karakter", "3 Titik Undangan"],
+    highlights: [
+      { label: "Teknologi", value: "Blender GLB + R3F" },
+      { label: "Nuansa", value: "Gothic, Hangat, Magis" },
+      { label: "Interaksi", value: "Tap-to-Walk" },
+      { label: "Format", value: "Portrait Mobile" },
+    ],
+  },
+  {
     id: "woodland",
     name: "Woodland Reverie",
     category: "parallax",

@@ -18,12 +18,18 @@ export const toWorld = (point: Point): [number, number] => [(point.x - 600) * .0
 export const fromWorld = (x: number, z: number): Point => ({ x: Math.max(90, Math.min(1110, x / .045 + 600)), y: Math.max(330, Math.min(640, z / .055 + 450)) });
 export const lanternPositions = [-25, -12, 1, 15, 27].map((x, i) => ({ x, z: i % 2 ? -5 : 6, radius: .25 }));
 const treeSolids = [0,1,2].map(scene=>treePlacements(scene).map(tree=>({x:tree.x,z:tree.z,radius:tree.scale*.38})));
+const blueForestSolids = [
+  { x:-18, z:-6, radius:1.55 }, { x:-14, z:7.6, radius:1.35 },
+  { x:-6, z:-8.4, radius:1.35 }, { x:-2, z:6.4, radius:1.45 },
+  { x:4, z:-6, radius:1.3 }, { x:10, z:8, radius:1.4 },
+  { x:18, z:-8, radius:1.4 },
+];
 export const ALLEY_LIMIT = 2.55;
 export function avoidScenery(point: Point, scene: number): Point {
   let [x, z] = toWorld(point);
   // Keep both characters clear of the projecting shopfronts; no forest obstacles in the alley.
   if (scene === 0) return fromWorld(x, Math.max(-ALLEY_LIMIT, Math.min(ALLEY_LIMIT, z)));
-  const solids = [...treeSolids[scene], ...lanternPositions, { x: -13, z: -1.7, radius: .35 }, ...(scene === 1 ? [{ x: 0, z: -7, radius: 1.4 }] : [])];
+  const solids = scene===1 ? blueForestSolids : [...treeSolids[scene], ...lanternPositions, { x: -13, z: -1.7, radius: .35 }];
   for (const solid of solids) {
     const dx=x-solid.x, dz=z-solid.z, distance=Math.hypot(dx,dz), clearance=solid.radius+.7;
     if (distance < clearance) { x=solid.x+(distance ? dx/distance : 1)*clearance; z=solid.z+(distance ? dz/distance : 0)*clearance; }

@@ -28,9 +28,9 @@ test('3D world coordinates round trip and raycast targets stay in bounds',()=>{
  assert.deepEqual(fromWorld(100,-100),{x:1110,y:330});
 });
 test('solid props keep the couple outside their footprint without blocking beacons',()=>{
- const blocked=avoidScenery(fromWorld(-13,-1.7),1);
+ const blocked=avoidScenery(fromWorld(-14,7.6),1);
  const [x,z]=toWorld(blocked);
- assert.ok(Math.hypot(x+13,z+1.7)>=1.049);
+ assert.ok(Math.hypot(x+14,z-7.6)>=2.049);
  chapters.forEach((chapter,scene)=>chapter.points.forEach(point=>{
    const result=avoidScenery(point,scene);
    assert.ok(Math.hypot(result.x-point.x,result.y-point.y)<.001);

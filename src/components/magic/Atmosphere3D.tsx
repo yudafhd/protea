@@ -34,18 +34,19 @@ const grade={
    color*=vignette;gl_FragColor=vec4(max(color,vec3(0.)),1.);
   }`,
 };
-export function ArtFinish() {
+export function ArtFinish({scene: sceneIndex = 0}:{scene?:number}) {
  const {gl,scene,camera,size}=useThree();
  const composerRef=useRef<EffectComposer|null>(null);
  useEffect(()=>{
   const composer=new EffectComposer(gl);
-  const render=new RenderPass(scene,camera),bloom=new UnrealBloomPass(new Vector2(256,512),.2,.65,1.05),color=new ShaderPass(grade),output=new OutputPass();
+  const forest=sceneIndex===1;
+  const render=new RenderPass(scene,camera),bloom=new UnrealBloomPass(new Vector2(256,512),forest?.4:.2,.65,forest?.78:1.05),color=new ShaderPass(grade),output=new OutputPass();
   composer.addPass(render);composer.addPass(bloom);composer.addPass(color);composer.addPass(output);
   composer.setPixelRatio(Math.min(gl.getPixelRatio(),1.5));
   const viewport=gl.getSize(new Vector2());composer.setSize(viewport.x,viewport.y);
   composerRef.current=composer;
   return ()=>{composerRef.current=null;bloom.dispose();color.dispose();output.dispose();composer.dispose();};
- },[gl,scene,camera]);
+ },[gl,scene,camera,sceneIndex]);
  useEffect(()=>{composerRef.current?.setPixelRatio(Math.min(gl.getPixelRatio(),1.5));composerRef.current?.setSize(size.width,size.height);},[size,gl]);
  useFrame((_,dt)=>{if(composerRef.current)composerRef.current.render(dt);else gl.render(scene,camera);},1);
  return null;

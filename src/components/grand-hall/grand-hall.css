@@ -1,0 +1,9 @@
+.qg-page{background:#090f19}
+.qg-frame{background:#101c29}
+.qg-cover{background:#101b2b85;backdrop-filter:blur(2px)}
+.qg-shade{background:linear-gradient(#091323ba,transparent 24%,transparent 78%,#091323b0)}
+.qg-stops button{background:#14263bd9}
+.qg-crosshair{position:absolute;left:50%;top:50%;width:5px;height:5px;border:1px solid #f3ddb8bb;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
+.qg-dpad{position:absolute;left:18px;bottom:48px;display:grid;grid-template:repeat(2,40px)/repeat(3,40px);gap:4px}
+.qg-dpad button{border:1px solid #d8c59a66;border-radius:50%;background:#14263bd9;color:#f4dfb2;display:grid;place-items:center;touch-action:none}.qg-dpad .up{grid-area:1/2}.qg-dpad .left{grid-area:2/1}.qg-dpad .down{grid-area:2/2}.qg-dpad .right{grid-area:2/3}
+.qg-hint{bottom:18px}

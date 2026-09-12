@@ -1,19 +1,20 @@
 "use client";
-import { Component, memo, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
+import { Component, memo, Suspense, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Sparkles } from '@react-three/drei';
 import { Group, MathUtils, Mesh, Vector3 } from 'three';
 import { Animal3D, Box, Castle3D, Cone, Gem, Lantern3D, Pole } from './Models3D';
 import { DetailedWizard } from './Characters3D';
-import { Cottage } from './Architecture3D';
 import { WizardAlley } from './WizardAlley';
 import { ForestCanopy, Meadow, Terrain, Understory } from './Nature3D';
 import { PaintedSky, ArtFinish } from './Atmosphere3D';
+import { EnchantedForest3D } from './EnchantedForest3D';
 import { INITIAL_YAW, thirdPersonPose } from './camera';
 import { chapters, toWorld, fromWorld, lanternPositions, type Point } from './world';
 type Props = { scene:number; position:Point; moving:boolean; visited:number[]; onWalk:(p:Point)=>void; paused:boolean; compact:boolean; reduced:boolean; overview:boolean; cameraYaw:RefObject<number>; cameraPitch:RefObject<number> };
 const Scenery = memo(function Scenery({scene,reduced}:{scene:number;reduced:boolean}) {
  if(scene===0)return <WizardAlley reduced={reduced}/>;
+ if(scene===1)return <EnchantedForest3D reduced={reduced}/>;
 
  return <>
   <color attach="background" args={['#b8cbb8']}/><fogExp2 attach="fog" args={['#9fbdad',.0075]}/>
@@ -27,7 +28,6 @@ const Scenery = memo(function Scenery({scene,reduced}:{scene:number;reduced:bool
   {lanternPositions.map(({x,z})=><Lantern3D key={x} at={[x,0,z]}/>)}
   <Animal3D at={[-13,2.6,-1.7]} kind="owl" reduced={reduced}/><Pole at={[-13,1.1,-1.7]} height={2.2} radius={.13} color="#796d4d"/><Box at={[-13,2.3,-1.7]} size={[1,.12,.3]} color="#796d4d"/>
   <Animal3D at={[10,0,1.5]} kind="deer" reduced={reduced}/>{[-21,-3,20].map((x,i)=><Animal3D key={x} at={[x,0,6-i]} phase={i*2} reduced={reduced}/>)}
-  {scene===1&&<><Cottage at={[-19,0,-12]}/><Cottage at={[-7,0,-13]} purple/><Cottage at={[8,0,-12]}/><Cottage at={[22,0,-12]} purple/><group position={[0,0,-7]}><Pole at={[0,.4,0]} radius={1.4} height={.8} color="#9ca793"/><Pole at={[0,1.1,0]} radius={.3} height={1.6} color="#a8b097"/><Gem at={[0,2.1,0]} size={[.65,.65,.65]} color="#a9d6c3"/></group>{[-10,15].map(x=><group key={x} position={[x,0,-6]}><Box at={[0,.8,0]} size={[2,.2,1]} color="#88704b"/>{[-.8,.8].map(a=><Pole key={a} at={[a,.4,0]} height={.8} radius={.08} color="#756043"/>)}{[-.6,0,.6].map((a,i)=><group key={a}><Gem at={[a,1.2,0]} size={[.2,.3,.2]} color={i%2?'#be95b5':'#79bbaa'}/><Pole at={[a,1.48,0]} height={.2} radius={.06} color="#bca46f"/></group>)}</group>)}{Array.from({length:9},(_,i)=><group key={i} position={[-23+i*5.5,5+Math.sin(i)*.4,-7]}><Cone at={[0,0,0]} radius={.2} height={.5} color={i%2?'#c59b76':'#839cb0'} sides={4}/></group>)}</>}
   {scene===2&&<><mesh position={[10,-.02,-12]} rotation={[-Math.PI/2,0,0]}><planeGeometry args={[50,14]}/><meshStandardMaterial color="#70b7b9" roughness={.23} metalness={.3}/></mesh><Castle3D/>{[-18,-10,26].map(x=><Gem key={x} at={[x,.1,-13]} size={[3.5,1.6,3]} color="#8caaa1"/>)}</>}
   {!reduced&&<Sparkles count={45} scale={[56,6,20]} position={[0,2,0]} size={3} speed={.3} color="#fff2b8"/>}
  </>;
@@ -75,10 +75,10 @@ export default function World3D(props:Props) {
   onPointerLeave={()=>{gesture.current.active=false;}}
  >
   <WorldBoundary><Canvas shadows="percentage" dpr={[1,props.compact?1.25:1.5]} camera={{position:[-26,3.6,5],fov:60,near:.1,far:160}} gl={{antialias:true,powerPreference:'high-performance'}} fallback={<div className="magic-3d-fallback">Browser ini belum mendukung WebGL. Gunakan tombol misi untuk membaca undangan.</div>}>
-   <Scenery scene={props.scene} reduced={props.reduced}/>
+   <Suspense fallback={null}><Scenery scene={props.scene} reduced={props.reduced}/></Suspense>
    <mesh rotation={[-Math.PI/2,0,0]} position={[0,.015,0]} visible onPointerUp={e=>{if(!props.paused&&!gesture.current.dragged){e.stopPropagation();props.onWalk(fromWorld(e.point.x,e.point.z));}}}><planeGeometry args={[52,25]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/></mesh>
    {chapters[props.scene].points.map((point,i)=><Beacon key={`${props.scene}-${i}`} point={point} found={props.visited.includes(props.scene*2+i)} onWalk={point=>{if(!gesture.current.dragged&&!props.paused)props.onWalk(point);}} reduced={props.reduced}/>)}
-   <Player key={props.scene} position={props.position} moving={props.moving} reduced={props.reduced} cameraYaw={props.cameraYaw}/><FollowCamera position={props.position} reduced={props.reduced} overview={props.overview} scene={props.scene} cameraYaw={props.cameraYaw} cameraPitch={props.cameraPitch}/><Ready onReady={markReady}/><ArtFinish/>
+   <Player key={props.scene} position={props.position} moving={props.moving} reduced={props.reduced} cameraYaw={props.cameraYaw}/><FollowCamera position={props.position} reduced={props.reduced} overview={props.overview} scene={props.scene} cameraYaw={props.cameraYaw} cameraPitch={props.cameraPitch}/><Ready onReady={markReady}/><ArtFinish scene={props.scene}/>
   </Canvas></WorldBoundary>
  </div>;
 }
