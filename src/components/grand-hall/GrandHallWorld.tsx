@@ -14,16 +14,33 @@ function CandleGlow() {
   const { gl, scene, camera, size } = useThree();
   const composer = useRef<EffectComposer | null>(null);
   useEffect(() => {
-    const effect = new EffectComposer(gl);
-    const render = new RenderPass(scene, camera);
-    const bloom = new UnrealBloomPass(new Vector2(1, 1), 0.32, 0.45, 1.2);
-    const output = new OutputPass();
-    effect.addPass(render); effect.addPass(bloom); effect.addPass(output);
-    composer.current = effect;
-    return () => { composer.current = null; render.dispose(); bloom.dispose(); output.dispose(); effect.dispose(); };
-  }, [gl, scene, camera]);
-  useEffect(() => { composer.current?.setPixelRatio(Math.min(gl.getPixelRatio(), 1.25)); composer.current?.setSize(size.width, size.height); }, [gl, size]);
-  useFrame((_, dt) => composer.current?.render(dt), 1);
+    try {
+      const effect = new EffectComposer(gl);
+      const render = new RenderPass(scene, camera);
+      const bloom = new UnrealBloomPass(new Vector2(Math.max(1, size.width), Math.max(1, size.height)), 0.32, 0.45, 1.2);
+      const output = new OutputPass();
+      effect.addPass(render); effect.addPass(bloom); effect.addPass(output);
+      composer.current = effect;
+      return () => { composer.current = null; render.dispose(); bloom.dispose(); output.dispose(); effect.dispose(); };
+    } catch {
+      composer.current = null;
+    }
+  }, [gl, scene, camera, size]);
+  useEffect(() => {
+    if (size.width > 0 && size.height > 0) {
+      composer.current?.setPixelRatio(Math.min(gl.getPixelRatio(), 1.25));
+      composer.current?.setSize(size.width, size.height);
+    }
+  }, [gl, size]);
+  useFrame((state, dt) => {
+    if (composer.current) {
+      try {
+        composer.current.render(dt);
+        return;
+      } catch {}
+    }
+    state.gl.render(state.scene, state.camera);
+  }, 1);
   return null;
 }
 
@@ -44,23 +61,41 @@ function Hall() {
   return <primitive object={scene} />;
 }
 
-function FirstPersonCamera({ position, yaw, pitch, moving, reduced }: {
+function FirstPersonCamera({ position, yaw, pitch, moving, reduced, fov }: {
   position: HallPoint;
   yaw: RefObject<number>;
   pitch: RefObject<number>;
   moving: boolean;
   reduced: boolean;
+  fov?: RefObject<number>;
 }) {
   const { camera } = useThree();
   const eye = useMemo(() => new Vector3(), []);
   const look = useMemo(() => new Vector3(), []);
   useFrame(({ clock }, dt) => {
-    const bob = moving && !reduced ? Math.sin(clock.elapsedTime * 10) * 0.025 : 0;
-    eye.set(position.x, 1.62 + bob, position.z);
+    const currentY = 1.62 + (position.y ?? 0);
+    const isGrounded = (position.y ?? 0) <= 0.05;
+    const bob = moving && isGrounded && !reduced ? Math.sin(clock.elapsedTime * 10) * 0.025 : 0;
+    const cameraY = currentY + bob;
+
+    eye.set(position.x, cameraY, position.z);
     camera.position.lerp(eye, reduced ? 1 : 1 - Math.exp(-dt * 18));
     const horizontal = Math.cos(pitch.current) * 10;
-    look.set(position.x + Math.sin(yaw.current) * horizontal, 1.62 + Math.sin(pitch.current) * 10, position.z + Math.cos(yaw.current) * horizontal);
+    look.set(
+      position.x + Math.sin(yaw.current) * horizontal,
+      cameraY + Math.sin(pitch.current) * 10,
+      position.z + Math.cos(yaw.current) * horizontal
+    );
     camera.lookAt(look);
+
+    if (fov && "fov" in camera && typeof (camera as { fov?: number }).fov === "number") {
+      const cam = camera as { fov: number; updateProjectionMatrix: () => void };
+      const targetFov = fov.current;
+      if (Math.abs(cam.fov - targetFov) > 0.02) {
+        cam.fov = MathUtils.lerp(cam.fov, targetFov, reduced ? 1 : 1 - Math.exp(-dt * 14));
+        cam.updateProjectionMatrix();
+      }
+    }
   });
   return null;
 }
@@ -79,7 +114,7 @@ function Beacon({ index, visited, onSelect }: { index: number; visited: boolean;
   );
 }
 
-export default function GrandHallWorld({ position, moving, visited, onWalk, yaw, pitch, reduced }: {
+export default function GrandHallWorld({ position, moving, visited, onWalk, yaw, pitch, reduced, fov }: {
   position: HallPoint;
   moving: boolean;
   visited: number[];
@@ -87,6 +122,7 @@ export default function GrandHallWorld({ position, moving, visited, onWalk, yaw,
   yaw: RefObject<number>;
   pitch: RefObject<number>;
   reduced: boolean;
+  fov?: RefObject<number>;
 }) {
   const walk = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
@@ -108,7 +144,7 @@ export default function GrandHallWorld({ position, moving, visited, onWalk, yaw,
       <Sparkles count={220} scale={[13, 21, 33]} position={[0, 11, -10]} size={2} speed={0.15} color="#e9d9a9" opacity={0.5} />
       <Sparkles count={220} scale={[13, 21, 33]} position={[0, 11, -10]} size={2} speed={0.15} color="#e9d9a9" opacity={0.5} />
       <Sparkles count={220} scale={[13, 21, 33]} position={[0, 11, -10]} size={2} speed={0.15} color="#e9d9a9" opacity={0.5} />
-      <FirstPersonCamera position={position} yaw={yaw} pitch={pitch} moving={moving} reduced={reduced} />
+      <FirstPersonCamera position={position} yaw={yaw} pitch={pitch} moving={moving} reduced={reduced} fov={fov} />
       <CandleGlow />
     </Canvas>
   );

@@ -38,7 +38,7 @@ export const THEME_CATALOG: CatalogTheme[] = [
     badge: "MVP · Portrait 3D",
     subtitle: "Perayaan di Bawah Cahaya Lentera",
     description: "Undangan portrait dengan satu karakter yang menyusuri hall gothic, lentera gantung, dan tiga kepingan informasi acara.",
-    couple: "Laras",
+    couple: "Yuda & Putri",
     weddingDate: "Sabtu, 12 Desember 2026",
     location: "The Sage House, Bandung",
     route: "/templates/grand-hall",
