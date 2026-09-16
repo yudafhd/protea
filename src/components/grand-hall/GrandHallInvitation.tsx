@@ -6,6 +6,7 @@ import { useProgress } from "@react-three/drei";
 import { Check, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, MapPin, Maximize2, Minimize2, X } from "lucide-react";
 import { MathUtils } from "three";
 import { STOPS, type HallPoint } from "./config";
+import { HallPhysics } from "./physics";
 import "../quiet-garden/quiet-garden.css";
 import "./grand-hall.css";
 
@@ -215,8 +216,9 @@ function FantasyWeddingIntro({ onFinish }: { onFinish: () => void }) {
 }
 
 export default function GrandHallInvitation() {
+  const [physics] = useState(() => new HallPhysics());
   const [introFinished, setIntroFinished] = useState(false);
-  const [position, setPosition] = useState<HallPoint>({ x: 0, y: 0, z: 5 });
+  const [position, setPosition] = useState<HallPoint>({ x: 0, y: 0, z: 5.5 });
   const [moving, setMoving] = useState(false);
   const [visited, setVisited] = useState<number[]>([]);
   const [open, setOpen] = useState<number>();
@@ -225,8 +227,8 @@ export default function GrandHallInvitation() {
   const target = useRef<HallPoint | null>(null);
   const keys = useRef(new Set<string>());
   const yaw = useRef(Math.PI);
-  const pitch = useRef(0.08);
-  const fov = useRef(67);
+  const pitch = useRef(-0.08);
+  const fov = useRef(76);
   const suppressed = useRef<number | undefined>(undefined);
   const pointers = useRef(new Map<number, { x: number; y: number; startX: number; startY: number }>());
   const pinchDistance = useRef<number | null>(null);
@@ -331,6 +333,7 @@ export default function GrandHallInvitation() {
     let frame = 0, last = 0;
     const tick = (time: number) => {
       const dt = last ? Math.min((time - last) / 1000, 0.05) : 0; last = time;
+      physics.step(dt, reduced);
       const pressed = keys.current;
       const strafe = Number(pressed.has("d") || pressed.has("ArrowRight")) - Number(pressed.has("a") || pressed.has("ArrowLeft"));
       const forward = Number(pressed.has("w") || pressed.has("ArrowUp")) - Number(pressed.has("s") || pressed.has("ArrowDown"));
@@ -353,16 +356,16 @@ export default function GrandHallInvitation() {
       const currentY = point.y ?? 0;
       const nextY = MathUtils.clamp(currentY + dy, 0, 20.2);
 
-      const next: HallPoint = {
-        x: length ? MathUtils.clamp(point.x + dx / length * distance, -1.3, 1.3) : point.x,
+      const next = physics.movePlayer(point, {
+        x: length ? point.x + dx / length * distance : point.x,
         y: nextY,
-        z: length ? MathUtils.clamp(point.z + dz / length * distance, -23.8, 5.5) : point.z,
-      };
-      const walking = Math.hypot(next.x - point.x, next.z - point.z) > 0.001 || Math.abs(nextY - currentY) > 0.001;
+        z: length ? point.z + dz / length * distance : point.z,
+      });
+      const walking = Math.hypot(next.x - point.x, next.z - point.z) > 0.00001 || Math.abs((next.y ?? 0) - currentY) > 0.00001;
       setMoving(walking);
       if (walking) { current.current = next; setPosition(next); }
-      if (target.current && Math.hypot(next.x - target.current.x, next.z - target.current.z) < 0.12 && Math.abs(nextY - (target.current.y ?? 0)) < 0.15) target.current = null;
-      const near = STOPS.findIndex(stop => Math.hypot(next.x - stop.x, next.z - stop.z) < 0.85);
+      if (target.current && ((!walking && physics.ready && dt > 0) || (Math.hypot(next.x - target.current.x, next.z - target.current.z) < 0.12 && Math.abs((next.y ?? 0) - (target.current.y ?? currentY)) < 0.15))) target.current = null;
+      const near = STOPS.findIndex(stop => Math.hypot(next.x - stop.x, next.z - stop.z) < 0.85 && (next.y ?? 0) < 1);
       if (near < 0) suppressed.current = undefined;
       else if (suppressed.current !== near) {
         suppressed.current = near; target.current = null; keys.current.clear();
@@ -372,7 +375,7 @@ export default function GrandHallInvitation() {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [paused]);
+  }, [paused, physics, reduced]);
 
   const walkTo = (point: HallPoint) => { if (!paused && !dragged.current) target.current = point; };
   const press = (key: string) => { if (!paused) { keys.current.add(key); target.current = null; } };
@@ -465,7 +468,7 @@ export default function GrandHallInvitation() {
           }
         }}
       >
-        <World position={position} moving={moving} visited={visited} onWalk={walkTo} yaw={yaw} pitch={pitch} fov={fov} reduced={reduced} />
+        <World position={position} moving={moving} visited={visited} onWalk={walkTo} onPortrait={() => { target.current = null; keys.current.clear(); setOpen(0); }} yaw={yaw} pitch={pitch} fov={fov} reduced={reduced} physics={physics} paused={paused} />
         <ModelLoader />
         <div className="qg-shade" />
 
@@ -534,9 +537,9 @@ export default function GrandHallInvitation() {
             </button>
           </div>
         </div>
-        <p className="qg-hint">WASD / D-pad · FLY & DOWN untuk terbang</p>
+        <p className="qg-hint">WASD / D-pad · Sentuh benda untuk mendorong · FLY / DOWN</p>
 
-        {open !== undefined && <div className="qg-dialog" role="dialog" aria-modal="true" aria-labelledby="qg-dialog-title"><button className="qg-close" onClick={() => setOpen(undefined)} aria-label="Tutup"><X size={18} /></button><span>KEPINGAN 0{open + 1}</span><h2 id="qg-dialog-title">{stops[open].title}</h2><p>{stops[open].body}</p>{open === 2 && <a href="https://maps.google.com" target="_blank" rel="noreferrer"><MapPin size={15} /> Lihat lokasi</a>}<button className="qg-continue" onClick={() => setOpen(undefined)}>Lanjutkan</button></div>}
+        {open !== undefined && <div className="qg-dialog" role="dialog" aria-modal="true" aria-labelledby="qg-dialog-title" style={{ maxHeight: '85dvh', overflowY: 'auto' }}><button className="qg-close" onClick={() => setOpen(undefined)} aria-label="Tutup"><X size={18} /></button><span>KEPINGAN 0{open + 1}</span>{open === 0 && <img src="/assets/models/grand-hall/couple-portrait.png" alt="Potret Yuda dan Putri dengan bingkai emas bertema dunia sihir" width={1254} height={1254} style={{ display: 'block', width: '100%', maxHeight: '45dvh', objectFit: 'contain', height: 'auto', margin: '12px auto' }} />}<h2 id="qg-dialog-title">{stops[open].title}</h2><p>{stops[open].body}</p>{open === 2 && <a href="https://maps.google.com" target="_blank" rel="noreferrer"><MapPin size={15} /> Lihat lokasi</a>}<button className="qg-continue" onClick={() => setOpen(undefined)}>Lanjutkan</button></div>}
 
         {iosHint && (
           <div className="toast" style={{ bottom: "100px", textAlign: "center", lineHeight: 1.5, pointerEvents: "none" }}>
