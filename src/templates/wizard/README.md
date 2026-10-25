@@ -48,10 +48,71 @@ Template tersedia di `/templates/wizard` dan masuk ke katalog kategori Sinematik
 - Komponen: `src/components/wizard/WizardInvitation.tsx`; gaya terisolasi dengan awalan `wizard-`.
 - Konten: `src/templates/wizard/content.ts`. Nama, tanggal, alamat, dan jadwal dirender sebagai teks; seluruhnya dapat disesuaikan melalui konten/props komponen.
 - Tanggal dan lokasi mengikuti poster. **Jam akad 09.00–10.00 dan resepsi 11.00–14.00 WIB adalah contoh**, perlu disesuaikan sebelum undangan dipakai. Profil tidak menambahkan nama lengkap atau orang tua yang belum diberikan.
-- Tombol Buka Undangan menjalankan perjalanan kamera sekitar 3,6 detik menuju kastil tanpa menggulir dokumen. Kastil dan danau berada dalam satu bidang lanskap dengan garis air menyentuh kaki kastil, sehingga keduanya tetap menyambung selama zoom. Figur, awan, dan kabut bergerak dengan kedalaman berbeda. Sampul dapat dikunjungi kembali dengan gerak kamera mundur.
-- Sesudah tiba, menu Pasangan, Acara, Surat, dan RSVP mengganti isi panel di dalam satu layar. Hanya isi panel yang panjang dapat digulir; adegan dan kamera tetap di tempat. Panel mengembalikan posisi baca ke atas saat bagian diganti.
+- Tombol Buka Undangan menjalankan perjalanan kamera sekitar 9,3 detik menuju kastil tanpa menggulir dokumen. Kastil dan danau berada dalam satu bidang lanskap dengan garis air menyentuh kaki kastil, sehingga keduanya tetap menyambung selama zoom. Figur, awan, dan kabut bergerak dengan kedalaman berbeda. Sampul dapat dikunjungi kembali dengan gerak kamera mundur.
+- Sesudah tiba, menu Pasangan, Acara, RSVP, dan Gift mengganti isi panel di dalam satu layar. Gift berada di menu terakhir. Pilihan kehadiran serta jumlah tamu pada RSVP masing-masing menempati satu baris. Hanya isi panel yang panjang dapat digulir; adegan dan kamera tetap di tempat. Panel mengembalikan posisi baca ke atas saat bagian diganti.
 - Pintasan keyboard Lewati Sampul tersedia. Preferensi pengurangan animasi langsung menampilkan posisi tujuan, termasuk bila preferensi berubah saat perjalanan berlangsung. Gerak pointer dinonaktifkan ketika pengurangan animasi aktif.
-- Tombol kalender mengunduh `.ics` untuk kedua acara, dengan konversi WIB yang eksplisit. Petunjuk arah membuka pencarian Google Maps menggunakan alamat tertulis, bukan pin koordinat yang sudah diverifikasi.
-- RSVP mengirim ke `/api/rsvp` menggunakan `invitationId="demo"` pada halaman pratinjau. Backend yang ada menyimpan ke `.data/rsvp.jsonl` atau direktori `PROTEA_DATA_DIR`. Untuk undangan terbit, berikan ID undangan yang valid melalui prop komponen.
+- Sampul memiliki gerakan otomatis tanpa kursor: awan dan kabut bergeser beberapa piksel, burung hantu melayang, panji berayun, dan bintang berpendar. Pose animasi ditahan selama perjalanan kamera; animasi otomatis dinonaktifkan saat pengurangan animasi dipilih.
+- Tombol kalender mengunduh `.ics` untuk kedua acara, dengan konversi WIB yang eksplisit. Petunjuk arah membuka tautan Google Maps yang diberikan pengguna melalui `mapsUrl` di `content.ts`.
+- RSVP aktif meneruskan jawaban ke Google Form pengguna melalui tab baru dengan isian awal. Tamu harus menekan Kirim di Google Form agar jawaban tersimpan. Jika `googleForm` dihapus dari konten, formulir menggunakan `/api/rsvp` dengan `invitationId="demo"` pada pratinjau; backend menyimpan ke `.data/rsvp.jsonl` atau `PROTEA_DATA_DIR`.
 - `scripts/prepare-wizard-assets.mjs` menyiapkan turunan WebP di `public/assets/wizard` serta menyalin SVG tanpa mengganti PNG sumber. Jalankan ulang setelah aset sumber berubah.
 - Uji interaksi: `node tests/wizard-browser.mjs` (Edge headless; dapat diganti dengan `PLAYWRIGHT_CHANNEL`), setelah server lokal berjalan. `PLAYWRIGHT_BASE_URL` opsional.
+
+## Musik dan suara pintu
+
+Musik aktif adalah komposisi orisinal **A Letter Beneath the Moon**, instrumental 40 detik dengan celesta, arpeggio harp, dan lapisan string sintetis dalam irama 3/4 pada 72 BPM. Musik serta efek engsel/kayu dibuat oleh `scripts/prepare-wizard-audio.mjs`, tanpa sampel rekaman eksternal. Jalankan `npm run assets:wizard-audio` untuk membuat ulang WAV stereo 22.050 Hz di `public/assets/wizard/audio`.
+
+`useWizardAudio.ts` membuat AudioContext setelah klik Buka Undangan atau pintasan keyboard. Musik masuk selama 1,2 detik pada gain 0,22, berulang selama membaca, dan memudar saat kembali ke sampul. Efek pintu buka 2,8 detik dan tutup 2 detik memakai gain 0,32 serta dipicu satu kali ketika progres kamera berada di antara 0,62 dan 0,95, mengikuti gerak daun pintu. Perjalanan instan/pengurangan animasi tidak memainkan efek pintu. Jika aset terlambat dimuat, efek yang sudah lewat dilewati.
+
+Tombol suara membisukan musik dan efek secara bersamaan, mempertahankan pilihan selama berpindah bagian atau kembali ke sampul. Audio ditangguhkan ketika tab tersembunyi, efek pintu yang aktif dihentikan, dan konteks ditutup saat komponen dilepas. Kegagalan memuat audio tidak menghalangi isi undangan; tamu bisa mencoba ulang melalui tombol suara.
+
+## Gerbang dan aula kastel
+
+Tiga aset tambahan dibuat menggunakan built-in `image_gen`. Prompt lengkap dan referensinya tersimpan di [castle-generation-prompts.json](./castle-generation-prompts.json).
+
+| Sumber PNG | Turunan untuk web | Peran |
+| --- | --- | --- |
+| `wedding_castle_gate_left.png` | `/assets/wizard/castle-gate-left.webp` | Daun gerbang kiri dengan kanal alpha. |
+| `wedding_castle_gate_right.png` | `/assets/wizard/castle-gate-right.webp` | Daun gerbang kanan dengan kanal alpha. |
+| `wedding_castle_hall.png` | `/assets/wizard/castle-hall.webp` | Latar aula opak, perspektif terpusat, palet sepia, burgundy, dan emas tua. |
+
+Perjalanan masuk berdurasi 9,3 detik: adegan luar 4,2 detik, perpindahan ke gerbang 0,9 detik, jeda 0,6 detik, dan pembukaan pintu 3,6 detik. Seluruh teks dan tombol sampul memudar selama 0,3 detik saat undangan dibuka, lalu muncul kembali dengan transisi yang sama setelah perjalanan pulang selesai. Putri keluar ke kiri dan Yuda ke kanan, bersamaan dengan burung yang membesar ke arah kamera lalu melintas keluar layar. Kamera mendekati kastel dengan pembesaran maksimal 1,25 kali dan titik fokus di tengah, sebelum adegan luar menghilang dan gerbang muncul. Perjalanan kembali berdurasi 7 detik. Percepatan dan perlambatan menggunakan kurva sinus, dengan interpolasi halus pada awal serta akhir gerak pintu. Setelah kamera mendekati kastel, gerbang menutup seluruh area undangan dari tepi ke tepi, kedua daun pintu membuka, lalu panel perkamen muncul di atas latar aula. Gerak memakai satu progres kamera yang sama sehingga perjalanan kembali ke sampul membalik urutan ini. CSS memotong bagian kayu di bawah lengkung untuk memenuhi tinggi dan lebar layar; rasio sumber dipertahankan dan tepi pertemuan pintu tetap sejajar di tengah.
+
+Pengurangan animasi langsung menampilkan aula dan isi undangan tanpa gerak pintu. Aset baru dimuat lebih awal agar tersedia ketika sampul dibuka. Jadwal, peta, kalender, dan pengiriman RSVP tetap memakai konten serta alur yang sudah ada.
+
+## Foto bersama di bagian Pasangan
+
+Versi sebelumnya: foto `DSC01262.jpg` diedit menggunakan built-in `image_gen` menjadi `wedding_couple_wizard.png`. Outfit diubah menjadi jubah charcoal dengan lapisan burgundy, detail emas, serta dasi senada; latar studio menjadi taupe hangat. Sumber asli tetap di lokasi semula. Prompt dan asal foto tercatat di [couple-generation-prompt.json](./couple-generation-prompt.json). Turunan WebP tersedia di `/assets/wizard/couple-wizard.webp`; gunakan `scripts/prepare-wizard-assets.mjs` untuk menyiapkannya kembali.
+
+Bagian Pasangan menampilkan satu foto bersama dalam bingkai tipis yang mempertahankan komposisi foto secara penuh. Teks pembuka dan kutipan mengikuti naskah pengguna di `content.ts`. Header nama/tanggal, judul dekoratif, dan keterangan foto di panel telah dihapus; kalimat pembuka ditutup setelah ?doa restu? agar tetap utuh. Bagian Acara langsung menampilkan tanggal dan jadwal, sedangkan RSVP langsung menampilkan formulir. Judul bagian tetap tersedia untuk pembaca layar dan fokus keyboard. Foto pasangan pada sampul tetap menggunakan lapisan animasi yang sudah ada.
+
+## Integrasi Google Form untuk RSVP
+
+Area penutup RSVP menampilkan Ucapan & Doa, menggantikan kutipan dan nama/tanggal. Sumber respons harus dipasang oleh pemilik Google Form melalui [panduan penghubung ucapan](./GOOGLE-WISHES-SETUP.md). URL deployment disimpan pada variabel server `WIZARD_WISHES_URL`. Tanpa konfigurasi ini, tampilan kosong dan belum membaca respons asli. API hanya mengeluarkan nama serta ucapan, dengan daftar terbaru lebih dahulu dan pembaruan saat tab kembali aktif.
+
+Form pengguna: `https://forms.gle/L9SjecJwKp5GW2Fn9`. Konfigurasi `googleForm` dalam `content.ts` berisi URL responder, ID kolom Nama Lengkap (`986528962`), Kehadiran (`877086558`), Jumlah tamu (`1498135098`), serta Ucapan & Doa (`2606285`). Nilai kehadiran harus sama persis dengan pilihan pada Google Form. Jika kolom dihapus/dibuat ulang, perbarui ID isian.
+
+Tombol Lanjut ke Google Form memakai navigasi GET bawaan browser dan membuka jawaban yang telah diisi pada tab baru. Nama awal mengikuti `?to=` pada link undangan dan masih dapat diedit. Jumlah tamu tidak diteruskan saat memilih tidak hadir karena kolom itu opsional di Google Form. Membuka form tidak menampilkan pesan berhasil atau membuat catatan lokal; konfirmasi baru tersimpan setelah tamu menekan Kirim di Google Form. Pengujian browser mencegat navigasi ke Google sehingga tidak membuat respons uji.
+
+Form yang diperiksa belum memiliki kolom atau pengumpulan email. Untuk email akun Google, pemilik form dapat mengaktifkan Settings > Responses > Collect email addresses > Verified; tamu akan diminta login serta mengonfirmasi pengumpulan email. Nama akun Google tidak otomatis menjadi jawaban Nama Lengkap melalui pengaturan ini.
+
+## QR lokasi
+
+Bagian Acara menyediakan QR yang mengarah ke `https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8`, sama dengan tombol Petunjuk arah. Tombol Unduh QR lokasi mengunduh PNG 1024 x 1024 px dari `/assets/wizard/location-qr.png`. QR memakai hitam-putih dan ruang kosong di sekelilingnya agar mudah dipindai. Setelah mengubah `mapsUrl` dalam `content.ts`, jalankan `npm run assets:wizard-qr` untuk membuat ulang QR. Tes mendekode gambar untuk memastikan isinya sesuai tautan pada konten.
+
+## Gift
+
+Bagian Gift menggantikan Surat di panel dan navigasi. Rekening disetel melalui `giftAccounts` dalam `content.ts`, berisi `bank`, `number`, `holder`, dan penanda opsional `isDemo`. Data awal adalah Bank Contoh dengan nomor `0000000000`, atas nama Yuda & Putri, serta label rekening contoh. Tombol salin menggunakan clipboard dan menampilkan pesan bila penyalinan gagal agar nomor tetap dapat disalin manual.
+
+## Bulan pada sampul
+
+`wedding_moon.png` dibuat dari referensi poster menggunakan built-in `image_gen`, dengan latar transparan dan warna ivory-sepia. Turunan WebP 768 px berada di `/assets/wizard/moon.webp`. Bulan ditempatkan di kiri atas kastel (kiri 27%, atas 48,5%, lebar 24%) di antara lapisan awan dan kastel, dengan gerak paralaks kecil pada sampul. Saat undangan dibuka, bulan membesar hingga 3,2 kali dan bergerak ke tengah layar, lalu memudar mengikuti akhir adegan luar. Prompt lengkap tersimpan di [moon-generation-prompt.json](./moon-generation-prompt.json).
+
+## Foto piknik HD
+
+Foto aktif bagian Pasangan diganti dengan foto piknik dari lampiran pengguna, ditingkatkan menggunakan built-in `image_gen`. Sumber hasil edit ada di `wedding_couple_picnic_hd.png`; versi web di `/assets/wizard/couple-picnic-hd.webp`. Peningkatan meliputi kejernihan, tekstur dan pencahayaan alami, dengan pakaian putih dan suasana taman dipertahankan. Bingkai mengikuti rasio foto sehingga wajah, pose duduk, dan alas piknik tidak terpotong. Prompt lengkap ada di [picnic-generation-prompts.json](./picnic-generation-prompts.json). Aset versi Wizard sebelumnya tetap tersedia sebagai arsip.
+
+## Perkenalan masing-masing mempelai
+
+Lanjutan bagian Pasangan menampilkan Yuda di kiri dan Putri di kanan, dengan potongan foto transparan dari lampiran studio berlatar biru. Aset sumber: `wedding_yuda_profile.png` dan `wedding_putri_profile.png`; aset web: `/assets/wizard/yuda-profile.webp` dan `/assets/wizard/putri-profile.webp`. Kanal alpha dipertahankan pada WebP. Aset dibuat menggunakan built-in `image_gen`; prompt tersimpan di [profile-generation-prompts.json](./profile-generation-prompts.json).
+
+Nama lengkap dan nama orang tua disetel melalui `partnerProfiles.groom` serta `partnerProfiles.bride` di `content.ts`. Data perkenalan mengikuti kiriman pengguna: Ahmad Yuda Fahrudin, putra dari Bpk Yusuf dan Ibu Siti; Rischyanti Putri Octavia, putri dari Alm. Bpk Sugeng dan Ibu Sri. Nama singkat dan foto pada sampul tidak diganti.

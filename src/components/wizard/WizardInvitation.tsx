@@ -3,13 +3,15 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ArrowLeft, ArrowUpRight, CalendarDays, Check, Heart, Mail, MapPin, Send, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowLeft, ArrowUpRight, CalendarDays, Check, Copy, Download, Gift, Heart, Mail, MapPin, Send, Sparkles, Volume2, VolumeX } from 'lucide-react';
 import { gsap } from 'gsap';
-import { createWizardCalendar, WIZARD_CONTENT, type WizardContent } from '@/templates/wizard/content';
+import WizardWishes from './WizardWishes';
+import useWizardAudio from './useWizardAudio';
+import { createWizardCalendar, WIZARD_CONTENT, type WizardContent, type WizardGiftAccount, type WizardGoogleForm } from '@/templates/wizard/content';
 import './wizard.css';
 
 const asset = (name: string) => `/assets/wizard/${name}`;
-const chapters = [{ id: 'sampul', label: 'Sampul', icon: Sparkles }, { id: 'pasangan', label: 'Pasangan', icon: Heart }, { id: 'acara', label: 'Acara', icon: CalendarDays }, { id: 'surat', label: 'Surat', icon: Mail }, { id: 'rsvp', label: 'RSVP', icon: Send }];
+const chapters = [{ id: 'sampul', label: 'Sampul', icon: Sparkles }, { id: 'pasangan', label: 'Pasangan', icon: Heart }, { id: 'acara', label: 'Acara', icon: CalendarDays }, { id: 'rsvp', label: 'RSVP', icon: Send }, { id: 'gift', label: 'Gift', icon: Gift }];
 type JourneyPhase = 'cover' | 'entering' | 'inside' | 'leaving';
 
 function Star({ className = '', style }: { className?: string; style?: CSSProperties }) {
@@ -56,20 +58,24 @@ function useParallax() {
   return root;
 }
 
-function WizardRsvp({ guestName, invitationId }: { guestName: string; invitationId: string }) {
-  const [attendance, setAttendance] = useState('yes');
+function WizardRsvp({ guestName, invitationId, googleForm }: { guestName: string; invitationId: string; googleForm?: WizardGoogleForm }) {
+  const [attendance, setAttendance] = useState<'yes' | 'no'>('yes');
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const [error, setError] = useState('');
   async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === 'saving') return;
+    if (status === 'saving') { event.preventDefault(); return; }
     const data = new FormData(event.currentTarget);
-    const name = String(data.get('name') ?? '').trim();
+    const name = String(data.get(googleForm?.fields.name ?? 'name') ?? '').trim();
     if (!name) {
+      event.preventDefault();
       setError('Silakan isi nama Anda.');
-      event.currentTarget.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+      event.currentTarget.querySelector<HTMLInputElement>('#wizard-guest')?.focus();
       return;
     }
+    setError('');
+    // Let the browser open Google's prefilled form. A handoff is not a saved RSVP.
+    if (googleForm) return;
+    event.preventDefault();
     setStatus('saving');
     setError('');
     try {
@@ -88,22 +94,52 @@ function WizardRsvp({ guestName, invitationId }: { guestName: string; invitation
       setError('Konfirmasi belum terkirim. Periksa koneksi Anda dan coba kembali.');
     }
   }
-  return status === 'saved' ? <div className="wizard-rsvp-success" role="status"><span><Check size={24} /></span><h3>Terima kasih untuk kabar baiknya.</h3><p>{attendance === 'yes' ? 'Kehadiran Anda akan melengkapi hari bahagia kami. Sampai bertemu di hari istimewa.' : 'Terima kasih atas doa dan restunya. Semoga kita dapat bertemu di kesempatan berikutnya.'}</p></div> : <form className="wizard-form" onSubmit={submit}>
+  return status === 'saved' ? <div className="wizard-rsvp-success" role="status"><span><Check size={24} /></span><h3>Terima kasih untuk kabar baiknya.</h3><p>{attendance === 'yes' ? 'Kehadiran Anda akan melengkapi hari bahagia kami. Sampai bertemu di hari istimewa.' : 'Terima kasih atas doa dan restunya. Semoga kita dapat bertemu di kesempatan berikutnya.'}</p></div> : <form className="wizard-form" onSubmit={submit} action={googleForm?.url} method={googleForm ? 'get' : undefined} target={googleForm ? '_blank' : undefined} rel={googleForm ? 'noopener noreferrer' : undefined}>
     <fieldset disabled={status === 'saving'}>
       <legend className="sr-only">Konfirmasi kehadiran</legend>
-      <label htmlFor="wizard-guest">Nama Anda<input id="wizard-guest" name="name" placeholder="Nama lengkap" defaultValue={guestName === 'Tamu Istimewa' ? '' : guestName} required maxLength={120} autoComplete="name" /></label>
-      <div className="wizard-form-row"><label htmlFor="wizard-attendance">Kehadiran<select id="wizard-attendance" name="attendance" value={attendance} onChange={(event) => setAttendance(event.target.value)}><option value="yes">Dengan senang hati, hadir</option><option value="no">Maaf, belum bisa hadir</option></select></label><label htmlFor="wizard-guests">Jumlah tamu<select id="wizard-guests" name="guests" disabled={attendance === 'no'}>{[1, 2, 3, 4, 5].map((number) => <option key={number} value={number}>{number} orang</option>)}</select></label></div>
-      <label htmlFor="wizard-message">Sepatah doa untuk kami <span>(opsional)</span><textarea id="wizard-message" name="message" placeholder="Tuliskan doa dan harapan Anda…" maxLength={1200} rows={4} /></label>
+      {googleForm && <><input type="hidden" name="usp" value="pp_url" /><input type="hidden" name={googleForm.fields.attendance} value={googleForm.attendanceLabels[attendance]} /></>}
+      <label htmlFor="wizard-guest">Nama Panggilan/Lengkap<input id="wizard-guest" name={googleForm?.fields.name ?? 'name'} placeholder="Nama lengkap" defaultValue={guestName === 'Tamu Istimewa' ? '' : guestName} required maxLength={120} autoComplete="name" /></label>
+      <label htmlFor="wizard-attendance">Kehadiran<select id="wizard-attendance" name={googleForm ? undefined : 'attendance'} value={attendance} onChange={(event) => setAttendance(event.target.value as 'yes' | 'no')}><option value="yes">Dengan senang hati, hadir</option><option value="no">Maaf, belum bisa hadir</option></select></label>
+      <label htmlFor="wizard-guests">Jumlah tamu<select id="wizard-guests" name={googleForm?.fields.guests ?? 'guests'} disabled={attendance === 'no'}>{[1, 2, 3, 4, 5].map((number) => <option key={number} value={number}>{number} orang</option>)}</select></label>
+      <label htmlFor="wizard-message">Sepatah doa untuk kami <span>(opsional)</span><textarea id="wizard-message" name={googleForm?.fields.message ?? 'message'} placeholder="Tuliskan doa dan harapan Anda…" maxLength={1200} rows={4} /></label>
       {error && <p className="wizard-form-error" role="alert">{error}</p>}
-      <button className="wizard-button" type="submit">{status === 'saving' ? 'Mengirim konfirmasi…' : 'Kirim konfirmasi'}<Send size={15} /></button>
+      {googleForm && <p className="wizard-form-note">Jawaban Anda akan terisi di Google Form pada tab baru.</p>}
+      <button className="wizard-button" type="submit">{googleForm ? 'Kirim ke Google Form' : status === 'saving' ? 'Mengirim konfirmasi…' : 'Kirim konfirmasi'}{googleForm ? <ArrowUpRight size={15} /> : <Send size={15} />}</button>
     </fieldset>
   </form>;
+}
+
+function WizardGift({ accounts }: { accounts: WizardGiftAccount[] }) {
+  const [copied, setCopied] = useState('');
+  const [error, setError] = useState('');
+
+  async function copyNumber(number: string) {
+    setError('');
+    setCopied('');
+    try {
+      await navigator.clipboard.writeText(number);
+      setCopied(number);
+    } catch {
+      setError('Nomor belum tersalin. Silakan salin nomor rekening secara manual.');
+    }
+  }
+
+  return <div className="wizard-gift-accounts">
+    {accounts.map((account) => <article className="wizard-gift-account" key={`${account.bank}-${account.number}`}>
+      <div className="wizard-gift-bank"><h3>{account.bank}</h3>{account.isDemo && <span>Rekening contoh</span>}</div>
+      <p className="wizard-gift-number">{account.number}</p>
+      <p className="wizard-gift-holder">Atas nama <strong>{account.holder}</strong></p>
+      <button className="wizard-button wizard-button-outline" type="button" onClick={() => copyNumber(account.number)}>{copied === account.number ? <Check size={15} /> : <Copy size={15} />}{copied === account.number ? 'Nomor tersalin' : 'Salin nomor rekening'}</button>
+    </article>)}
+    <p className="wizard-gift-feedback" role="status">{error || (copied ? 'Nomor rekening berhasil disalin.' : '')}</p>
+  </div>;
 }
 
 export default function WizardInvitation({ guestName = 'Tamu Istimewa', content = WIZARD_CONTENT, invitationId = 'demo' }: {
   guestName?: string; content?: WizardContent; invitationId?: string;
 }) {
   const root = useParallax();
+  const sound = useWizardAudio();
   const [active, setActive] = useState('sampul');
   const [phase, setPhase] = useState<JourneyPhase>('cover');
   const journey = useRef({ progress: 0 });
@@ -119,8 +155,26 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
   }
 
   function paintJourney() {
-    root.current?.style.setProperty('--wizard-journey', String(journey.current.progress));
-    if (root.current) root.current.dataset.cameraProgress = journey.current.progress.toFixed(4);
+    const node = root.current;
+    if (!node) return;
+    const progress = journey.current.progress;
+    const stage = (start: number, end: number) => {
+      const value = Math.max(0, Math.min(1, (progress - start) / (end - start)));
+      return value * value * (3 - 2 * value);
+    };
+    node.style.setProperty('--wizard-journey', String(progress));
+    node.style.setProperty('--wizard-characters', String(stage(0, .24)));
+    node.style.setProperty('--wizard-characters-fade', String(stage(.2, .28)));
+    node.style.setProperty('--wizard-flight', String(stage(0, .32)));
+    node.style.setProperty('--wizard-fly-past', String(stage(.2, .38)));
+    node.style.setProperty('--wizard-owl-fade', String(stage(.34, .4)));
+    node.style.setProperty('--wizard-approach', String(stage(0, .48)));
+    node.style.setProperty('--wizard-moon-approach', String(stage(0, .42)));
+    node.style.setProperty('--wizard-exterior-fade', String(stage(.44, .58)));
+    node.style.setProperty('--wizard-threshold', String(stage(.48, .58)));
+    node.style.setProperty('--wizard-door-open', String(stage(.62, .95)));
+    node.dataset.cameraProgress = progress.toFixed(4);
+    sound.sync(progress);
   }
 
   function finishJourney() {
@@ -128,6 +182,7 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
     tween.current = null;
     journey.current.progress = destination.current === 'inside' ? 1 : 0;
     paintJourney();
+    sound.finish(destination.current === 'inside');
     setJourneyPhase(destination.current);
     if (destination.current === 'cover') setActive('sampul');
   }
@@ -136,14 +191,26 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
     tween.current?.kill();
     destination.current = inside ? 'inside' : 'cover';
     setJourneyPhase(inside ? 'entering' : 'leaving');
-    if (skipAnimation || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const animated = !skipAnimation && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    sound.begin(inside, animated);
+    if (!animated) {
       finishJourney();
       return;
     }
     tween.current = gsap.to(journey.current, {
-      progress: inside ? 1 : 0,
-      duration: inside ? 3.6 : 2.6,
-      ease: 'power2.inOut',
+      // Finish the exterior journey before revealing and opening the doors.
+      ease: 'none',
+      keyframes: inside ? [
+        { progress: .48, duration: 4.2, ease: 'sine.inOut' },
+        { progress: .58, duration: .9, ease: 'sine.inOut' },
+        { progress: .62, duration: .6, ease: 'sine.inOut' },
+        { progress: 1, duration: 3.6, ease: 'sine.inOut' },
+      ] : [
+        { progress: .62, duration: 2.6, ease: 'sine.inOut' },
+        { progress: .58, duration: .5, ease: 'sine.inOut' },
+        { progress: .48, duration: .8, ease: 'sine.inOut' },
+        { progress: 0, duration: 3.1, ease: 'sine.inOut' },
+      ],
       onUpdate: paintJourney,
       onComplete: finishJourney,
     });
@@ -179,8 +246,12 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
     if (phaseRef.current === 'cover') travel(true, skipAnimation);
   }
 
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${content.address}, ${content.city}`)}`;
-  return <div className="wizard-page" lang="id">
+  const mapsUrl = content.mapsUrl;
+  const profiles = [
+    { id: 'groom', role: 'Mempelai pria', name: content.groom, image: 'yuda-profile.webp', ...content.partnerProfiles.groom },
+    { id: 'bride', role: 'Mempelai wanita', name: content.bride, image: 'putri-profile.webp', ...content.partnerProfiles.bride },
+  ];
+  return <div className="wizard-page" lang="id" data-sound={sound.state}>
     {phase === 'cover' && <button className="wizard-skip" onClick={() => goTo('pasangan', true)}>Lewati sampul</button>}
     <aside className="wizard-desktop-note" aria-label="Tentang undangan"><Link href="/" className="wizard-back"><ArrowLeft size={15} /> Koleksi undangan</Link><div className="wizard-desktop-title"><Star /><p>A LOVE<br />BEYOND MAGIC.</p><span>Beberapa kisah memang<br />ditakdirkan menjadi selamanya.</span></div><span className="wizard-edition">THE WEDDING COLLECTION — 2026</span></aside>
     <main className="wizard-book" ref={root} data-phase={phase} data-camera-progress="0">
@@ -188,12 +259,13 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
         <div className="wizard-cover-art" aria-hidden="true">
           <Image className="wizard-paper" src={asset('parchment.webp')} alt="" fill sizes="(max-width: 600px) 100vw, 540px" preload />
           <Image className="wizard-clouds" src={asset('clouds.webp')} alt="" width={864} height={1821} sizes="(max-width: 600px) 110vw, 600px" loading="eager" />
+          <Image className="wizard-moon" src={asset('moon.webp')} alt="" width={768} height={768} sizes="(max-width: 600px) 80vw, 430px" loading="eager" />
           <div className="wizard-landscape-world">
             <Image className="wizard-lake" src={asset('landscape.webp')} alt="" width={1200} height={800} sizes="(max-width: 600px) 260vw, 1400px" loading="eager" />
             <Image className="wizard-castle" src={asset('castle.webp')} alt="" width={1200} height={643} sizes="(max-width: 600px) 100vw, 540px" loading="eager" />
           </div>
           <Image className="wizard-mist" src={asset('mist.webp')} alt="" width={1200} height={600} sizes="(max-width: 600px) 100vw, 540px" />
-          <Image className="wizard-owl" src={asset('owl.webp')} alt="" width={1200} height={1200} sizes="140px" />
+          <Image className="wizard-owl" src={asset('owl.webp')} alt="" width={1200} height={1200} sizes="(max-width: 600px) 150vw, 900px" loading="eager" />
           <Image className="wizard-bride" src={asset('bride.webp')} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" />
           <Image className="wizard-groom" src={asset('groom.webp')} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" />
           <img className="wizard-cover-frame" src={asset('gold-frame.svg')} alt="" />
@@ -207,29 +279,41 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
         <div className="wizard-cover-bottom"><p className="wizard-script">It was always you.</p><Image className="wizard-orb" src={asset('winged-orb.webp')} alt="" width={1200} height={600} sizes="100px" /><span>Kepada Yth. Bapak/Ibu/Saudara/i</span><strong>{guestName}</strong><button className="wizard-open" onClick={() => goTo('pasangan')}><Mail size={14} /> Buka undangan <ArrowRight size={14} /></button></div>
         <span className="wizard-cover-corner">{content.groom[0]} &amp; {content.bride[0]} · {content.dateParts.join('.')}</span>
       </section>
+      <div className="wizard-castle-entry" aria-hidden="true">
+        <Image className="wizard-hall" src={asset('castle-hall.webp')} alt="" fill sizes="(max-width: 600px) 100vw, 540px" loading="eager" />
+        <div className="wizard-hall-shade" />
+        <div className="wizard-gate">
+          <div className="wizard-door wizard-door-left"><Image src={asset('castle-gate-left.webp')} alt="" width={1024} height={1536} sizes="(max-width: 600px) 110vh, 1200px" loading="eager" /></div>
+          <div className="wizard-door wizard-door-right"><Image src={asset('castle-gate-right.webp')} alt="" width={1024} height={1536} sizes="(max-width: 600px) 110vh, 1200px" loading="eager" /></div>
+        </div>
+      </div>
       <div className="wizard-arrival-veil" aria-hidden="true" />
-      <div className="wizard-journey-status" role="status" aria-live="polite">
-        {phase === 'entering' && <span>Lebih dekat dengan cerita kita…</span>}
-        {phase === 'leaving' && <span>Kembali ke awal cerita…</span>}
-      </div>
       <div className="wizard-interior" ref={interior} hidden={phase !== 'inside'} role="region" aria-label="Isi undangan">
-        <div className="wizard-interior-header"><Star /><span>{content.groom} &amp; {content.bride}</span><small>{content.dateParts.join(' · ')}</small></div>
       <section className="wizard-section wizard-couple-section" id="pasangan" hidden={active !== 'pasangan'} aria-labelledby="wizard-couple-title">
-        <Star className="wizard-section-star" /><span className="wizard-eyebrow">DUA DUNIA, SATU CERITA</span><h2 id="wizard-couple-title" tabIndex={-1}>Ditulis oleh takdir.<br /><em>Dipilih oleh hati.</em></h2><p className="wizard-body-copy">{content.introduction}</p>
-        <div className="wizard-couple-portraits"><figure><div className="wizard-portrait-arch"><Image src={asset('groom.webp')} alt={`Potret ${content.groom}`} width={1024} height={1536} sizes="(max-width: 600px) 42vw, 220px" /></div><figcaption><span>THE GROOM</span><h3>{content.groom}</h3></figcaption></figure><span className="wizard-couple-amp">&amp;</span><figure><div className="wizard-portrait-arch"><Image src={asset('bride.webp')} alt={`Potret ${content.bride}`} width={1024} height={1536} sizes="(max-width: 600px) 42vw, 220px" /></div><figcaption><span>THE BRIDE</span><h3>{content.bride}</h3></figcaption></figure></div>
+        <h2 id="wizard-couple-title" className="sr-only" tabIndex={-1}>Pasangan</h2><p className="wizard-body-copy">{content.introduction}</p>
+        <figure className="wizard-couple-photo"><div className="wizard-couple-photo-frame"><Image src={asset('couple-picnic-hd.webp')} alt={`Potret piknik bersama ${content.groom} dan ${content.bride}`} width={1293} height={1216} sizes="(max-width: 600px) 85vw, 430px" /></div></figure>
         <blockquote>“{content.quote}”</blockquote><div className="wizard-small-rule"><span /><Star /><span /></div>
+        <div className="wizard-profiles" aria-label="Perkenalan mempelai">
+          <p className="wizard-profiles-heading">Perkenalkan kami</p>
+          {profiles.map((profile) => <article className={`wizard-profile wizard-profile-${profile.id}`} key={profile.id} aria-labelledby={`wizard-profile-${profile.id}-name`}>
+            <div className="wizard-profile-portrait"><Image src={asset(profile.image)} alt={`Potret ${profile.name} tanpa latar belakang`} width={768} height={1152} sizes="(max-width: 600px) 45vw, 220px" /></div>
+            <div className="wizard-profile-copy"><span className="wizard-eyebrow">{profile.role}</span><h3 className="wizard-profile-name" id={`wizard-profile-${profile.id}-name`}>{profile.fullName}</h3><p className="wizard-profile-relationship">{profile.relationship}</p><p className="wizard-profile-parent">{profile.father}</p><span className="wizard-profile-and" aria-hidden="true">&amp;</span><p className="wizard-profile-parent">{profile.mother}</p></div>
+          </article>)}
+        </div>
       </section>
 
-      <section className="wizard-section wizard-event-section" id="acara" hidden={active !== 'acara'} aria-labelledby="wizard-event-title"><span className="wizard-eyebrow">THE DAY WE SAY ALWAYS</span><h2 id="wizard-event-title" tabIndex={-1}>Satu hari.<br /><em>Untuk selamanya.</em></h2><time className="wizard-full-date" dateTime={content.date}>{content.dateLabel}</time><div className="wizard-events">{content.events.map((event, index) => <article className="wizard-event" key={event.id}><span className="wizard-event-number">0{index + 1}</span><div><h3>{event.title}</h3><p className="wizard-event-time">{event.time}</p><p>{event.note}</p></div><Star /></article>)}</div><a className="wizard-button wizard-button-outline" href={`data:text/calendar;charset=utf-8,${encodeURIComponent(createWizardCalendar(content))}`} download="pernikahan-yuda-putri.ics"><CalendarDays size={16} /> Simpan tanggalnya</a>
-        <div className="wizard-venue"><div className="wizard-venue-art" aria-hidden="true"><Image src={asset('castle.webp')} alt="" width={1200} height={643} sizes="(max-width: 600px) 90vw, 480px" /></div><MapPin size={20} strokeWidth={1.3} /><span className="wizard-eyebrow">TEMPAT KITA MERAYAKAN</span><h3>{content.address}</h3><p>{content.city}</p><a className="wizard-text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">Petunjuk arah <ArrowUpRight size={15} /></a></div>
+      <section className="wizard-section wizard-event-section" id="acara" hidden={active !== 'acara'} aria-labelledby="wizard-event-title"><h2 id="wizard-event-title" className="sr-only" tabIndex={-1}>Acara pernikahan</h2><time className="wizard-full-date" dateTime={content.date}>{content.dateLabel}</time><div className="wizard-events">{content.events.map((event, index) => <article className="wizard-event" key={event.id}><span className="wizard-event-number">0{index + 1}</span><div><h3>{event.title}</h3><p className="wizard-event-time">{event.time}</p><p>{event.note}</p></div><Star /></article>)}</div><a className="wizard-button wizard-button-outline" href={`data:text/calendar;charset=utf-8,${encodeURIComponent(createWizardCalendar(content))}`} download="pernikahan-yuda-putri.ics"><CalendarDays size={16} /> Simpan tanggalnya</a>
+        <div className="wizard-venue"><div className="wizard-venue-art" aria-hidden="true"><Image src={asset('castle.webp')} alt="" width={1200} height={643} sizes="(max-width: 600px) 90vw, 480px" /></div><MapPin size={20} strokeWidth={1.3} /><span className="wizard-eyebrow">TEMPAT KITA MERAYAKAN</span><h3>{content.address}</h3><p>{content.city}</p><a className="wizard-text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">Petunjuk arah <ArrowUpRight size={15} /></a><figure className="wizard-location-qr"><Image src={asset('location-qr.png')} alt="QR lokasi pernikahan Yuda dan Putri di Google Maps" width={1024} height={1024} unoptimized /><figcaption>Pindai untuk membuka lokasi acara</figcaption></figure><a className="wizard-button wizard-button-outline" href={asset('location-qr.png')} download="qr-lokasi-pernikahan-yuda-putri.png"><Download size={15} /> Unduh QR lokasi</a></div>
       </section>
 
-      <section className="wizard-letter" id="surat" hidden={active !== 'surat'} aria-labelledby="wizard-letter-title"><Image className="wizard-letter-owl" src={asset('owl.webp')} alt="Burung hantu membawa sepucuk surat" width={1200} height={1200} sizes="180px" /><span className="wizard-eyebrow">SEPOTONG SURAT UNTUK ANDA</span><h2 id="wizard-letter-title" tabIndex={-1}>Keajaiban terbaik<br />adalah <em>kebersamaan.</em></h2><p>Hari ini akan terasa lebih berarti dengan kehadiran orang-orang terkasih. Datanglah, berbagi tawa, dan tuliskan kenangan indah bersama kami.</p><span className="wizard-letter-signature">Dengan cinta, {content.groom} &amp; {content.bride}</span><Star /></section>
+      <section className="wizard-section wizard-gift-section" id="gift" hidden={active !== 'gift'} aria-labelledby="wizard-gift-title"><div className="wizard-gift-mark" aria-hidden="true"><Gift size={30} strokeWidth={1.2} /></div><h2 id="wizard-gift-title" tabIndex={-1}>Gift</h2><p className="wizard-body-copy">Kehadiran dan doa restu Anda merupakan hadiah terindah bagi kami. Bagi Anda yang ingin memberikan tanda kasih, kami menerimanya dengan penuh rasa syukur.</p><WizardGift accounts={content.giftAccounts} /></section>
 
-      <section className="wizard-section wizard-rsvp-section" id="rsvp" hidden={active !== 'rsvp'} aria-labelledby="wizard-rsvp-title"><Star className="wizard-section-star" /><span className="wizard-eyebrow">A SEAT IN OUR STORY</span><h2 id="wizard-rsvp-title" tabIndex={-1}>Boleh kami<br /><em>menanti Anda?</em></h2><p className="wizard-body-copy">Sampaikan kabar kehadiran dan sepatah doa untuk perjalanan baru kami.</p><WizardRsvp guestName={guestName} invitationId={invitationId} /></section>
+      <section className="wizard-section wizard-rsvp-section" id="rsvp" hidden={active !== 'rsvp'} aria-labelledby="wizard-rsvp-title"><h2 id="wizard-rsvp-title" className="sr-only" tabIndex={-1}>Konfirmasi kehadiran</h2><WizardRsvp guestName={guestName} invitationId={invitationId} googleForm={content.googleForm} /></section>
 
-      <footer className="wizard-footer" hidden={active !== 'rsvp'}><Image src={asset('winged-orb.webp')} alt="" width={1200} height={600} sizes="110px" /><p className="wizard-script">After all this time? Always.</p><h2>{content.groom} <i>&amp;</i> {content.bride}</h2><span>{content.dateParts[0]} · {content.dateParts[1]} · {content.date.slice(0, 4)}</span><Link href="/">Dibuat dengan cinta oleh <b>protēa</b><ArrowUpRight size={12} /></Link></footer>
+      <footer className="wizard-footer" hidden={active !== 'rsvp'}><Image src={asset('winged-orb.webp')} alt="" width={1200} height={600} sizes="110px" /><WizardWishes active={phase === 'inside' && active === 'rsvp'} /></footer>
       </div>
+      {phase !== 'cover' && <button className="wizard-sound-toggle" type="button" onClick={sound.toggle} aria-label={sound.state === 'error' ? 'Coba putar suara' : sound.state === 'muted' ? 'Aktifkan suara' : 'Matikan suara'} aria-pressed={sound.state !== 'muted' && sound.state !== 'error'} aria-busy={sound.state === 'loading'} title={sound.state === 'muted' ? 'Aktifkan suara' : 'Matikan suara'}>{sound.state === 'muted' || sound.state === 'error' ? <VolumeX size={17} /> : <Volume2 size={17} />}</button>}
+      {phase !== 'cover' && sound.state === 'error' && <p className="wizard-sound-error" role="status">Audio belum dapat diputar. Ketuk tombol suara untuk mencoba lagi.</p>}
     </main>
     <aside className="wizard-desktop-right" aria-hidden="true"><span>A JOURNEY INTO OUR ALWAYS</span><div /><Sparkles size={16} /></aside>
     <nav className={`wizard-chapter-nav ${phase === 'inside' ? 'is-open' : ''}`} aria-label="Bagian undangan">{chapters.map(({ id, label, icon: Icon }) => <button key={id} onClick={() => goTo(id)} aria-current={active === id ? 'location' : undefined}><Icon size={17} strokeWidth={1.4} /><span>{label}</span></button>)}</nav>

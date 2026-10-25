@@ -86,5 +86,69 @@
         "bytes":  1071557,
         "alphaMin":  0,
         "transparentSamplePercent":  80.33
+    },
+    {
+        "file": "wedding_castle_hall.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2867741,
+        "alphaMin": 255,
+        "transparentSamplePercent": 0
+    },
+    {
+        "file": "wedding_castle_gate_left.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2378105,
+        "alphaMin": 0,
+        "transparentSamplePercent": 100
+    },
+    {
+        "file": "wedding_castle_gate_right.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2251968,
+        "alphaMin": 0,
+        "transparentSamplePercent": 100
+    },
+    {
+        "file": "wedding_couple_wizard.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2228744,
+        "alphaMin": 255,
+        "transparentSamplePercent": 0
+    },
+    {
+        "file": "wedding_moon.png",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 1830267,
+        "alphaMin": 0,
+        "transparentSamplePercent": 100
+    },
+    {
+        "file": "wedding_couple_picnic_hd.png",
+        "width": 1293,
+        "height": 1216,
+        "bytes": 2753625,
+        "alphaMin": 255,
+        "transparentSamplePercent": 0
+    },
+    {
+        "file": "wedding_yuda_profile.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 1448349,
+        "alphaMin": 0,
+        "transparentSamplePercent": 100
+    },
+    {
+        "file": "wedding_putri_profile.png",
+        "width": 1024,
+        "height": 1536,
+        "bytes": 2219306,
+        "alphaMin": 0,
+        "transparentSamplePercent": 100
     }
 ]

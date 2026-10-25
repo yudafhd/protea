@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "prompts": [
+    {
+      "file": "wedding_castle_hall.png",
+      "reference": "public/assets/wizard/castle.webp",
+      "prompt": "Use case: illustration-story. Asset type: production background for an existing portrait wedding invitation website, NOT a website mockup. Input image 1 is STYLE AND ARCHITECTURE REFERENCE ONLY: match its sepia limestone fantasy castle, warm antique gold and burgundy palette, softly painted realistic storybook details. Create a single full-bleed portrait 2:3 illustration of the castle's grand wedding entrance hall viewed straight ahead at eye level, perfectly centered one-point perspective, tall gothic stone arches, warm candle sconces, distant high windows glowing softly, a muted burgundy aisle leading into the distance, restrained antique gold trim, gentle atmospheric mist and elegant warm parchment tones. No people, no text, no lettering, no symbols from any franchise. Main central 60% should be low detail, luminous softly lit beige/cream space so invitation text on parchment can overlay it legibly. Rich architecture and ornament concentrated along left and right edges and upper corners. Entrance foreground arch aligns with a full-height two-leaf door opening. Bottom foreground warm stone floor. The result will be the destination scene behind separate opening door leaves, so show the OPEN interior with no doors blocking it. Calm romantic wedding atmosphere, consistent believable architecture with supplied castle. Image only."
+    },
+    {
+      "file": "wedding_castle_gate_left.png",
+      "reference": "wedding_castle_hall.png",
+      "transparent_background": true,
+      "prompt": "Use case: illustration-story. Asset type: a single isolated LEFT leaf of a two-leaf gothic castle entrance door for a wedding website animation. Input image is STYLE REFERENCE for material, palette, lighting and architecture only. Generate ONLY the left door leaf, front orthographic view without perspective tilt. Canvas portrait 2:3. The single leaf occupies the full canvas width and 94% height. It is the LEFT HALF of a symmetrical pointed gothic arch double door: outer LEFT edge is vertical then gently curves up to a high pointed arch apex at the TOP RIGHT corner; the RIGHT meeting edge is perfectly straight vertical from top apex to flat bottom, so it can meet a separate right leaf at website center. Dark warm walnut wood, aged antique-gold carved edge trim, restrained gothic raised panels, burgundy undertone, antique bronze ring handle near RIGHT edge at 62% height, hinge plates near LEFT edge. Soft warm light from above front. Storybook painted realism, elegant and romantic, matching supplied warm sepia hall. Flat bottom at 97% height, clean unclipped silhouette with tiny transparent padding. Transparent background everywhere outside the door silhouette, including curved top-left corner; real alpha, no shadow background, no floor, no wall, no doorway, no other door, no room, no labels, no text, no people, no watermark."
+    },
+    {
+      "file": "wedding_castle_gate_right.png",
+      "reference": "wedding_castle_gate_left.png",
+      "transparent_background": true,
+      "prompt": "Use case: precise-object-edit. Asset type: RIGHT leaf of a castle double door for website animation. Edit the supplied LEFT door leaf into its exact horizontally mirrored RIGHT door counterpart. Preserve absolutely all carved panel details, wood color, gold trim, dimensions, alpha edges and illustration style, only mirror the entire leaf horizontally. The straight vertical meeting edge and ring handle must now be on the LEFT; hinges on the RIGHT; the pointed apex at TOP LEFT, curved outer top corner on the right. Remove the diffuse brown glow outside the physical wooden leaf so there is clean genuine transparency outside its silhouette. No background, no floor, no wall, no room, no text. Keep original canvas 1024x1536 and exact same scale and placement as reference, mirrored. This must form a perfectly matching symmetrical double door when placed next to the supplied left leaf. Return only one right door with transparent background."
+    }
+  ]
+}

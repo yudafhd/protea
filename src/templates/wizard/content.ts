@@ -1,3 +1,16 @@
+export type WizardGiftAccount = {
+  bank: string;
+  number: string;
+  holder: string;
+  isDemo?: boolean;
+};
+
+export type WizardGoogleForm = {
+  url: string;
+  fields: { name: string; attendance: string; guests: string; message: string };
+  attendanceLabels: { yes: string; no: string };
+};
+
 export const WIZARD_CONTENT = {
   bride: 'Putri',
   groom: 'Yuda',
@@ -6,15 +19,38 @@ export const WIZARD_CONTENT = {
   dateParts: ['02', '11', '26'],
   address: 'Jalan Empu Sendok No. 5',
   city: 'Sooko, Mojokerto',
-  introduction: 'Dengan penuh rasa syukur dan bahagia, kami mengundang Bapak/Ibu/Saudara/i untuk menjadi bagian dari hari istimewa kami.',
-  quote: 'Di antara begitu banyak dunia, kami menemukan rumah dalam satu sama lain.',
+  mapsUrl: 'https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8',
+  googleForm: {
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLScdN9JIZicJ7lEwJkB0CC-NGS3hFvW2Y1xIaKFOKJdklwaPBQ/viewform',
+    fields: { name: 'entry.986528962', attendance: 'entry.877086558', guests: 'entry.1498135098', message: 'entry.2606285' },
+    attendanceLabels: { yes: 'Ya, saya akan hadir', no: 'Maaf, saya tidak bisa hadir' },
+  } satisfies WizardGoogleForm,
+  introduction: 'Atas Rahmat Tuhan Yang Maha Esa, kami bermaksud mengundang Anda di acara Kami. Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.',
+  quote: 'Dan di antara tanda-tanda kebesaran-Nya, Dia menciptakan pasangan untukmu agar kamu merasa tenteram.',
+  partnerProfiles: {
+    groom: {
+      fullName: 'Ahmad Yuda Fahrudin',
+      relationship: 'Putra dari',
+      father: 'Bpk Yusuf',
+      mother: 'Ibu Siti',
+    },
+    bride: {
+      fullName: 'Rischyanti Putri Octavia',
+      relationship: 'Putri dari',
+      father: 'Alm. Bpk Sugeng',
+      mother: 'Ibu Sri',
+    },
+  },
+  giftAccounts: [
+    { bank: 'Bank Contoh', number: '0000000000', holder: 'Yuda & Putri', isDemo: true },
+  ] as WizardGiftAccount[],
   events: [
-    { id: 'akad', title: 'Akad Nikah', time: '09.00 – 10.00 WIB', start: '2026-11-02T09:00:00+07:00', end: '2026-11-02T10:00:00+07:00', note: 'Sebuah janji, untuk selamanya.' },
-    { id: 'resepsi', title: 'Resepsi', time: '11.00 – 14.00 WIB', start: '2026-11-02T11:00:00+07:00', end: '2026-11-02T14:00:00+07:00', note: 'Merayakan cinta bersama orang terkasih.' },
+    { id: 'akad', title: 'Akad Nikah', time: '09.00 – 10.00 WIB', start: '2026-11-02T09:00:00+07:00', end: '2026-11-02T10:00:00+07:00', note: '' },
+    { id: 'resepsi', title: 'Resepsi', time: '18.00 WIB', start: '2026-11-02T11:00:00+07:00', end: '2026-11-02T14:00:00+07:00', note: '' },
   ],
 };
 
-export type WizardContent = typeof WIZARD_CONTENT;
+export type WizardContent = Omit<typeof WIZARD_CONTENT, 'googleForm'> & { googleForm?: WizardGoogleForm };
 
 function escapeCalendarText(value: string) {
   return value.replace(/\\/g, '\\\\').replace(/\r?\n/g, '\\n').replace(/;/g, '\\;').replace(/,/g, '\\,');

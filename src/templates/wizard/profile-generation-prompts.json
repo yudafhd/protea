@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "reference": "Two user-attached blue studio photographs: Yuda leaning from the left; Putri leaning from the right.",
+  "prompts": [
+    {
+      "file": "wedding_yuda_profile.png",
+      "web_asset": "/assets/wizard/yuda-profile.webp",
+      "transparent_background": true,
+      "prompt": "Use case: background-extraction, identity-preserve. Asset type: isolated photographic cutout of the groom for an individual introduction in a wedding website. Among the recent images, use ONLY the original attached photo containing the MAN in a white collared shirt and beige trousers leaning in from the LEFT against a blue studio backdrop. Ignore both images of the woman. Remove the entire blue studio background to genuine transparency and tightly crop the empty canvas around the man. Preserve this actual man's exact facial identity and original facial features: same skin texture and marks, eyes, expression, facial hair, mole, hair, white shirt, beige trousers, leaning posture/body angle and original studio lighting. Do not change clothes, beautify, turn him upright, or invent a different person or missing anatomy. Keep source crop edges where his body already exits the original frame; frame his visible head, shoulders and torso naturally with small transparent padding around his hair. Clean professional cutout, remove blue spill around hair and clothing. NO soft shadow, NO black background, NO grey glow or backdrop, NO ambient halo; all space outside his physical silhouette must have alpha zero. Keep natural hair edge partial alpha only. No text, labels, symbols, frame or other people. Output ONE isolated man on a truly transparent background, high-resolution PNG."
+    },
+    {
+      "file": "wedding_putri_profile.png",
+      "web_asset": "/assets/wizard/putri-profile.webp",
+      "transparent_background": true,
+      "prompt": "Use case: background-extraction, identity-preserve. Asset type: isolated photographic cutout of the bride for an individual introduction in a wedding website. Edit ONLY the last attached photo: the woman in a white long-sleeve buttoned blouse and grey trousers, leaning into the frame from the right against a blue studio backdrop. Remove the entire blue studio background to genuine transparency. Preserve the actual woman's exact facial identity and original face pixels, facial expression, eyes, lips, hair strands and curls, earrings, blouse, trousers, rings, hands and fingers, leaning body angle, lighting and skin texture. Do not beautify, redraw, change clothing, rotate her upright or invent missing anatomy. Tightly crop away unused blue/transparent canvas so the isolated woman is large in frame, showing her complete visible head/hair, upper body and hands exactly as in the source; keep source crop edges where her body already exits the photo. Maintain a little transparent margin around hair and hands. Clean professional hair alpha edges with no blue spill, no shadow or glow around the body. All non-person areas must be transparent alpha. No text, no labels, no additional objects, no background, no frame. Output ONE isolated woman, at a useful high resolution, with true alpha channel."
+    }
+  ]
+}

@@ -1,6 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
+import jsQR from 'jsqr';
 import { createWizardCalendar, WIZARD_CONTENT } from '../src/templates/wizard/content';
+
+test('downloadable location QR decodes to the configured Maps URL', async () => {
+  const { data, info } = await sharp(fileURLToPath(new URL('../public/assets/wizard/location-qr.png', import.meta.url)))
+    .ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  assert.equal(info.width, 1024);
+  assert.equal(info.height, 1024);
+  const result = jsQR(new Uint8ClampedArray(data), info.width, info.height);
+  assert.ok(result, 'Location QR cannot be decoded');
+  assert.equal(result.data, WIZARD_CONTENT.mapsUrl);
+});
 
 test('calendar exports both events at the supplied WIB times', () => {
   const calendar = createWizardCalendar();

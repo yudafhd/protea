@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "source": "D:/Gambar ChatGPT 18 Okt 2026, 23.45.41 (1).png",
+  "file": "wedding_moon.png",
+  "web_asset": "/assets/wizard/moon.webp",
+  "transparent_background": true,
+  "prompt": "Use case: background-extraction. Asset type: one transparent moon layer for the cover of a warm sepia Wizard wedding invitation. Input image 1 is the source poster and edit reference. Extract/reconstruct ONLY the small pale FULL MOON visible around 35% of poster width and 47% of poster height, to the left above the castle's left tower. Produce a single centered complete circular moon on a square transparent canvas, disc diameter about 80% of canvas width with 10% transparent padding on all sides. Match the reference's delicate warm ivory, pale parchment beige and softly desaturated sepia lunar shading, faint realistic crater texture, very low contrast, dreamy romantic atmosphere, softly feathered rim and tiny restrained halo. Keep the moon itself visible enough to layer over antique cream paper; delicate lunar texture, not a featureless bright circle. All area outside the narrow feathered rim must be genuinely transparent alpha. Remove every cloud, castle, person, star, decorative mark, parchment background and word. No sky, no solid background, no black rectangle, no text, no watermark. This is one isolated lunar asset, not a complete invitation."
+}

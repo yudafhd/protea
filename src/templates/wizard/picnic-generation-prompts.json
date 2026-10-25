@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-25",
+  "reference": "User-attached picnic photograph in this conversation (587 × 552 preview)",
+  "file": "wedding_couple_picnic_hd.png",
+  "web_asset": "/assets/wizard/couple-picnic-hd.webp",
+  "prompts": [
+    {
+      "stage": "Enhancement",
+      "prompt": "Use case: identity-preserve. Asset type: high-resolution professional-quality restored couple photograph for a wedding invitation. The most recent attached photograph is the EDIT TARGET: two real adults sitting together on a red/white gingham picnic blanket in a green flowering garden, each holding a fork with food, with a small bouquet, drinks, takeaway boxes and shoes visible. Enhance THIS exact photograph, do not invent a different photo. Preserve both adults' exact facial identities, eye shapes, expressions (including their playful food poses), natural skin tone and skin texture, hairstyles, same white shirt and ivory trousers on the man, same white sleeveless dress on the woman, their wristwatch, hands, fingers, forks and food, positions and body proportions. Keep all original picnic objects, blanket pattern, trees, grass, flowering shrubs and overall composition. Improve clarity, reduce compression artifacts and noise, recover clean natural photographic edges, refine exposure and white balance, gentle realistic skin retouch without plastic smoothing, controlled highlights on the white outfits, balanced shadow detail. Use refined professional full-frame portrait-camera quality, natural 85mm-lens rendering and restrained background depth of field: faces and foreground crisp while distant foliage remains gently soft. Realistic green garden colors and warm natural daylight; avoid heavy sepia or oversaturation. Preserve the original near-square landscape composition and full seated pose; do not crop heads, hands or feet, no added subjects, no new props, no typography, no watermark, no wizard outfit, no fantasy effects. Deliver a clean HD image at approximately 2048 by 1920 pixels or higher with the same composition/aspect ratio. Prioritize identity fidelity over invented detail. Output the enhanced photograph only."
+    },
+    {
+      "stage": "Remove unintended extra phone",
+      "prompt": "Use case: precise-object-edit. Edit target is the supplied enhanced picnic couple photo. Make exactly ONE local correction: remove the small black rectangular smartphone lying on the red-and-white gingham blanket in the lower foreground around 32% from the left and 87% from the top. Reconstruct the continuous red/white gingham pattern naturally in that small area only. Preserve EVERYTHING else exactly, especially both people's faces, expressions, identity, hair, hands, forks and food, white outfits, body pose, all other objects, foliage, depth of field, color, lighting and composition. Do not retouch or redraw faces. No additional people, no new objects, no typography, no watermark. Keep the same near-square landscape composition. Deliver a clean high-resolution HD photograph, preferably 2048x1920 or nearest aspect-preserving high-resolution output."
+    }
+  ]
+}

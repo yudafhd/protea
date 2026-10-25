@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
+    "assets:wizard-qr": "tsx scripts/prepare-wizard-location-qr.mjs",
+    "assets:wizard-audio": "node scripts/prepare-wizard-audio.mjs",
     "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
@@ -30,6 +32,8 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.185.4",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }
