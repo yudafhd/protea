@@ -31,6 +31,28 @@ export const CATALOG_CATEGORIES = [
 
 export const THEME_CATALOG: CatalogTheme[] = [
   {
+    id: "wizard",
+    name: "A Love Beyond Magic",
+    category: "parallax",
+    categoryLabel: "Sinematik Parallax",
+    badge: "Baru · Wizard Wedding",
+    subtitle: "Dua Dunia, Satu Cerita Cinta",
+    description: "Undangan bernuansa dunia sihir dengan kastil berkabut, burung hantu pembawa surat, panji burgundy, dan potret pasangan dalam komposisi paralaks berlapis.",
+    couple: "Yuda & Putri",
+    weddingDate: "Senin, 2 November 2026",
+    location: "Sooko, Mojokerto",
+    route: "/templates/wizard",
+    previewImage: "/assets/wizard/preview.webp",
+    palette: ["#410d12", "#956b37", "#efe3cd", "#30201d"],
+    features: ["Paralaks Berlapis", "Nama Tamu Personal", "Kalender & Petunjuk Arah", "RSVP Digital"],
+    highlights: [
+      { label: "Gaya", value: "Wizard, Sepia, Burgundy" },
+      { label: "Interaksi", value: "Scroll & Gerakan Pointer" },
+      { label: "Format", value: "Portrait Responsif" },
+      { label: "Aksesibilitas", value: "Pengurangan Animasi" },
+    ],
+  },
+  {
     id: "grand-hall",
     name: "Grand Hall",
     category: "3d-interactive",

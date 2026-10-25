@@ -1,0 +1,90 @@
+﻿[
+    {
+        "file":  "wedding_parchment_bg.png",
+        "width":  864,
+        "height":  1820,
+        "bytes":  2438945,
+        "alphaMin":  255,
+        "transparentSamplePercent":  0
+    },
+    {
+        "file":  "wedding_clouds_back.png",
+        "width":  864,
+        "height":  1821,
+        "bytes":  1531024,
+        "alphaMin":  0,
+        "transparentSamplePercent":  48.93
+    },
+    {
+        "file":  "wedding_landscape_lake.png",
+        "width":  1536,
+        "height":  1024,
+        "bytes":  2211624,
+        "alphaMin":  0,
+        "transparentSamplePercent":  43.44
+    },
+    {
+        "file":  "wedding_castle_layer_01_clean.png",
+        "width":  1714,
+        "height":  918,
+        "bytes":  1627876,
+        "alphaMin":  0,
+        "transparentSamplePercent":  55.69
+    },
+    {
+        "file":  "wedding_mist_front.png",
+        "width":  1774,
+        "height":  887,
+        "bytes":  1631468,
+        "alphaMin":  0,
+        "transparentSamplePercent":  40.18
+    },
+    {
+        "file":  "wedding_bride_foreground.png",
+        "width":  1024,
+        "height":  1536,
+        "bytes":  2565439,
+        "alphaMin":  0,
+        "transparentSamplePercent":  29.1
+    },
+    {
+        "file":  "wedding_groom_foreground.png",
+        "width":  1024,
+        "height":  1536,
+        "bytes":  2397607,
+        "alphaMin":  0,
+        "transparentSamplePercent":  34.07
+    },
+    {
+        "file":  "wedding_owl_letter.png",
+        "width":  1254,
+        "height":  1254,
+        "bytes":  1141693,
+        "alphaMin":  0,
+        "transparentSamplePercent":  70.43
+    },
+    {
+        "file":  "wedding_banner_lion_left.png",
+        "width":  724,
+        "height":  2172,
+        "bytes":  2486704,
+        "alphaMin":  0,
+        "transparentSamplePercent":  40.02
+    },
+    {
+        "file":  "wedding_banner_serpent_right.png",
+        "width":  724,
+        "height":  2172,
+        "bytes":  2099924,
+        "alphaMin":  0,
+        "transparentSamplePercent":  46.54
+    },
+    {
+        "file":  "wedding_gold_winged_orb.png",
+        "width":  1774,
+        "height":  887,
+        "bytes":  1071557,
+        "alphaMin":  0,
+        "transparentSamplePercent":  80.33
+    }
+]
