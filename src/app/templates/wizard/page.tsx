@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import WizardInvitation from '@/components/wizard/WizardInvitation';
 
 export const metadata: Metadata = {
-  title: 'Yuda & Putri — A Love Beyond Magic | Protēa',
+  title: 'Yuda & Putri - Wedding Invitation',
   description: 'Undangan pernikahan Yuda & Putri. Senin, 2 November 2026, Sooko, Mojokerto. Sebuah kisah cinta di antara dua dunia.',
 };
 
