@@ -9,6 +9,7 @@ import { ArrowRight, ArrowUpRight, CalendarDays, Check, Copy, Download, Gift, He
 import { gsap } from 'gsap';
 import WizardWishes from './WizardWishes';
 import WizardFootsteps from './WizardFootsteps';
+import WizardImagePreview from './WizardImagePreview';
 import useWizardAudio from './useWizardAudio';
 import useWizardAssets from './useWizardAssets';
 import useWizardChapters from './useWizardChapters';
@@ -276,7 +277,7 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
     <aside className="wizard-desktop-note" aria-label="Tentang undangan" inert={!ready}><div className="wizard-desktop-title"><Star /><p>A LOVE<br />BEYOND MAGIC.</p><span>Beberapa kisah memang<br />ditakdirkan hidup bersama.</span></div><span className="wizard-edition">THE WEDDING COLLECTION — 2026</span></aside>
     <main className="wizard-book" ref={root} data-phase={phase} data-camera-progress="0" inert={!ready} aria-hidden={!ready}>
       <section className="wizard-cover" id="sampul" aria-labelledby="wizard-names" aria-hidden={phase !== 'cover'} inert={phase !== 'cover'}>
-        <div className="wizard-cover-art" aria-hidden="true">
+        <div className="wizard-cover-art">
           <Image className="wizard-paper" src={asset('parchment.webp')} alt="" fill sizes="(max-width: 600px) 100vw, 540px" preload />
           <Image className="wizard-clouds" src={asset('clouds.webp')} alt="" width={864} height={1821} sizes="(max-width: 600px) 110vw, 600px" loading="eager" />
           <Image className="wizard-moon" src={asset('moon.webp')} alt="" width={768} height={768} sizes="(max-width: 600px) 80vw, 430px" loading="eager" />
@@ -286,8 +287,8 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
           </div>
           <Image className="wizard-mist" src={asset('mist.webp')} alt="" width={1200} height={600} sizes="(max-width: 600px) 100vw, 540px" />
           <Image className="wizard-owl" src={asset('owl.webp')} alt="" width={1200} height={1200} sizes="(max-width: 600px) 150vw, 900px" loading="eager" />
-          <Image className="wizard-bride" src={wizardBride} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" />
-          <Image className="wizard-groom" src={wizardGroom} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" />
+          <WizardImagePreview className="wizard-cover-character wizard-bride" src={wizardBride} alt={`Potret ${content.bride}`}><Image src={wizardBride} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" /></WizardImagePreview>
+          <WizardImagePreview className="wizard-cover-character wizard-groom" src={wizardGroom} alt={`Potret ${content.groom}`}><Image src={wizardGroom} alt="" width={1024} height={1536} sizes="(max-width: 600px) 85vw, 450px" loading="eager" /></WizardImagePreview>
           <img className="wizard-cover-frame" src={asset('gold-frame.svg')} alt="" />
           <Image className="wizard-banner wizard-banner-left" src={asset('banner-lion.webp')} alt="" width={724} height={2172} sizes="100px" loading="eager" />
           <Image className="wizard-banner wizard-banner-right" src={asset('banner-serpent.webp')} alt="" width={724} height={2172} sizes="100px" loading="eager" />
@@ -316,7 +317,7 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
             <h2 id="wizard-couple-title" className="sr-only" tabIndex={-1}>Pasangan</h2>
             <p className="wizard-greeting" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
             <p className="wizard-body-copy">{content.introduction}</p>
-            <figure className="wizard-couple-photo"><div className="wizard-couple-photo-frame"><Image src={wizardPicnic} alt={`Potret piknik bersama ${content.groom} dan ${content.bride}`} width={1293} height={1216} sizes="(max-width: 600px) 85vw, 430px" /></div></figure>
+            <figure className="wizard-couple-photo"><WizardImagePreview className="wizard-couple-photo-frame" src={wizardPicnic} alt={`Potret piknik bersama ${content.groom} dan ${content.bride}`}><Image src={wizardPicnic} alt={`Potret piknik bersama ${content.groom} dan ${content.bride}`} width={1293} height={1216} sizes="(max-width: 600px) 85vw, 430px" /></WizardImagePreview></figure>
             <blockquote>“{content.quote}”</blockquote><div className="wizard-small-rule"><span /><Star /><span /></div>
             <div className="wizard-profiles" aria-label="Perkenalan mempelai">
               <div className="wizard-profiles-heading-wrap">
@@ -334,9 +335,9 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
                   )}
                   <article className={`wizard-profile wizard-profile-${profile.id}`} aria-labelledby={`wizard-profile-${profile.id}-name`}>
                     <figure className="wizard-profile-portrait">
-                      <div className="wizard-portrait-mat">
+                      <WizardImagePreview className="wizard-portrait-mat" src={profile.image} alt={`Potret ${profile.name}`}>
                         <Image src={profile.image} alt={`Potret ${profile.name} tanpa latar belakang`} sizes="210px" />
-                      </div>
+                      </WizardImagePreview>
                     </figure>
                     <div className="wizard-profile-copy">
                       <span className="wizard-eyebrow">{profile.role}</span>
@@ -355,7 +356,7 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
           </section>
 
           <section className="wizard-section wizard-event-section" id="acara" hidden={active !== 'acara'} aria-labelledby="wizard-event-title"><h2 id="wizard-event-title" className="sr-only" tabIndex={-1}>Acara pernikahan</h2><time className="wizard-full-date" dateTime={content.date}>{content.dateLabel}</time><div className="wizard-events">{content.events.map((event, index) => <article className="wizard-event" key={event.id}><span className="wizard-event-number">0{index + 1}</span><div><h3>{event.title}</h3><p className="wizard-event-time">{event.time}</p><p>{event.note}</p></div><Star /></article>)}</div><a className="wizard-button wizard-button-outline" href={`data:text/calendar;charset=utf-8,${encodeURIComponent(createWizardCalendar(content))}`} download="pernikahan-yuda-putri.ics"><CalendarDays size={16} /> Simpan tanggalnya</a>
-            <div className="wizard-venue"><div className="wizard-venue-art" aria-hidden="true"><Image src={asset('castle.webp')} alt="" width={1200} height={643} sizes="(max-width: 600px) 90vw, 480px" /></div><MapPin size={20} strokeWidth={1.3} /><span className="wizard-eyebrow">TEMPAT KITA MERAYAKAN</span><h3>{content.address}</h3><p>{content.city}</p><a className="wizard-text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">Petunjuk arah <ArrowUpRight size={15} /></a><figure className="wizard-location-qr"><Image src={asset('location-qr.png')} alt="QR lokasi pernikahan Yuda dan Putri di Google Maps" width={1024} height={1024} unoptimized /><figcaption>Pindai untuk membuka lokasi acara</figcaption></figure><a className="wizard-button wizard-button-outline" href={asset('location-qr.png')} download="qr-lokasi-pernikahan-yuda-putri.png"><Download size={15} /> Unduh QR lokasi</a></div>
+            <div className="wizard-venue"><div className="wizard-venue-art" aria-hidden="true"><Image src={asset('castle.webp')} alt="" width={1200} height={643} sizes="(max-width: 600px) 90vw, 480px" /></div><MapPin size={20} strokeWidth={1.3} /><span className="wizard-eyebrow">TEMPAT KITA MERAYAKAN</span><h3>{content.address}</h3><p>{content.city}</p><a className="wizard-text-link" href={mapsUrl} target="_blank" rel="noopener noreferrer">Google Map <ArrowUpRight size={15} /></a><figure className="wizard-location-qr"><Image src={asset('location-qr.png')} alt="QR lokasi pernikahan Yuda dan Putri di Google Maps" width={1024} height={1024} unoptimized /><figcaption>Pindai untuk membuka lokasi acara</figcaption></figure><a className="wizard-button wizard-button-outline" href={asset('location-qr.png')} download="qr-lokasi-pernikahan-yuda-putri.png"><Download size={15} /> Unduh QR lokasi</a></div>
           </section>
 
           <section className="wizard-section wizard-gift-section" id="gift" hidden={active !== 'gift'} aria-labelledby="wizard-gift-title"><h2 id="wizard-gift-title" tabIndex={-1}>Gift</h2><p className="wizard-body-copy">Kehadiran dan doa restu Anda merupakan hadiah terindah bagi kami. Bagi Anda yang ingin memberikan tanda kasih, kami menerimanya dengan penuh rasa syukur.</p><WizardGift accounts={content.giftAccounts} /></section>

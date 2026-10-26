@@ -1,5 +1,5 @@
 export const WIZARD_AUDIO_TRACKS = {
-  music: '/assets/wizard/audio/moonlit-letter.wav',
+  music: '/assets/wizard/audio/ironbound-storybook.mp3',
   open: '/assets/wizard/audio/castle-door-open.wav',
   close: '/assets/wizard/audio/castle-door-close.wav',
 } as const;

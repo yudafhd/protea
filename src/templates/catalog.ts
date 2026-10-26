@@ -44,7 +44,7 @@ export const THEME_CATALOG: CatalogTheme[] = [
     route: "/templates/wizard",
     previewImage: "/assets/wizard/preview.webp",
     palette: ["#410d12", "#956b37", "#efe3cd", "#30201d"],
-    features: ["Paralaks Berlapis", "Nama Tamu Personal", "Kalender & Petunjuk Arah", "RSVP Digital"],
+    features: ["Paralaks Berlapis", "Nama Tamu Personal", "Kalender & Google Maps", "RSVP Digital"],
     highlights: [
       { label: "Gaya", value: "Wizard, Sepia, Burgundy" },
       { label: "Interaksi", value: "Scroll & Gerakan Pointer" },

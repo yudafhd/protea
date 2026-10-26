@@ -53,7 +53,7 @@ Template Wizard menjadi halaman utama `/`, tetap tersedia di `/templates/wizard`
 - Perpindahan menu memakai fade keluar 150 ms lalu reveal tiap elemen 560 ms dengan jeda bertahap maksimal 275 ms. `useWizardChapters.ts` mengatur teks, foto, profil, jadwal, lokasi, field RSVP, ucapan dinamis, dan kartu rekening; elemen di bawah layar menunggu sampai digulir. Klik cepat mengikuti tujuan terakhir, formulir tetap terpasang agar isian tersimpan, dan pengurangan gerak menampilkan isi langsung. Uji Chromium/WebKit: `node tests/wizard-chapters-browser.mjs`.
 - Pintasan keyboard Lewati Sampul tersedia. Preferensi pengurangan animasi langsung menampilkan posisi tujuan, termasuk bila preferensi berubah saat perjalanan berlangsung. Gerak pointer dinonaktifkan ketika pengurangan animasi aktif.
 - Sampul memiliki gerakan otomatis tanpa kursor: awan dan kabut bergeser beberapa piksel, burung hantu melayang, panji berayun, dan bintang berpendar. Pose animasi ditahan selama perjalanan kamera; animasi otomatis dinonaktifkan saat pengurangan animasi dipilih.
-- Tombol kalender mengunduh `.ics` untuk kedua acara, dengan konversi WIB yang eksplisit. Petunjuk arah membuka tautan Google Maps yang diberikan pengguna melalui `mapsUrl` di `content.ts`.
+- Tombol kalender mengunduh `.ics` untuk kedua acara, dengan konversi WIB yang eksplisit. Google map membuka tautan Google Maps yang diberikan pengguna melalui `mapsUrl` di `content.ts`.
 - RSVP aktif meneruskan jawaban ke Google Form pengguna melalui tab baru dengan isian awal. Tamu harus menekan Kirim di Google Form agar jawaban tersimpan. Jika `googleForm` dihapus dari konten, formulir menggunakan `/api/rsvp` dengan `invitationId="demo"` pada pratinjau; backend menyimpan ke `.data/rsvp.jsonl` atau `PROTEA_DATA_DIR`.
 - `scripts/prepare-wizard-assets.mjs` menyiapkan turunan WebP di `public/assets/wizard` serta menyalin SVG tanpa mengganti PNG sumber. Jalankan ulang setelah aset sumber berubah.
 - Uji interaksi: `node tests/wizard-browser.mjs` (Edge headless; dapat diganti dengan `PLAYWRIGHT_CHANNEL`), setelah server lokal berjalan. `PLAYWRIGHT_BASE_URL` opsional.
@@ -61,7 +61,9 @@ Template Wizard menjadi halaman utama `/`, tetap tersedia di `/templates/wizard`
 
 ## Musik dan suara pintu
 
-Musik aktif adalah komposisi orisinal **A Letter Beneath the Moon**, instrumental 40 detik dengan celesta, arpeggio harp, dan lapisan string sintetis dalam irama 3/4 pada 72 BPM. Musik serta efek engsel/kayu dibuat oleh `scripts/prepare-wizard-audio.mjs`, tanpa sampel rekaman eksternal. Jalankan `npm run assets:wizard-audio` untuk membuat ulang WAV stereo 22.050 Hz di `public/assets/wizard/audio`.
+Musik aktif adalah **The Ironbound Storybook**, dari berkas `The_Ironbound_Storybook.mp3` yang disediakan pengguna di root proyek (sekitar 2 menit 54 detik / 4,18 MB). Versi web di `/assets/wizard/audio/ironbound-storybook.mp3` berdurasi 90 detik, MP3 stereo 32 kHz / 96 kbps, sekitar 1,08 MB. Potongan awal diproses dengan normalisasi loudness dan crossfade dua detik antara akhir serta awal agar pengulangan tetap halus. Berkas sumber tetap utuh.
+
+Jalankan `npm run assets:wizard-music` untuk membuat ulang versi web; diperlukan FFmpeg di PATH atau variabel `FFMPEG_PATH` yang menunjuk executable. Efek engsel/kayu serta musik orisinal lama **A Letter Beneath the Moon** tetap dapat dibuat ulang dengan `npm run assets:wizard-audio`; WAV musik lama tidak dipakai sebagai latar aktif.
 
 `useWizardAudio.ts` membuat AudioContext setelah klik Buka Undangan atau pintasan keyboard. Musik masuk selama 1,2 detik pada gain 0,22, berulang selama membaca, dan memudar saat kembali ke sampul. Efek pintu buka 2,8 detik dan tutup 2 detik memakai gain 0,32 serta dipicu satu kali ketika progres kamera berada di antara 0,62 dan 0,95, mengikuti gerak daun pintu. Perjalanan instan/pengurangan animasi tidak memainkan efek pintu. Jika aset terlambat dimuat, efek yang sudah lewat dilewati.
 
@@ -101,7 +103,7 @@ Form yang diperiksa belum memiliki kolom atau pengumpulan email. Untuk email aku
 
 ## QR lokasi
 
-Bagian Acara menyediakan QR yang mengarah ke `https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8`, sama dengan tombol Petunjuk arah. Tombol Unduh QR lokasi mengunduh PNG 1024 x 1024 px dari `/assets/wizard/location-qr.png`. QR memakai hitam-putih dan ruang kosong di sekelilingnya agar mudah dipindai. Setelah mengubah `mapsUrl` dalam `content.ts`, jalankan `npm run assets:wizard-qr` untuk membuat ulang QR. Tes mendekode gambar untuk memastikan isinya sesuai tautan pada konten.
+Bagian Acara menyediakan QR yang mengarah ke `https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8`, sama dengan tombol Google maps. Tombol Unduh QR lokasi mengunduh PNG 1024 x 1024 px dari `/assets/wizard/location-qr.png`. QR memakai hitam-putih dan ruang kosong di sekelilingnya agar mudah dipindai. Setelah mengubah `mapsUrl` dalam `content.ts`, jalankan `npm run assets:wizard-qr` untuk membuat ulang QR. Tes mendekode gambar untuk memastikan isinya sesuai tautan pada konten.
 
 ## Gift
 

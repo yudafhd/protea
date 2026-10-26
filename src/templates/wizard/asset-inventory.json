@@ -43,9 +43,9 @@
         "file":  "wedding_bride_foreground.png",
         "width":  1024,
         "height":  1536,
-        "bytes":  2260602,
+        "bytes":  2279127,
         "alphaMin":  0,
-        "transparentSamplePercent":  28.91
+        "transparentSamplePercent":  30.76
     },
     {
         "file":  "wedding_groom_foreground.png",

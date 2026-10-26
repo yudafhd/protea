@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "assets:wizard-qr": "tsx scripts/prepare-wizard-location-qr.mjs",
     "assets:wizard-audio": "node scripts/prepare-wizard-audio.mjs",
+    "assets:wizard-music": "node scripts/prepare-wizard-soundtrack.mjs",
     "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {

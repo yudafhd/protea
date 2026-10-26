@@ -19,7 +19,7 @@ for (const [name, engine] of [['chromium', chromium], ['webkit', webkit]]) {
     const audioRequests = [];
     page.on('pageerror', (error) => errors.push(error.message));
     page.on('request', (request) => { if (request.url().includes('/assets/wizard/audio/')) audioRequests.push(request.url()); });
-    const held = ['couple-picnic-hd', 'moonlit-letter.wav', 'cormorant-latin-400-italic.woff2'].map((file) => ({ file, seen: deferred(), release: deferred() }));
+    const held = ['couple-picnic-hd', 'ironbound-storybook.mp3', 'cormorant-latin-400-italic.woff2'].map((file) => ({ file, seen: deferred(), release: deferred() }));
     await page.route('**/*', async (route) => {
       const blocked = held.find(({ file }) => decodeURIComponent(route.request().url()).includes(file));
       if (blocked) { blocked.seen.resolve(); await blocked.release.promise; }
@@ -60,7 +60,9 @@ for (const [name, engine] of [['chromium', chromium], ['webkit', webkit]]) {
     await page.setViewportSize({ width: 393, height: 678 });
     await page.screenshot({ path: `${output}/cover-${name}.png` });
     await page.getByRole('button', { name: 'Buka undangan', exact: true }).click();
-    await page.locator('.wizard-page[data-sound="playing"]').waitFor();
+    const supportsAudio = await page.evaluate(() => typeof window.AudioContext === 'function' || typeof window.webkitAudioContext === 'function');
+    await page.locator(`.wizard-page[data-sound="${supportsAudio ? 'playing' : 'error'}"]`).waitFor();
+    if (!supportsAudio) assert.ok(await page.getByRole('button', { name: 'Coba putar suara', exact: true }).isVisible(), 'A browser without Web Audio must expose the retry state');
     assert.equal(audioRequests.length, 3, 'Opening must reuse the downloaded audio');
     const greeting = page.locator('#pasangan .wizard-greeting');
     assert.ok(await greeting.isVisible());

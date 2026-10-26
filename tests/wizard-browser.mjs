@@ -136,7 +136,7 @@ try {
   assert.equal(await progress(), 1);
   await page.locator('.wizard-page[data-sound="playing"]').waitFor();
   const openingAudio = await page.evaluate(() => window.wizardAudioStarts);
-  assert.equal(openingAudio.filter((entry) => entry.loop && Math.abs(entry.duration - 40) < .01).length, 1, 'Music did not start exactly once');
+  assert.equal(openingAudio.filter((entry) => entry.loop && Math.abs(entry.duration - 90) < .08).length, 1, 'Music did not start exactly once');
   const openingEffect = openingAudio.filter((entry) => !entry.loop);
   assert.equal(openingEffect.length, 1, 'Opening effect must play once');
   assert.ok(Math.abs(openingEffect[0].duration - 2.8) < .01 && openingEffect[0].progress >= .62 && openingEffect[0].progress <= .95, `Opening audio is not aligned with the moving doors: ${JSON.stringify(openingEffect)}`);
@@ -176,7 +176,7 @@ try {
   const calendar = decodeURIComponent((await page.getByRole('link', { name: 'Simpan tanggalnya' }).getAttribute('href')).split(',').slice(1).join(','));
   assert.ok(calendar.includes('DTSTART:20261102T020000Z'));
   assert.ok(calendar.includes('DTSTART:20261102T040000Z'));
-  assert.equal(await page.getByRole('link', { name: 'Petunjuk arah' }).getAttribute('href'), 'https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8');
+  assert.equal(await page.getByRole('link', { name: 'Google Map' }).getAttribute('href'), 'https://maps.app.goo.gl/JRXDjYGB8LeEy6cB8');
   await page.screenshot({ animations: 'disabled', path: `${output}/events-mobile.png` });
   const locationQr = page.getByRole('img', { name: 'QR lokasi pernikahan Yuda dan Putri di Google Maps' });
   await locationQr.scrollIntoViewIfNeeded();
