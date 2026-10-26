@@ -117,9 +117,9 @@ Foto aktif bagian Pasangan diganti dengan foto piknik dari lampiran pengguna, di
 
 ## Perkenalan masing-masing mempelai
 
-Lanjutan bagian Pasangan menampilkan Yuda di kiri dan Putri di kanan, dengan potongan foto transparan dari lampiran studio berlatar biru. Aset sumber: `wedding_yuda_profile.png` dan `wedding_putri_profile.png`; aset web: `/assets/wizard/yuda-profile.webp` dan `/assets/wizard/putri-profile.webp`. Kanal alpha dipertahankan pada WebP. Aset dibuat menggunakan built-in `image_gen`; prompt tersimpan di [profile-generation-prompts.json](./profile-generation-prompts.json).
+Lanjutan bagian Pasangan menampilkan Yuda lalu Putri, masing-masing dengan foto di tengah di atas nama lengkap dan nama orang tua. Gambar transparan menggunakan aset yang sama dengan sampul: `/assets/wizard/groom.webp` dan `/assets/wizard/bride.webp`. Kedua bagian menggunakan impor gambar yang sama agar revisi gambar sampul juga tampil di perkenalan mempelai.
 
-Nama lengkap dan nama orang tua disetel melalui `partnerProfiles.groom` serta `partnerProfiles.bride` di `content.ts`. Data perkenalan mengikuti kiriman pengguna: Ahmad Yuda Fahrudin, putra dari Bpk Yusuf dan Ibu Siti; Rischyanti Putri Octavia, putri dari Alm. Bpk Sugeng dan Ibu Sri. Nama singkat dan foto pada sampul tidak diganti.
+Nama lengkap dan nama orang tua disetel melalui `partnerProfiles.groom` serta `partnerProfiles.bride` di `content.ts`. Data perkenalan mengikuti kiriman pengguna: Ahmad Yuda Fahrudin, putra dari Bpk Yusuf Wibisono dan Ibu Siti Romadoni; Rischyanti Putri Octavia, putri dari Alm. Bpk Sugeng Utomo dan Ibu Sulastri. Nama singkat dan foto pada sampul tidak diganti.
 
 ## Jejak Putri dan Yuda
 

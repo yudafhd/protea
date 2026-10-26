@@ -31,14 +31,14 @@ export const WIZARD_CONTENT = {
     groom: {
       fullName: 'Ahmad Yuda Fahrudin',
       relationship: 'Putra dari',
-      father: 'Bpk Yusuf',
-      mother: 'Ibu Siti',
+      father: 'Bpk Yusuf Wibisono',
+      mother: 'Ibu Siti Romadoni',
     },
     bride: {
       fullName: 'Rischyanti Putri Octavia',
       relationship: 'Putri dari',
-      father: 'Alm. Bpk Sugeng',
-      mother: 'Ibu Sri',
+      father: 'Alm. Bpk Sugeng Utomo',
+      mother: 'Ibu Sulastri',
     },
   },
   giftAccounts: [

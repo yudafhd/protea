@@ -5,7 +5,8 @@ import { useLayoutEffect, useRef, useState, type RefObject } from 'react';
 // Animate meaningful pieces independently without moving their layout or inputs.
 const revealSelector = [
   '.wizard-greeting', '.wizard-body-copy', '.wizard-couple-photo', 'blockquote',
-  '.wizard-small-rule', '.wizard-profiles-heading', '.wizard-profile-portrait',
+  '.wizard-small-rule', '.wizard-profiles-heading', '.wizard-profiles-rule',
+  '.wizard-profiles-separator', '.wizard-profile-portrait',
   '.wizard-profile-copy > *', '.wizard-full-date', '.wizard-event-number',
   '.wizard-event > div > *', '.wizard-event > .wizard-star',
   '.wizard-event-section > .wizard-button', '.wizard-venue > :not(.wizard-venue-art)',

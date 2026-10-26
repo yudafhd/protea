@@ -101,22 +101,27 @@
 .wizard-couple-photo{margin:22px auto 28px;max-width:380px}
 .wizard-couple-photo-frame{padding:5px;border:1px solid #94713c66;background:#f8edda;box-shadow:0 7px 24px #49311c1f}
 .wizard-couple-photo-frame img{width:100%;height:auto}
-.wizard-profiles{margin-top:34px}
-.wizard-profiles-heading{display:inline-block;padding:5px 9px;border:1px solid #aa85564d;color:#947551;font-size:13px;letter-spacing:.05em}
-.wizard-profile{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:12px;margin:24px -10px 0;text-align:left}
-.wizard-profile+.wizard-profile{padding-top:24px;border-top:1px solid #aa855638}
-.wizard-profile-portrait{position:relative;height:250px;overflow:hidden}
-.wizard-profile-portrait:before{content:'';position:absolute;inset:22% 3% 0;border-radius:50% 50% 2px 2px;background:radial-gradient(ellipse at 50% 45%,#d5be9970,#e4d4b633 65%,transparent 75%)}
-.wizard-profile-portrait img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center bottom}
-.wizard-profile-copy{position:relative;padding-block:16px;min-width:0}
-.wizard-profile-copy>.wizard-eyebrow{font-size:12px;letter-spacing:.08em}
-.wizard-profile-name{font:400 clamp(24px,6.8cqw,31px)/1.12 var(--serif);letter-spacing:-.025em;margin:12px 0 18px;overflow-wrap:anywhere}
-.wizard-profile-relationship{font-size:14px;line-height:1.7;margin-bottom:9px;color:#947551}
-.wizard-profile-parent{font:400 18px/1.5 var(--serif);color:#6b4931}
-.wizard-profile-and{display:block;margin:5px 0;font:italic 19px/1 var(--serif);color:var(--wizard-gold)}
-.wizard-profile-bride{grid-template-columns:1fr 1.1fr}
-.wizard-profile-bride .wizard-profile-portrait{grid-column:2;grid-row:1}
-.wizard-profile-bride .wizard-profile-copy{grid-column:1;grid-row:1;text-align:right}
+.wizard-profiles{margin:40px auto 32px;max-width:380px}
+.wizard-profiles-heading-wrap{text-align:center;margin-bottom:26px}
+.wizard-profiles-heading{font:400 22px/1.2 var(--serif);color:var(--wizard-wine);letter-spacing:.14em;text-transform:uppercase;margin:0 auto 10px}
+.wizard-profiles-rule{display:flex;align-items:center;justify-content:center;gap:14px;width:55%;margin:0 auto}
+.wizard-profiles-rule span{flex:1;height:1px;background:#aa855655}
+.wizard-profiles-rule img{width:13px;height:13px;opacity:.7}
+.wizard-profile-entry{position:relative}
+.wizard-profile{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;gap:18px;text-align:center;padding:8px 0}
+.wizard-profile-portrait{position:relative;margin:0 auto;width:clamp(160px,48cqw,195px);aspect-ratio:4/5.1;padding:5px;background:#f8eedc;border:1px solid #94713c77;box-shadow:0 6px 20px #3c24151a;border-radius:46% 46% 3px 3px}
+.wizard-portrait-mat{position:relative;width:100%;height:100%;overflow:hidden;border-radius:46% 46% 2px 2px;border:1px solid #aa855644;background:radial-gradient(ellipse at 50% 40%,#eee1cb 0%,#decfb6 60%,#caa477 100%)}
+.wizard-portrait-mat img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:contrast(1.02) sepia(.04)}
+.wizard-profile-copy{position:relative;width:100%;min-width:0;display:flex;flex-direction:column;align-items:center}
+.wizard-profile-copy>.wizard-eyebrow{font:400 11.5px/1.4 var(--ui);letter-spacing:.2em;text-transform:uppercase;color:#85623b;margin-bottom:4px}
+.wizard-profile-name{font:400 clamp(26px,7cqw,33px)/1.18 var(--serif);letter-spacing:-.015em;color:var(--wizard-wine);margin:0 auto 10px;max-width:320px;text-wrap:balance;overflow-wrap:break-word}
+.wizard-profile-lineage{display:flex;flex-direction:column;align-items:center;width:100%;max-width:300px}
+.wizard-profile-relationship{font:italic 14.5px/1.4 WizardItalic,Georgia,serif;color:#85623b;margin-bottom:6px}
+.wizard-profile-parent{font:400 clamp(17px,4.5cqw,19.5px)/1.45 var(--serif);color:#543823;overflow-wrap:break-word;margin:0}
+.wizard-profile-and{display:block;margin:2px 0;font:italic 19px/1.1 WizardItalic,Georgia,serif;color:var(--wizard-gold)}
+.wizard-profiles-separator{display:flex;align-items:center;justify-content:center;gap:16px;margin:26px auto 24px;width:75%;max-width:260px}
+.wizard-sep-line{flex:1;height:1px;background:#aa855655}
+.wizard-sep-amp{font:italic 22px/1 WizardItalic,Georgia,serif;color:var(--wizard-gold)}
 .wizard-gift-accounts{margin-top:28px;text-align:left}
 .wizard-gift-account{padding:24px 20px;border:1px solid #aa855660;background:linear-gradient(135deg,#faf2e1b3,#ddc8a344)}
 .wizard-gift-account+.wizard-gift-account{margin-top:18px}

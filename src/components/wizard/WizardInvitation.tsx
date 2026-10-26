@@ -258,8 +258,8 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
 
   const mapsUrl = content.mapsUrl;
   const profiles = [
-    { id: 'groom', role: 'Mempelai pria', name: content.groom, image: 'yuda-profile.webp', ...content.partnerProfiles.groom },
-    { id: 'bride', role: 'Mempelai wanita', name: content.bride, image: 'putri-profile.webp', ...content.partnerProfiles.bride },
+    { id: 'groom', role: 'Mempelai pria', name: content.groom, image: wizardGroom, ...content.partnerProfiles.groom },
+    { id: 'bride', role: 'Mempelai wanita', name: content.bride, image: wizardBride, ...content.partnerProfiles.bride },
   ];
   return <div className="wizard-page" lang="id" data-sound={sound.state} data-assets={assets.status}>
     {!ready && <div className="wizard-loader" role="region" aria-label="Pemuatan undangan" aria-busy={assets.status === 'loading'}>
@@ -319,11 +319,38 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
             <figure className="wizard-couple-photo"><div className="wizard-couple-photo-frame"><Image src={wizardPicnic} alt={`Potret piknik bersama ${content.groom} dan ${content.bride}`} width={1293} height={1216} sizes="(max-width: 600px) 85vw, 430px" /></div></figure>
             <blockquote>“{content.quote}”</blockquote><div className="wizard-small-rule"><span /><Star /><span /></div>
             <div className="wizard-profiles" aria-label="Perkenalan mempelai">
-              <p className="wizard-profiles-heading">Perkenalkan kami</p>
-              {profiles.map((profile) => <article className={`wizard-profile wizard-profile-${profile.id}`} key={profile.id} aria-labelledby={`wizard-profile-${profile.id}-name`}>
-                <div className="wizard-profile-portrait"><Image src={asset(profile.image)} alt={`Potret ${profile.name} tanpa latar belakang`} width={768} height={1152} sizes="(max-width: 600px) 45vw, 220px" /></div>
-                <div className="wizard-profile-copy"><span className="wizard-eyebrow">{profile.role}</span><h3 className="wizard-profile-name" id={`wizard-profile-${profile.id}-name`}>{profile.fullName}</h3><p className="wizard-profile-relationship">{profile.relationship}</p><p className="wizard-profile-parent">{profile.father}</p><span className="wizard-profile-and" aria-hidden="true">&amp;</span><p className="wizard-profile-parent">{profile.mother}</p></div>
-              </article>)}
+              <div className="wizard-profiles-heading-wrap">
+                <p className="wizard-profiles-heading">Perkenalkan Kami</p>
+                <div className="wizard-profiles-rule" aria-hidden="true"><span /><Star /><span /></div>
+              </div>
+              {profiles.map((profile, index) => (
+                <div key={profile.id} className="wizard-profile-entry">
+                  {index > 0 && (
+                    <div className="wizard-profiles-separator" aria-hidden="true">
+                      <span className="wizard-sep-line" />
+                      <span className="wizard-sep-amp">&amp;</span>
+                      <span className="wizard-sep-line" />
+                    </div>
+                  )}
+                  <article className={`wizard-profile wizard-profile-${profile.id}`} aria-labelledby={`wizard-profile-${profile.id}-name`}>
+                    <figure className="wizard-profile-portrait">
+                      <div className="wizard-portrait-mat">
+                        <Image src={profile.image} alt={`Potret ${profile.name} tanpa latar belakang`} sizes="210px" />
+                      </div>
+                    </figure>
+                    <div className="wizard-profile-copy">
+                      <span className="wizard-eyebrow">{profile.role}</span>
+                      <h3 className="wizard-profile-name" id={`wizard-profile-${profile.id}-name`}>{profile.fullName}</h3>
+                      <div className="wizard-profile-lineage">
+                        <p className="wizard-profile-relationship">{profile.relationship}</p>
+                        <p className="wizard-profile-parent">{profile.father}</p>
+                        <span className="wizard-profile-and" aria-hidden="true">&amp;</span>
+                        <p className="wizard-profile-parent">{profile.mother}</p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              ))}
             </div>
           </section>
 

@@ -159,7 +159,7 @@ try {
   await page.screenshot({ animations: 'disabled', path: `${output}/couple-photo-mobile.png` });
   assert.equal(await page.locator('.wizard-profile').count(), 2);
   assert.deepEqual(await page.locator('.wizard-profile-name').allTextContents(), ['Ahmad Yuda Fahrudin', 'Rischyanti Putri Octavia']);
-  assert.deepEqual(await page.locator('.wizard-profile-parent').allTextContents(), ['Bpk Yusuf', 'Ibu Siti', 'Alm. Bpk Sugeng', 'Ibu Sri']);
+  assert.deepEqual(await page.locator('.wizard-profile-parent').allTextContents(), ['Bpk Yusuf Wibisono', 'Ibu Siti Romadoni', 'Alm. Bpk Sugeng Utomo', 'Ibu Sulastri']);
   await page.locator('.wizard-profile-groom').scrollIntoViewIfNeeded();
   await page.locator('.wizard-profile-groom img').evaluate((image) => image.decode());
   await page.screenshot({ animations: 'disabled', path: `${output}/profile-yuda-mobile.png` });
