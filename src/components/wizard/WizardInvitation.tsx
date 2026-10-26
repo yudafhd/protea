@@ -297,8 +297,7 @@ export default function WizardInvitation({ guestName = 'Tamu Istimewa', content 
         <div className="wizard-cover-heading"><span className="wizard-script">The Wedding Of</span><h1 id="wizard-names">{content.groom} <i>&amp;</i> {content.bride}</h1><div className="wizard-separator"><span /><img src={asset('gold-triangle-mark.svg')} width="27" height="27" alt="" /><span /></div><div className="wizard-date-circles" aria-label={content.dateLabel}>{content.dateParts.map((part, index) => <span key={index}>{part}</span>)}</div><p className="wizard-cover-address">{content.address}<br />{content.city}</p></div>
         <p className="wizard-cover-motto">Love is <br />the bridge between you<br /><span>and everything</span></p>
         <div className="wizard-cover-bottom">
-          <p className="wizard-script">It was always you.</p>
-          <Image className="wizard-orb" src={asset('winged-orb.webp')} alt="" width={1200} height={600} sizes="100px" /><span>Kepada Yth.<br />Bapak/Ibu/Saudara/i</span><strong>{guestName}</strong><button className="wizard-open" onClick={() => goTo('pasangan')} disabled={!ready}><Mail size={14} /> Buka undangan <ArrowRight size={14} /></button></div>
+          <span>Kepada Yth.<br />Bapak/Ibu/Saudara/i</span><strong>{guestName}</strong><button className="wizard-open" onClick={() => goTo('pasangan')} disabled={!ready}><Mail size={14} /> Buka undangan <ArrowRight size={14} /></button></div>
         <span className="wizard-cover-corner">{content.groom[0]} &amp; {content.bride[0]} · {content.dateParts.join('.')}</span>
       </section>
       <div className="wizard-castle-entry" aria-hidden="true">
