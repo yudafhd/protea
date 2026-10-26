@@ -42,7 +42,7 @@ export const WIZARD_CONTENT = {
     },
   },
   giftAccounts: [
-    { bank: 'Bank Contoh', number: '0000000000', holder: 'Yuda & Putri', isDemo: true },
+    { bank: 'BCA', number: '1070071661', holder: 'AHMAD YUDA FAHRUDIN' },
   ] as WizardGiftAccount[],
   events: [
     { id: 'akad', title: 'Akad Nikah', time: '09.00 – 10.00 WIB', start: '2026-11-02T09:00:00+07:00', end: '2026-11-02T10:00:00+07:00', note: '' },

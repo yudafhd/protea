@@ -12,6 +12,11 @@
     {
       "stage": "Remove unintended extra phone",
       "prompt": "Use case: precise-object-edit. Edit target is the supplied enhanced picnic couple photo. Make exactly ONE local correction: remove the small black rectangular smartphone lying on the red-and-white gingham blanket in the lower foreground around 32% from the left and 87% from the top. Reconstruct the continuous red/white gingham pattern naturally in that small area only. Preserve EVERYTHING else exactly, especially both people's faces, expressions, identity, hair, hands, forks and food, white outfits, body pose, all other objects, foliage, depth of field, color, lighting and composition. Do not retouch or redraw faces. No additional people, no new objects, no typography, no watermark. Keep the same near-square landscape composition. Deliver a clean high-resolution HD photograph, preferably 2048x1920 or nearest aspect-preserving high-resolution output."
+    },
+    {
+      "stage": "Clean both of Putri's shoe soles to white",
+      "date": "2026-10-26",
+      "prompt": "Use case: precise-object-edit.\nAsset type: existing picnic photograph for a wedding invitation.\nThe supplied photograph is the EDIT TARGET. Make exactly one strictly localized edit: clean and recolor BOTH visible outsoles of Putri's shoes at the lower right of the photo to clean white/off-white rubber. The two soles are facing the viewer around x=65%-86%, y=65%-82%. Remove dark/black/brown dirt, staining and muddy coloration on the entire sole, heel and tread surfaces, replacing them with clean white, while preserving the exact tread grooves, embossed details, shoe shape, perspective and soft realistic light-gray groove shadows. These should be visibly clean WHITE soles, not beige/brown/black and not featureless flat white patches. Keep original shoe uppers and her feet/legs unchanged.\nPreserve EVERYTHING else exactly: both people's faces and identity, expressions, food/forks, hair, clothing, hands, pose, skin color, garden, flowers, picnic blanket pattern, bouquet, drinks, boxes, background, framing, lighting and colors. Do not retouch faces, recompose, crop or add any object. Keep original near-square 1293x1216 composition/aspect ratio and resolution if possible. Output one complete opaque photograph without text or watermark."
     }
   ]
 }

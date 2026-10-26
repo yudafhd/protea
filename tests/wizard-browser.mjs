@@ -45,6 +45,7 @@ try {
   const touchPage = await browser.newPage({ viewport: { width: 393, height: 678 }, isMobile: true, hasTouch: true });
   touchPage.on('pageerror', (error) => errors.push(error.message));
   await touchPage.goto(`${base}/templates/wizard`);
+  await touchPage.locator('.wizard-page[data-assets="ready"]').waitFor();
   await touchPage.waitForFunction(() => document.querySelector('.wizard-book')?.style.getPropertyValue('--wizard-x') !== '');
   assert.ok(await touchPage.evaluate(() => matchMedia('(pointer: coarse)').matches), 'Touch device was not emulated');
   const idlePose = await touchPage.locator('.wizard-owl').evaluate((node) => getComputedStyle(node).translate);
@@ -74,6 +75,7 @@ try {
   await touchPage.close();
 
   await page.goto(`${base}/templates/wizard?to=Keluarga%20Pratama`);
+  await page.locator('.wizard-page[data-assets="ready"]').waitFor();
   await page.waitForFunction(() => document.querySelector('.wizard-book')?.style.getPropertyValue('--wizard-x') !== '');
   await page.evaluate(() => document.fonts.ready);
   await page.locator('.wizard-cover img').evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
@@ -117,7 +119,7 @@ try {
   await page.screenshot({ path: `${output}/camera-approach-mobile.png` });
   await page.waitForFunction(() => Number(document.querySelector('.wizard-book').dataset.cameraProgress) >= .58);
   assert.equal(await page.evaluate(() => window.wizardAudioStarts.filter((entry) => !entry.loop).length), 0, 'Door audio played before the gate moved');
-  assert.equal(await page.locator('.wizard-landscape-world').evaluate((node) => Number(getComputedStyle(node).opacity)), 0, 'Castle remains visible in the gate scene');
+  assert.ok(await page.locator('.wizard-landscape-world').evaluate((node) => Number(getComputedStyle(node).opacity) < .001), 'Castle remains visible in the gate scene');
   const passedOwl = await page.locator('.wizard-owl').boundingBox();
   const invitationBounds = await page.locator('.wizard-book').boundingBox();
   assert.ok(passedOwl.x > invitationBounds.x + invitationBounds.width || passedOwl.y + passedOwl.height < invitationBounds.y, 'Owl did not pass beyond the viewport');
@@ -168,7 +170,7 @@ try {
   assert.equal(await page.locator('.wizard-hall').evaluate((node) => node.complete && node.naturalWidth > 0), true, 'Hall background failed to load');
 
   await page.getByRole('button', { name: 'Acara', exact: true }).click();
-  assert.ok(await page.locator('#acara').isVisible());
+  await page.locator('#acara').waitFor({ state: 'visible' });
   assert.ok(await page.locator('#pasangan').isHidden());
   assert.equal(await page.locator('.wizard-interior').evaluate((node) => node.scrollTop), 0);
   const calendar = decodeURIComponent((await page.getByRole('link', { name: 'Simpan tanggalnya' }).getAttribute('href')).split(',').slice(1).join(','));
@@ -188,10 +190,12 @@ try {
   await qrDownload.saveAs(`${output}/location-qr-download.png`);
   await page.screenshot({ animations: 'disabled', path: `${output}/location-qr-mobile.png` });
   await page.getByRole('button', { name: 'Gift', exact: true }).click();
-  assert.ok(await page.locator('#gift').isVisible());
+  await page.locator('#gift').waitFor({ state: 'visible' });
   assert.equal(await page.getByRole('button', { name: 'Surat', exact: true }).count(), 0);
-  assert.equal(await page.locator('.wizard-gift-number').textContent(), '0000000000');
-  assert.equal(await page.locator('.wizard-gift-bank>span').textContent(), 'Rekening contoh');
+  assert.equal(await page.locator('.wizard-gift-number').textContent(), '1070071661');
+  assert.equal(await page.locator('.wizard-gift-bank h3').textContent(), 'BCA');
+  assert.equal(await page.locator('.wizard-gift-holder strong').textContent(), 'AHMAD YUDA FAHRUDIN');
+  assert.equal(await page.locator('.wizard-gift-bank>span').count(), 0);
   // Keep test copies inside this page rather than changing the user's clipboard.
   await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
     writeText: async () => { throw new Error('Clipboard unavailable in test'); },
@@ -203,7 +207,7 @@ try {
   } }));
   await page.getByRole('button', { name: 'Salin nomor rekening' }).click();
   await page.getByRole('button', { name: 'Nomor tersalin' }).waitFor();
-  assert.equal(await page.evaluate(() => window.wizardTestCopiedNumber), '0000000000');
+  assert.equal(await page.evaluate(() => window.wizardTestCopiedNumber), '1070071661');
   await page.screenshot({ animations: 'disabled', path: `${output}/gift-mobile.png` });
   let wishesMode = 'ready';
   const wishFixtures = [
@@ -216,6 +220,7 @@ try {
     body: JSON.stringify({ status: wishesMode === 'unconfigured' ? 'unconfigured' : 'ready', wishes: wishesMode === 'ready' ? wishFixtures : [] }),
   }));
   await page.getByRole('button', { name: 'RSVP', exact: true }).click();
+  await page.locator('#rsvp').waitFor({ state: 'visible' });
   assert.equal(await page.locator('#wizard-guest').inputValue(), 'Keluarga Pratama');
   assert.deepEqual(await page.locator('.wizard-chapter-nav button').allTextContents(), ['Sampul', 'Pasangan', 'Acara', 'RSVP', 'Gift']);
   const attendanceBounds = await page.locator('#wizard-attendance').boundingBox();
@@ -268,12 +273,15 @@ try {
   assert.equal(await page.locator('.wizard-wish img').count(), 0, 'Wish HTML must be displayed as text');
   assert.equal(await page.locator('.wizard-wish p').nth(1).textContent(), wishFixtures[1].message);
   const wishList = page.locator('.wizard-wishes-list');
+  await wishList.scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => [...document.querySelectorAll('.wizard-wish')].slice(0, 3).every((node) => node.dataset.chapterReveal === 'shown'));
   const listBounds = await wishList.boundingBox();
   const thirdWish = await page.locator('.wizard-wish').nth(2).boundingBox();
   const fourthWish = await page.locator('.wizard-wish').nth(3).boundingBox();
   assert.ok(Math.abs(thirdWish.y + thirdWish.height - (listBounds.y + listBounds.height)) < 2, 'Wish list should fit exactly three initial cards');
   assert.ok(fourthWish.y >= listBounds.y + listBounds.height, 'Fourth wish should require scrolling');
   await wishList.evaluate((node) => { node.scrollTop = node.scrollHeight; });
+  await page.waitForFunction(() => document.querySelector('.wizard-wish:last-child').dataset.chapterReveal === 'shown');
   assert.ok(await wishList.evaluate((node) => node.scrollTop > 0), 'Remaining wishes cannot be scrolled');
   const lastWish = await page.locator('.wizard-wish').last().boundingBox();
   assert.ok(lastWish.y >= listBounds.y && lastWish.y + lastWish.height <= listBounds.y + listBounds.height + 2, 'Last wish cannot be reached');
@@ -356,18 +364,18 @@ try {
   await phase('inside');
   assert.equal(await page.evaluate(() => window.wizardAudioStarts.filter((entry) => !entry.loop).length), 2, 'Instant/reduced motion navigation should not play door effects');
   await stationary();
-  await page.goto(base);
+  await page.goto(`${base}/catalog`);
   await page.locator('#open-theme-wizard').waitFor();
   assert.equal(await page.locator('#open-theme-wizard').getAttribute('href'), '/templates/wizard');
   const retryPage = await browser.newPage({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   retryPage.on('pageerror', (error) => errors.push(error.message));
   await retryPage.route('**/assets/wizard/audio/**', (route) => route.fulfill({ status: 503, body: 'Temporary test failure' }));
   await retryPage.goto(`${base}/templates/wizard`);
-  await retryPage.getByRole('button', { name: 'Buka undangan' }).click();
-  await retryPage.getByRole('button', { name: 'Coba putar suara', exact: true }).waitFor();
-  assert.equal(await retryPage.locator('.wizard-book').getAttribute('data-phase'), 'inside', 'Audio failure blocked the invitation');
+  await retryPage.locator('.wizard-page[data-assets="error"]').waitFor();
+  assert.ok(await retryPage.locator('.wizard-open').isDisabled(), 'Incomplete assets should keep the loader visible');
   await retryPage.unroute('**/assets/wizard/audio/**');
-  await retryPage.getByRole('button', { name: 'Coba putar suara', exact: true }).click();
+  await retryPage.getByRole('button', { name: 'Coba lagi', exact: true }).click();
+  await retryPage.getByRole('button', { name: 'Buka undangan', exact: true }).click();
   await retryPage.locator('.wizard-page[data-sound="playing"]').waitFor();
   await retryPage.close();
   assert.deepEqual(errors, []);

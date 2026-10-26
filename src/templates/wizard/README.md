@@ -43,19 +43,21 @@ Semua 11 PNG dapat dibuka. Sepuluh lapisan objek memiliki piksel transparan; lat
 
 ## Template yang terintegrasi
 
-Template tersedia di `/templates/wizard` dan masuk ke katalog kategori Sinematik Parallax. Nama tamu dapat dipersonalisasi melalui `/templates/wizard?to=Keluarga%20Pratama`.
+Template Wizard menjadi halaman utama `/`, tetap tersedia di `/templates/wizard`, dan masuk ke katalog kategori Sinematik Parallax di `/catalog`. Tautan `/guest/ahmad%20yuda%20fahrudin` menampilkan nama penerima **Ahmad Yuda Fahrudin**, termasuk isian awal RSVP. Nama dari path didekode, spasi dirapikan, dan setiap kata diawali huruf kapital. Personalisasi melalui `/templates/wizard?to=Keluarga%20Pratama` atau `/?to=Keluarga%20Pratama` juga tetap tersedia. Jalankan `node tests/wizard-routes-browser.mjs` untuk memeriksa rute, nama tamu, ukuran teks penerima di HP kecil, dan warna menu.
 
 - Komponen: `src/components/wizard/WizardInvitation.tsx`; gaya terisolasi dengan awalan `wizard-`.
 - Konten: `src/templates/wizard/content.ts`. Nama, tanggal, alamat, dan jadwal dirender sebagai teks; seluruhnya dapat disesuaikan melalui konten/props komponen.
 - Tanggal dan lokasi mengikuti poster. **Jam akad 09.00–10.00 dan resepsi 11.00–14.00 WIB adalah contoh**, perlu disesuaikan sebelum undangan dipakai. Profil tidak menambahkan nama lengkap atau orang tua yang belum diberikan.
 - Tombol Buka Undangan menjalankan perjalanan kamera sekitar 9,3 detik menuju kastil tanpa menggulir dokumen. Kastil dan danau berada dalam satu bidang lanskap dengan garis air menyentuh kaki kastil, sehingga keduanya tetap menyambung selama zoom. Figur, awan, dan kabut bergerak dengan kedalaman berbeda. Sampul dapat dikunjungi kembali dengan gerak kamera mundur.
 - Sesudah tiba, menu Pasangan, Acara, RSVP, dan Gift mengganti isi panel di dalam satu layar. Gift berada di menu terakhir. Pilihan kehadiran serta jumlah tamu pada RSVP masing-masing menempati satu baris. Hanya isi panel yang panjang dapat digulir; adegan dan kamera tetap di tempat. Panel mengembalikan posisi baca ke atas saat bagian diganti.
+- Perpindahan menu memakai fade keluar 150 ms lalu reveal tiap elemen 560 ms dengan jeda bertahap maksimal 275 ms. `useWizardChapters.ts` mengatur teks, foto, profil, jadwal, lokasi, field RSVP, ucapan dinamis, dan kartu rekening; elemen di bawah layar menunggu sampai digulir. Klik cepat mengikuti tujuan terakhir, formulir tetap terpasang agar isian tersimpan, dan pengurangan gerak menampilkan isi langsung. Uji Chromium/WebKit: `node tests/wizard-chapters-browser.mjs`.
 - Pintasan keyboard Lewati Sampul tersedia. Preferensi pengurangan animasi langsung menampilkan posisi tujuan, termasuk bila preferensi berubah saat perjalanan berlangsung. Gerak pointer dinonaktifkan ketika pengurangan animasi aktif.
 - Sampul memiliki gerakan otomatis tanpa kursor: awan dan kabut bergeser beberapa piksel, burung hantu melayang, panji berayun, dan bintang berpendar. Pose animasi ditahan selama perjalanan kamera; animasi otomatis dinonaktifkan saat pengurangan animasi dipilih.
 - Tombol kalender mengunduh `.ics` untuk kedua acara, dengan konversi WIB yang eksplisit. Petunjuk arah membuka tautan Google Maps yang diberikan pengguna melalui `mapsUrl` di `content.ts`.
 - RSVP aktif meneruskan jawaban ke Google Form pengguna melalui tab baru dengan isian awal. Tamu harus menekan Kirim di Google Form agar jawaban tersimpan. Jika `googleForm` dihapus dari konten, formulir menggunakan `/api/rsvp` dengan `invitationId="demo"` pada pratinjau; backend menyimpan ke `.data/rsvp.jsonl` atau `PROTEA_DATA_DIR`.
 - `scripts/prepare-wizard-assets.mjs` menyiapkan turunan WebP di `public/assets/wizard` serta menyalin SVG tanpa mengganti PNG sumber. Jalankan ulang setelah aset sumber berubah.
 - Uji interaksi: `node tests/wizard-browser.mjs` (Edge headless; dapat diganti dengan `PLAYWRIGHT_CHANNEL`), setelah server lokal berjalan. `PLAYWRIGHT_BASE_URL` opsional.
+- Pemuatan awal menunggu semua gambar pada sampul dan bagian tersembunyi selesai diunduh serta didekode, tekstur latar, tiga font, dan tiga berkas audio. Indikator menunjukkan persentase jumlah aset yang siap. Jika ada aset gagal dimuat, tombol Coba lagi mengulangi pemuatan; sampul belum bisa dibuka sebelum seluruh aset siap. Audio disimpan di memori untuk dipakai sesudah ketukan Buka undangan tanpa unduhan ulang maupun autoplay. Uji loader, kegagalan gambar, ukuran teks penerima, dan salam Arab di Chromium/WebKit: `node tests/wizard-loading-browser.mjs`.
 
 ## Musik dan suara pintu
 
@@ -63,7 +65,9 @@ Musik aktif adalah komposisi orisinal **A Letter Beneath the Moon**, instrumenta
 
 `useWizardAudio.ts` membuat AudioContext setelah klik Buka Undangan atau pintasan keyboard. Musik masuk selama 1,2 detik pada gain 0,22, berulang selama membaca, dan memudar saat kembali ke sampul. Efek pintu buka 2,8 detik dan tutup 2 detik memakai gain 0,32 serta dipicu satu kali ketika progres kamera berada di antara 0,62 dan 0,95, mengikuti gerak daun pintu. Perjalanan instan/pengurangan animasi tidak memainkan efek pintu. Jika aset terlambat dimuat, efek yang sudah lewat dilewati.
 
-Tombol suara membisukan musik dan efek secara bersamaan, mempertahankan pilihan selama berpindah bagian atau kembali ke sampul. Audio ditangguhkan ketika tab tersembunyi, efek pintu yang aktif dihentikan, dan konteks ditutup saat komponen dilepas. Kegagalan memuat audio tidak menghalangi isi undangan; tamu bisa mencoba ulang melalui tombol suara.
+Tombol suara membisukan musik dan efek secara bersamaan, mempertahankan pilihan selama berpindah bagian atau kembali ke sampul. Audio ditangguhkan ketika tab tersembunyi, efek pintu yang aktif dihentikan, dan konteks ditutup saat komponen dilepas. Kegagalan unduhan ditangani loader awal; kegagalan pemutaran setelah sampul dibuka dapat dicoba ulang melalui tombol suara.
+
+Pada Safari yang mendukung Audio Session API, sesi diatur ke `playback` agar musik tidak mengikuti sakelar silent iPhone, lalu dikembalikan saat komponen dilepas. Browser tanpa API ini tetap memakai Web Audio biasa; mode silent perangkat dapat memengaruhi suara. Konteks yang terhenti ditampilkan sebagai tombol coba ulang, dan ketukan pengguna melanjutkan konteks tanpa menggandakan musik. Jalankan `node tests/audio-browser.mjs` setelah server lokal berjalan untuk menguji Chromium dan WebKit (pasang browser dengan `npx playwright install chromium webkit`).
 
 ## Gerbang dan aula kastel
 
@@ -116,3 +120,9 @@ Foto aktif bagian Pasangan diganti dengan foto piknik dari lampiran pengguna, di
 Lanjutan bagian Pasangan menampilkan Yuda di kiri dan Putri di kanan, dengan potongan foto transparan dari lampiran studio berlatar biru. Aset sumber: `wedding_yuda_profile.png` dan `wedding_putri_profile.png`; aset web: `/assets/wizard/yuda-profile.webp` dan `/assets/wizard/putri-profile.webp`. Kanal alpha dipertahankan pada WebP. Aset dibuat menggunakan built-in `image_gen`; prompt tersimpan di [profile-generation-prompts.json](./profile-generation-prompts.json).
 
 Nama lengkap dan nama orang tua disetel melalui `partnerProfiles.groom` serta `partnerProfiles.bride` di `content.ts`. Data perkenalan mengikuti kiriman pengguna: Ahmad Yuda Fahrudin, putra dari Bpk Yusuf dan Ibu Siti; Rischyanti Putri Octavia, putri dari Alm. Bpk Sugeng dan Ibu Sri. Nama singkat dan foto pada sampul tidak diganti.
+
+## Jejak Putri dan Yuda
+
+Setelah perjalanan pembukaan selesai, `WizardFootsteps` menampilkan dua rangkaian jejak dengan teks nama Putri dan Yuda yang mengikuti langkah. Nama mengikuti `content.bride` dan `content.groom`, ditampilkan tanpa kotak, border, background, atau padding label. Tujuan dipilih acak dalam area baca; kaki kiri dan kanan menapak bergantian, meninggalkan jejak sepia yang diam dan memudar selama 3,2 detik. Masing-masing memakai sepuluh elemen jejak yang digunakan kembali agar jumlah elemen tetap terbatas.
+
+Lapisan mengikuti ukuran area baca, berada di atas latar perkamen tetapi di bawah seluruh isi dan navigasi, serta meneruskan klik dan sentuhan ke konten. Animasi berhenti ketika tab browser tersembunyi, undangan kembali ke sampul, atau pengurangan gerakan aktif. Efek ini berupa visual tanpa tambahan audio. Jalankan `node tests/wizard-footsteps-browser.mjs` dengan server lokal untuk memeriksa langkah, urutan lapisan, perubahan ukuran, interaksi formulir, dan siklus animasi di Chromium dan WebKit.

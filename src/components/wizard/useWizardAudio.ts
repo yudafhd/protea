@@ -1,14 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { loadWizardAudioFile, WIZARD_AUDIO_TRACKS as tracks } from './assets';
 
 type SoundState = 'idle' | 'loading' | 'playing' | 'muted' | 'error';
-type Track = 'music' | 'open' | 'close';
-const tracks: Record<Track, string> = {
-  music: '/assets/wizard/audio/moonlit-letter.wav',
-  open: '/assets/wizard/audio/castle-door-open.wav',
-  close: '/assets/wizard/audio/castle-door-close.wav',
-};
+type Track = keyof typeof tracks;
 
 class WizardAudio {
   private context: AudioContext | null = null;
@@ -25,18 +21,34 @@ class WizardAudio {
   private doorPlayed = false;
   private generation = 0;
   private failed = false;
-  private abort = new AbortController();
+  private restoreAudioSession: (() => void) | null = null;
 
   constructor(private report: (state: SoundState) => void) {}
 
   private async prepare() {
     if (!this.context) {
+      // Web Audio defaults to ambient audio on iOS, which follows the silent switch.
+      // Declare music playback where Safari supports the Audio Session API.
+      try {
+        const session = (navigator as Navigator & { audioSession?: { type: string } }).audioSession;
+        if (session) {
+          const previous = session.type;
+          session.type = 'playback';
+          this.restoreAudioSession = () => { if (session.type === 'playback') session.type = previous; };
+        }
+      } catch { /* Audio Session is optional; keep standard Web Audio available. */ }
       const Constructor = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
       if (!Constructor) throw new Error('Web Audio is unavailable.');
       this.context = new Constructor();
       this.master = this.context.createGain();
       this.master.gain.value = this.muted ? 0 : 1;
       this.master.connect(this.context.destination);
+      this.context.onstatechange = () => {
+        if (this.disposed || !this.musicWanted || this.muted || document.hidden || !this.music) return;
+        // Safari can interrupt audio after a call or a switch to another app.
+        this.failed = this.context?.state !== 'running';
+        this.notify();
+      };
     }
     const context = this.context;
     // Resume synchronously from the opening/toggle click before any network await.
@@ -44,9 +56,8 @@ class WizardAudio {
     if (!this.loading) {
       this.loading = Promise.all((Object.entries(tracks) as [Track, string][]).map(async ([key, url]) => {
         if (this.buffers[key]) return;
-        const response = await fetch(url, { signal: this.abort.signal });
-        if (!response.ok) throw new Error('Audio asset could not load.');
-        this.buffers[key] = await context.decodeAudioData(await response.arrayBuffer());
+        const file = await loadWizardAudioFile(url);
+        if (!this.disposed) this.buffers[key] = await context.decodeAudioData(file.slice(0));
       })).then(() => undefined).catch((error) => { this.loading = null; throw error; });
     }
     await Promise.all([resumed, this.loading]);
@@ -63,6 +74,7 @@ class WizardAudio {
 
   private startMusic() {
     if (this.disposed || !this.musicWanted || !this.context || !this.master || !this.buffers.music) return;
+    if (this.context.state !== 'running') { this.fail(); return; }
     this.failed = false;
     this.master.gain.setTargetAtTime(this.muted ? 0 : 1, this.context.currentTime, .04);
     if (!this.music) {
@@ -132,7 +144,7 @@ class WizardAudio {
   }
 
   toggle() {
-    if (this.failed || this.muted) {
+    if (this.failed || this.muted || this.context?.state !== 'running') {
       this.muted = false;
       this.report('loading');
       void this.prepare().then(() => this.startMusic()).catch(() => this.fail());
@@ -149,16 +161,17 @@ class WizardAudio {
       this.stopDoor();
       void this.context?.suspend().catch(() => undefined);
     } else if (this.musicWanted && !this.muted) {
-      void this.context?.resume().catch(() => this.fail());
+      void this.context?.resume().then(() => this.startMusic()).catch(() => this.fail());
     }
   }
 
   dispose() {
     this.disposed = true;
     ++this.generation;
-    this.abort.abort();
     this.stopDoor();
+    if (this.context) this.context.onstatechange = null;
     void this.context?.close().catch(() => undefined);
+    try { this.restoreAudioSession?.(); } catch { /* Optional API may become unavailable. */ }
   }
 }
 
